@@ -3,7 +3,10 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "npm run dev:previewBuild",
+    "dev:previewBuild": "cd microServices/Auth && npm run build && cd ../Books && npm run build && cd ../ && npm run dev:previewPort",
+    "dev:previewPort": "start cmd.exe /k \"cd microServices/Auth && npm run preview\" && start cmd.exe /k \"cd microServices/Books && npm run preview\" && npm run dev:vite",
+    "dev:vite": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest",
