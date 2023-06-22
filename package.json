@@ -14,8 +14,16 @@
     "src/**/*.{ts,tsx}": [
       "eslint --fix",
       "prettier --write"
+    ],
+    "microServices/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
     ]
   },
+  "workspaces": [
+    "microServices/Auth",
+    "microServices/Books"
+  ],
   "dependencies": {
     "axios": "^1.3.3",
     "react": "^18.2.0",
@@ -24,6 +32,7 @@
     "react-icons": "^4.7.1"
   },
   "devDependencies": {
+    "@originjs/vite-plugin-federation": "^1.2.3",
     "@types/node": "18.13.0",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",

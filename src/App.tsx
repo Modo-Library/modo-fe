@@ -1,5 +1,14 @@
+import App3 from 'Auth/App';
+import App2 from 'Books/App';
+
 function App() {
-  return <>메인 페이rewrewrewrwe지</>;
+  return (
+    <>
+      Main
+      <App3 />
+      <App2 />
+    </>
+  );
 }
 
 export default App;
