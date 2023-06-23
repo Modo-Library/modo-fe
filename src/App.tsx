@@ -1,12 +1,16 @@
-import App3 from 'Auth/App';
-import App2 from 'Books/App';
+import { Routes, Route, useLocation } from 'react-router-dom';
+
+import HomePage from 'src/pages/home';
 
 function App() {
+  const location = useLocation();
+
   return (
     <>
-      Main
-      <App3 />
-      <App2 />
+      <Routes location={location}>
+        <Route element={<HomePage />} path="/" />
+        <Route element={<>페이지를 찾을 수 없습니다.</>} path="*" />
+      </Routes>
     </>
   );
 }

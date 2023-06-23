@@ -69,12 +69,12 @@
             "position": "after"
           },
           {
-            "pattern": "microServices/Auth/**",
+            "pattern": "Auth/**",
             "group": "internal",
             "position": "after"
           },
           {
-            "pattern": "microServices/Books/**",
+            "pattern": "Books/**",
             "group": "internal",
             "position": "after"
           },
