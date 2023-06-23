@@ -3,22 +3,19 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "dev": "npm run dev:previewBuild",
-    "dev:previewBuild": "cd microServices/Auth && npm run build && cd ../Books && npm run build && cd ../ && npm run dev:previewPort",
-    "dev:previewPort": "start cmd.exe /k \"cd microServices/Auth && npm run preview\" && start cmd.exe /k \"cd microServices/Books && npm run preview\" && npm run dev:vite",
+    "dev": "npm run dev:previewBuild && npm run dev:previewPort && npm run dev:vite",
+    "dev:previewBuild": "cd microServices/Auth && npm run build && cd ../Books && npm run build",
+    "dev:previewPort": "start cmd.exe /k \"cd microServices/Auth && npm run preview\" && start cmd.exe /k \"cd microServices/Books && npm run preview\"",
     "dev:vite": "vite",
+    "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
     "build": "tsc && vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --port 5000 --strictPort",
     "test": "jest",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "microServices/**/*.{ts,tsx}": [
+    "{src,microServices}/**/*.{ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ]
@@ -44,6 +41,9 @@
     "@typescript-eslint/parser": "^5.59.0",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.13",
+    "cross-var": "^1.1.0",
+    "dotenv": "^16.3.1",
+    "dotenv-cli": "^7.2.1",
     "eslint": "^8.38.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "13.1.6",
