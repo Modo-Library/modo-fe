@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 
 import Loader from 'src/components/Loader';
 
-const Button = lazy(() => import('auth/components/Button'));
+const LoginArea = lazy(() => import('auth/components/LoginArea'));
 
 export default function LoginPage() {
   return (
@@ -11,7 +11,7 @@ export default function LoginPage() {
       <div className="w-full flex flex-col gap-4">
         <Suspense fallback={<Loader />}>
           <div className="flex flex-col gap-4 w-full">
-            <Button />
+            <LoginArea />
           </div>
         </Suspense>
       </div>

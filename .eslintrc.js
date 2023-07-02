@@ -39,6 +39,7 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
+    'react/prop-types': ['off'],
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/react-in-jsx-scope': 'off', // import React from 'react' 무시
     'import/no-extraneous-dependencies': 'off',

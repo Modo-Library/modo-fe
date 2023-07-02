@@ -1,5 +1,12 @@
 module.exports = {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './**/*.{js,ts,jsx,tsx}',
+    './index.html',
+    './packages/**/*.{js,ts,jsx,tsx}',
+    './microServices/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@packages/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     screens: {
       nw: '100vw',

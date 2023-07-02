@@ -10,8 +10,8 @@
     "dev:auth": "npm run dev -workspace=@workspace/auth",
     "dev:books": "npm run dev -workspace=@workspace/books",
     "build": "tsc && vite build",
-    "build:auth" : "npm run build -workspace=@workspace/auth",
-    "build:books" : "npm run build -workspace=@workspace/books",
+    "build:auth": "npm run build -workspace=@workspace/auth",
+    "build:books": "npm run build -workspace=@workspace/books",
     "preview": "vite preview --port 5000 --strictPort",
     "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
     "test": "jest",
@@ -34,7 +34,8 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.1",
     "react-icons": "^4.7.1",
-    "react-router-dom": "^6.13.0"
+    "react-router-dom": "^6.13.0",
+    "sass": "^1.63.6"
   },
   "devDependencies": {
     "@iconify/react": "^4.1.1",
