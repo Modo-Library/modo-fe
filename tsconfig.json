@@ -24,5 +24,10 @@
       "Books/*": ["microServices/Books/src/*"]
     }
   },
-  "include": ["src", "vite.config.ts", "microServices/Auth/src/*", "microServices/Books/src/*"]
+  "include": [
+    "src",
+    "vite.config.ts",
+    "microServices/Auth/src/**/*",
+    "microServices/Books/src/**/*"
+  ]
 }
