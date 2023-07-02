@@ -5,6 +5,7 @@
   "files": [
     "tailwind/base.css",
     "tailwind/components.css",
-    "tailwind/utilities.css"
+    "tailwind/utilities.css",
+    "tailwind-LEGACY.css"
   ]
 }
