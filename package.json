@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "npm run dev:previewBuild && npm run dev:previewPort && npm run dev:vite",
-    "dev:previewBuild": "npm run build -workspace=@workspace/*",
+    "dev:previewBuild": "npm run build -workspace=@workspace/auth -workspace=@workspace/books",
     "dev:previewPort": "start cmd.exe /k \"cd microServices/Auth && npm run preview\" && start cmd.exe /k \"cd microServices/Books && npm run preview\"",
     "dev:vite": "vite",
     "dev:auth": "npm run dev -workspace=@workspace/auth",
@@ -34,8 +34,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.1",
     "react-icons": "^4.7.1",
-    "react-router-dom": "^6.13.0",
-    "yarn": "^1.22.19"
+    "react-router-dom": "^6.13.0"
   },
   "devDependencies": {
     "@iconify/react": "^4.1.1",

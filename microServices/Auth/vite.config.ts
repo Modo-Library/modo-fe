@@ -24,9 +24,4 @@ export default defineConfig({
     minify: false,
     cssCodeSplit: false,
   },
-  resolve: {
-    alias: {
-      src: path.resolve(__dirname, './src'),
-    },
-  },
 });

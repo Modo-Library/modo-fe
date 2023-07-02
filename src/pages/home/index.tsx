@@ -1,6 +1,6 @@
-import App3 from 'Auth/App';
+import App3 from 'auth/App';
 
-import App2 from 'Books/App';
+import App2 from 'books/App';
 
 export default function HomePage() {
   return (
