@@ -13,7 +13,7 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       exposes: {
         './App': './src/App',
-        './components/loginArea': './src/components/loginArea',
+        './components/LoginArea': './src/components/LoginArea',
       },
       shared: ['react', 'react-dom'],
     }),
