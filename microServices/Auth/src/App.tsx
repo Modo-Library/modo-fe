@@ -1,6 +1,6 @@
 import Button from './components/Button';
 
-// import './styles/auth.css';
+import './styles/auth.css';
 
 function App() {
   return (

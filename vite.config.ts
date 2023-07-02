@@ -17,8 +17,8 @@ export default defineConfig({
     federation({
       name: 'app',
       remotes: {
-        Auth: `http://${PREFIX_ENVIRONMENT_URL}:5001/assets/remoteEntry.js`,
-        Books: `http://${PREFIX_ENVIRONMENT_URL}:5002/assets/remoteEntry.js`,
+        auth: `http://${PREFIX_ENVIRONMENT_URL}:5001/assets/remoteEntry.js`,
+        books: `http://${PREFIX_ENVIRONMENT_URL}:5002/assets/remoteEntry.js`,
       },
       shared: ['react', 'react-dom'],
     }),

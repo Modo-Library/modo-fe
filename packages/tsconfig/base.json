@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "default",
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
@@ -15,19 +17,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSources": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true,
     "baseUrl": ".",
-    "types": ["vite/client"],
     "paths": {
-      "src/*": ["src/*"],
-      "auth/*": ["microServices/Auth/src/*"],
-      "books/*": ["microServices/Books/src/*"]
+      "src/*": ["src/*"]
     }
   },
-  "include": [
-    "src",
-    "vite.config.ts",
-    "microServices/Auth/src/**/*",
-    "microServices/Books/src/**/*"
-  ]
+  "exclude": ["node_modules"]
 }

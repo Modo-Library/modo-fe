@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 
 import Loader from 'src/components/Loader';
 
-const Button = lazy(() => import('Auth/components/Button'));
+const Button = lazy(() => import('auth/components/Button'));
 
 export default function LoginPage() {
   return (

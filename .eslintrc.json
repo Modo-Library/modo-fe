@@ -13,8 +13,8 @@
       "alias": {
         "map": [
           ["src", "./src"],
-          ["Auth", "./microServices/Auth/src"],
-          ["Books", "./microServices/Books/src"]
+          ["auth", "./microServices/Auth/src"],
+          ["books", "./microServices/Books/src"]
         ],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
