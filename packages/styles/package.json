@@ -1,0 +1,10 @@
+{
+  "name": "@packages/styles",
+  "version": "0.0.0",
+  "main": "global.css",
+  "files": [
+    "tailwind/base.css",
+    "tailwind/components.css",
+    "tailwind/utilities.css"
+  ]
+}
