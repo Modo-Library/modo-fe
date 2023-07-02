@@ -1,17 +1,20 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { Suspense } from 'react';
 
-import HomePage from 'src/pages/home';
+import * as router from 'src/utils/routes';
+
+import Loader from 'src/components/Loader';
 
 function App() {
   const location = useLocation();
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       <Routes location={location}>
-        <Route element={<HomePage />} path="/" />
-        <Route element={<>페이지를 찾을 수 없습니다.</>} path="*" />
+        <Route element={<router.Home />} path="/" />
+        <Route element={<router.Error />} path="*" />
       </Routes>
-    </>
+    </Suspense>
   );
 }
 

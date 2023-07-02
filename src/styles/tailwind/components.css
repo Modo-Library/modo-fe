@@ -1,0 +1,23 @@
+@tailwind components;
+@layer components {
+  .flex-center {
+    display : flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .loader {
+    width: 72px;
+    height: 12px;
+    border-radius: 12px;
+    background: repeating-linear-gradient(135deg,#c7b199 0 6px,rgba(199,177,153,0.75) 0 12px) left/0%   100% no-repeat,
+          repeating-linear-gradient(135deg,rgba(199,177,153,0.2) 0 6px,rgba(199,177,153,0.1) 0 12px) left/100% 100%;
+    animation: loader 1.2s infinite;
+  }
+
+  @keyframes loader {
+    100% {
+        background-size: 100% 100%;
+    }
+  }
+}

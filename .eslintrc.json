@@ -64,12 +64,12 @@
             "position": "before"
           },
           {
-            "pattern": "src/**",
+            "pattern": "**/*/components/**",
             "group": "internal",
             "position": "after"
           },
           {
-            "pattern": "Auth/**",
+            "pattern": "**/*/pages/**",
             "group": "internal",
             "position": "after"
           },
@@ -105,20 +105,25 @@
         "css": "never"
       }
     ],
-    "@typescript-eslint/no-unused-vars": ["error"],
-    "@typescript-eslint/explicit-module-boundary-types": "off", // module return type 명시 X
+    "@typescript-eslint/no-unused-vars": ["warn"],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "no-console": "error",
     "no-debugger": "error",
-    "no-unused-vars": "error", // no-unused-vars : 변수 선언 후 반드시 사용 (interface 임시로 변수 선언하고플 때 해결책)
+    "no-unused-vars": "off",
+
     "no-param-reassign": ["error", { "props": false }],
     "no-unused-expressions": [
-      // 사용 안하는 표현 (예외 제외 Error 표시)
       "error",
       {
-        "allowTernary": true, // a ? b : 0 (삼항 연산자)
-        "allowShortCircuit": true // a || b
+        "allowTernary": true,
+        "allowShortCircuit": true
       }
     ],
-    "prettier/prettier": "error"
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }
