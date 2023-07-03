@@ -1,5 +1,7 @@
 import Button from '@packages/components/Button';
 
+import KaKaoLoginButton from './KaKaoLoginButton';
+
 export default function LoginArea() {
   return (
     <section className="flex flex-col w-full gap-4">
@@ -10,12 +12,7 @@ export default function LoginArea() {
         iconSrc={'flat-color-icons:google'}
         value={'구글 계정으로 로그인'}
       />
-      <Button
-        onClick={() => {}}
-        customClass={'bg-[#FAE100]'}
-        iconSrc={'ri:kakao-talk-fill'}
-        value={'카카오 계정으로 로그인'}
-      />
+      <KaKaoLoginButton />
       <Button
         onClick={() => {}}
         disabled={true}

@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const PREFIX_ENVIRONMENT_URL =
-  process.env.NODE_ENV === 'production' ? `${process.env.SERVER_IP}` : 'localhost';
+  process.env.NODE_ENV === 'production' ? `${process.env.CLIENT_IP}` : 'localhost';
 
 // https://vitejs.dev/config/
 export default defineConfig({

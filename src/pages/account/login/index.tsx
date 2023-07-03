@@ -1,6 +1,5 @@
 import { lazy, Suspense } from 'react';
-
-import Loader from 'src/components/Loader';
+import Loader from '@packages/components/Loader';
 
 const LoginArea = lazy(() => import('auth/components/LoginArea'));
 
