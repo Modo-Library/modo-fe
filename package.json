@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "dev": "npm run dev:previewBuild && npm run dev:previewPort && npm run dev:vite",
+    "dev": "npm run generate:css && npm run dev:previewBuild && npm run dev:previewPort && npm run dev:vite",
     "dev:previewBuild": "npm run build -workspace=@workspace/auth -workspace=@workspace/books",
     "dev:previewPort": "start cmd.exe /k \"cd microServices/Auth && npm run preview\" && start cmd.exe /k \"cd microServices/Books && npm run preview\"",
     "dev:vite": "vite",
@@ -15,7 +15,7 @@
     "preview": "vite preview --port 5000 --strictPort",
     "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
     "test": "jest",
-    "generate:css": "npx tailwindcss -i ./packages/styles/global.css -o ./packages/styles/tailwind-LEGACY.css --watch",
+    "generate:css": "npx tailwindcss -i ./packages/styles/global.css -o ./packages/styles/tailwind-LEGACY.css",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   },

@@ -23,5 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
+
+
 .env
 tsconfig.tsbuildinfo
+
+#tailiwindCSS LEGACY
+tailwind-LEGACY.css
