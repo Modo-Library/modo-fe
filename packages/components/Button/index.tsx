@@ -24,7 +24,7 @@ type ButtonType = (props: IButton) => React.ReactElement;
 export const Button: ButtonType = (props) => {
   const {
     onClick,
-    disabled,
+    disabled = true,
     value,
     type = 'button',
     iconSrc,
@@ -33,7 +33,8 @@ export const Button: ButtonType = (props) => {
     customClass,
   } = props;
 
-  const common = 'w-full font-semibold px-10 py-3 shadow-md rounded-md';
+  const disabledClass = `${disabled ? 'disabled:cursor:default' : ''}`;
+  const common = `w-full font-semibold px-10 py-3 shadow-md rounded-md ${disabledClass}`;
   const btnClass = `${common} ${customClass ? `${customClass}` : `${BtnHeirarchyMap[heirarchy]}`}`;
 
   return (
