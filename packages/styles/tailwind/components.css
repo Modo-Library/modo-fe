@@ -6,6 +6,12 @@
     align-items: center;
   }
 
+  .loader-wrapper {
+    display : flex;
+    justify-content : center;
+    align-items: center;
+  }
+
   .loader {
     width: 72px;
     height: 12px;

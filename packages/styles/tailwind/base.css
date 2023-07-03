@@ -6,7 +6,7 @@
   }
 
   #root {
-    @apply flex-center w-full h-screen shadow-layout;
+    @apply flex-center flex-col w-full h-screen shadow-layout px-4;
   }
 
   body {
