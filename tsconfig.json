@@ -26,8 +26,9 @@
   },
   "include": [
     "src",
+    "custom.d.ts",
     "vite.config.ts",
     "microServices/Auth/src/**/*",
     "microServices/Books/src/**/*"
-  ]
+, "packages/assets/custom.d.ts"  ]
 }

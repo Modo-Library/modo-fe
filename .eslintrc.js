@@ -65,6 +65,11 @@ module.exports = {
             position: 'before',
           },
           {
+            pattern: '**/*/assets/**',
+            group: 'internal',
+            position: 'before',
+          },
+          {
             pattern: '**/*/components/**',
             group: 'internal',
             position: 'after',
