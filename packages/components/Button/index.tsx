@@ -37,7 +37,7 @@ export const Button: ButtonType = (props) => {
   } = props;
 
   const disabledClass = `${disabled ? `${BtnHeirarchyMap.disabled}` : ''}`;
-  const common = `w-full font-semibold px-10 py-3 shadow-md rounded-md cursor:pointer ${disabledClass}`;
+  const common = `active:animate-push w-full font-semibold px-10 py-3 shadow-md rounded-md cursor:pointer ${disabledClass}`;
   const btnClass = `${common} ${customClass ? `${customClass}` : `${BtnHeirarchyMap[heirarchy]}`}`;
 
   return (

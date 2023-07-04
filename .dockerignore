@@ -1,0 +1,11 @@
+## Common module
+/.github
+/.husky
+/node_modules
+**/npm-debug.log
+
+/.git
+.gitignore
+
+## MicroServices
+/microServices

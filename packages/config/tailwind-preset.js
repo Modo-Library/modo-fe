@@ -53,6 +53,15 @@ module.exports = {
       width: {
         layout: '25rem',
       },
+      keyframes: {
+        push: {
+          '0%': { transform: 'scale(1.0)' },
+          '100%': { transform: 'scale(0.975)' },
+        },
+      },
+      animation: {
+        push: 'push .2s ease-out forwards',
+      },
     },
   },
 };
