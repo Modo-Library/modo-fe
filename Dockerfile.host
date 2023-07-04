@@ -25,6 +25,7 @@ RUN npm run build
 
 #### Server Image
 FROM nginx:alpine as server
+ENV SERVICE www
 ENV URL host
 ENV PORT 5173
 ENV HOST 0.0.0.0
@@ -35,4 +36,4 @@ COPY --from=build /app/dist /home/ubuntu/production/$URL
 EXPOSE $PORT
 
 ## Inject Environment Variables
-CMD sh -c "envsubst '\$PORT \$URL' < /etc/nginx/conf.d/modo.template > /etc/nginx/conf.d/modo.conf && nginx -g 'daemon off;'"
+CMD sh -c "envsubst '\$PORT \$URL \$SERVICE' < /etc/nginx/conf.d/modo.template > /etc/nginx/conf.d/modo.conf && nginx -g 'daemon off;'"
