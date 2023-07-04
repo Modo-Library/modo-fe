@@ -13,6 +13,7 @@ const BtnHeirarchyMap = {
 };
 
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
+  iconCustom?: React.ReactElement;
   iconSrc?: string | IconifyIcon;
   iconColor?: string;
   heirarchy?: keyof typeof BtnHeirarchyMap;
@@ -28,6 +29,7 @@ export const Button: ButtonType = (props) => {
     disabled,
     value,
     type = 'button',
+    iconCustom,
     iconSrc,
     iconColor,
     heirarchy = 'first',
@@ -41,6 +43,7 @@ export const Button: ButtonType = (props) => {
   return (
     <button onClick={onClick} className={btnClass} type={type} disabled={disabled}>
       <div className="flex items-center justify-center gap-4">
+        {iconCustom && iconCustom}
         {iconSrc && <Icon icon={iconSrc} color={iconColor} width={24} height={24} />}
         <p>{value}</p>
       </div>
