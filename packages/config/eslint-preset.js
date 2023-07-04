@@ -41,13 +41,12 @@ module.exports = {
   rules: {
     'react/prop-types': ['off'],
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-    'react/react-in-jsx-scope': 'off', // import React from 'react' 무시
+    'react/react-in-jsx-scope': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     'import/no-cycle': 'off',
     'import/no-named-as-default': 'off',
     'import/order': [
-      // import 정렬 및 구분
       'error',
       {
         groups: [
@@ -67,7 +66,7 @@ module.exports = {
           {
             pattern: '**/*/assets/**',
             group: 'internal',
-            position: 'before',
+            position: 'after',
           },
           {
             pattern: '**/*/components/**',

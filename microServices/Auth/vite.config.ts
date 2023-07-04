@@ -14,7 +14,6 @@ export default defineConfig({
       name: 'remote_app',
       filename: 'remoteEntry.js',
       exposes: {
-        './App': './src/App',
         './components/LoginArea': './src/components/LoginArea',
       },
       shared: ['react', 'react-dom'],

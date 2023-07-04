@@ -45,6 +45,11 @@
     "sass": "^1.63.6"
   },
   "devDependencies": {
+    "@packages/components": "0.1.0",
+    "@packages/tsconfig": "0.1.0",
+    "@packages/assets": "0.1.0",
+    "@packages/config": "0.1.0",
+    "@packages/styles": "0.1.0",
     "@iconify/react": "^4.1.1",
     "@originjs/vite-plugin-federation": "^1.2.3",
     "@types/node": "18.13.0",
