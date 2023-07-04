@@ -1,5 +1,0 @@
-## Common module
-/node_modules
-**/npm-debug.log
-
-.gitignore

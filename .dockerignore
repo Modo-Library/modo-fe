@@ -6,6 +6,3 @@
 
 /.git
 .gitignore
-
-## MicroServices
-/microServices
