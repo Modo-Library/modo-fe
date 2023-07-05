@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react';
+
 import Loader from '@packages/components/Loader';
 import { ReactComponent as Logo } from '@packages/assets/Logo/modo-with-font.svg';
 

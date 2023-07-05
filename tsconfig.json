@@ -15,20 +15,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "baseUrl": ".",
-    "types": ["vite/client"],
-    "paths": {
-      "src/*": ["src/*"],
-      "auth/*": ["microServices/Auth/src/*"],
-      "books/*": ["microServices/Books/src/*"]
-    }
+    "jsx": "react-jsx"
   },
-  "include": [
-    "src",
-    "custom.d.ts",
-    "vite.config.ts",
-    "microServices/Auth/src/**/*",
-    "microServices/Books/src/**/*"
-  ]
+  "references": [
+    { "path": "tsconfig.node.json" },
+    { "path": "microServices/Auth/tsconfig.json" },
+    { "path": "microServices/Books/tsconfig.json" }
+  ],
+  "include": [],
+  "exclude": ["packages/**/dist/**"]
 }

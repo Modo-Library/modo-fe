@@ -6,19 +6,8 @@ module.exports = {
     jest: true,
   },
   settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-      alias: {
-        map: [
-          ['src', './src'],
-          ['auth', './microServices/Auth/src'],
-          ['books', './microServices/Books/src'],
-        ],
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-    },
+    // @packages 경로를 internal 경로로 추가
+    'import/internal-regex': '^@packages/',
   },
   extends: [
     'plugin:@typescript-eslint/eslint-recommended',
@@ -62,6 +51,11 @@ module.exports = {
             pattern: '{react*,react*/**}',
             group: 'external',
             position: 'before',
+          },
+          {
+            pattern: '@packages/**',
+            group: 'internal',
+            position: 'after',
           },
           {
             pattern: '**/*/assets/**',

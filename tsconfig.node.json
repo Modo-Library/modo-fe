@@ -1,0 +1,26 @@
+{
+  "baseUrl": ".",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "composite": true,
+    "paths": {
+      "src/*": ["src/*"],
+      "auth/*": ["microServices/Auth/src/*"],
+      "books/*": ["microServices/Books/src/*"]
+    },
+    "types": ["vite/client"],
+    "baseUrl": "."
+  },
+
+  "include": [
+    "src",
+    "custom.d.ts",
+    "vite.config.ts",
+    "microServices/Auth/src/**/*",
+    "microServices/Books/src/**/*"
+  ]
+}

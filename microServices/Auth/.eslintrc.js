@@ -6,11 +6,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
       alias: {
-        map: [
-          ['src', './src'],
-          ['auth', './microServices/Auth/src'],
-          ['books', './microServices/Books/src'],
-        ],
+        map: [['src', './microServices/Auth/src']],
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
