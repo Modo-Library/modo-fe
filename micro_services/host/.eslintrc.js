@@ -1,6 +1,5 @@
 module.exports = {
-  extends: ['eslint-config-preset', 'plugin:react/recommended'],
-  version: "latest",
+  extends: ['eslint-config-preset'],
   settings: {
     'import/resolver': {
       node: {

@@ -16,7 +16,8 @@
     "composite": true,
     "noEmit": false,
     "jsx": "react-jsx",
-    "baseUrl": ".",
+    "baseUrl": "../",
+    "rootDir": "../",
     "types": ["vite/client"],
     "paths": {
       "src/*": ["host/src/*"],
@@ -24,6 +25,6 @@
       "books/*": ["books/src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "../auth/src/**/*", "../books/src/**/*"],
   "exclude": ["node_modules"]
 }
