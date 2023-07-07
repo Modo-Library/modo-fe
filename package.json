@@ -1,7 +1,7 @@
 {
   "name": "modo-fe",
   "version": "0.1.0",
-  "description": "Modo Project on Frontend",
+  "description": "Frontend Modo Project using Monorepo Architecture",
   "scripts": {
     "dev": "run-p \"dev:*\"",
     "dev:css": "npm run generate:css -- --watch",
@@ -19,6 +19,7 @@
     "mfa:auth": "npm run build -workspace=@workspace/auth && npm run preview -workspace=@workspace/auth",
     "mfa:books": "npm run build -workspace=@workspace/books && npm run preview -workspace=@workspace/books",
     "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
+    "lint": "eslint .",
     "test": "jest",
     "generate:css": "npx tailwindcss -i ./packages/styles/global.css -o ./packages/styles/tailwind-LEGACY.css",
     "prepare": "husky install",
@@ -29,11 +30,11 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "microServices/Auth/*.{js,jsx,ts,tsx}": [
+    "microServices/Auth/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix --config microServices/Auth/.eslintrc.js",
       "prettier --write"
     ],
-    "microServices/Books/*.{js,jsx,ts,tsx}": [
+    "microServices/Books/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix --config microServices/Books/.eslintrc.js",
       "prettier --write"
     ]
