@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES5",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "composite": true,
@@ -15,14 +15,28 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "references": [
-    { "path": "tsconfig.node.json" },
-    { "path": "microServices/Auth/tsconfig.json" },
-    { "path": "microServices/Books/tsconfig.json" },
-    { "path": "microServices/Host/tsconfig.json" }
+    {
+      "path": "tsconfig.node.json"
+    },
+    {
+      "path": "micro_services/auth/tsconfig.json"
+    },
+    {
+      "path": "micro_services/books/tsconfig.json"
+    },
+    {
+      "path": "micro_services/host/tsconfig.json"
+    }
   ],
-  "include": [],
-  "exclude": ["packages/**/dist/**"]
+  "include": [".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

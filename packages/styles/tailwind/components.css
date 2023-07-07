@@ -1,11 +1,5 @@
 @tailwind components;
 @layer components {
-  .flex-center {
-    display : flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   .loader-wrapper {
     display : flex;
     justify-content : center;

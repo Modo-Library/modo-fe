@@ -6,9 +6,9 @@
     "dev": "run-p \"dev:*\"",
     "dev:css": "npm run generate:css -- --watch",
     "dev:mfa": "npm run mfa",
-    "dev:host": "vite",
-    "build": "npm run generate:css && tsc && vite build",
-    "preview": "vite --port 5000 --strictPort",
+    "dev:main": "next dev",
+    "build": "npm run generate:css && tsc && next build",
+    "preview": "next start -p 5173",
     "host": "run-p \"host:*\"",
     "host:mfa": "npm run mfa",
     "host:css": "npm run generate:css -- --watch",
@@ -23,7 +23,7 @@
     "mfa:auth": "npm run build -workspace=@workspace/auth && npm run preview -workspace=@workspace/auth",
     "mfa:books": "npm run build -workspace=@workspace/books && npm run preview -workspace=@workspace/books",
     "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
-    "lint": "eslint .",
+    "lint": "next lint && tsc",
     "test": "jest",
     "generate:css": "npx tailwindcss -i ./packages/styles/global.css -o ./packages/styles/tailwind-LEGACY.css",
     "prepare": "husky install",
@@ -34,24 +34,22 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "microServices/Auth/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config microServices/Auth/.eslintrc.js",
+    "micro_services/Auth/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix --config micro_services/Auth/.eslintrc.js",
       "prettier --write"
     ],
-    "microServices/Books/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config microServices/Books/.eslintrc.js",
+    "micro_services/Books/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix --config micro_services/Books/.eslintrc.js",
       "prettier --write"
     ],
-    "microServices/Host/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config microServices/Host/.eslintrc.js",
+    "micro_services/Host/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix --config micro_services/Host/.eslintrc.js",
       "prettier --write"
     ]
   },
-  
   "workspaces": [
-    "microServices/*",
-    "packages/*",
-    "packages/config/eslint-config-preset"
+    "micro_services/*",
+    "packages/**/*"
   ],
   "dependencies": {
     "@packages/config": "^0.1.0",
@@ -63,20 +61,9 @@
     "@packages/assets": "^0.1.0",
     "@packages/components": "^0.1.0",
     "@packages/config": "^0.1.0",
+    "@packages/config-next": "^0.1.0",
     "@packages/styles": "^0.1.0",
     "@packages/tsconfig": "^0.1.0",
-    "eslint": "^8.38.0",
-    "eslint-config-preset": "^0.1.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-next": "13.1.6",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-import-resolver-typescript": "^3.5.3",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.3.4"
+    "eslint-config-preset": "^0.1.0"
   }
 }

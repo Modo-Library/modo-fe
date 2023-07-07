@@ -8,7 +8,7 @@ ARG SERVER_IP
 FROM node:16-alpine as dependency
 
 WORKDIR /app
-COPY microServices/Host/package.json /app/
+COPY micro_services/host/package.json /app/
 COPY packages/components /app/packages/components
 COPY packages/tsconfig /app/packages/tsconfig
 COPY packages/config /app/packages/config

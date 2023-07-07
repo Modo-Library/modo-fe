@@ -1,0 +1,8 @@
+{
+  "name": "@packages/config-next",
+  "version": "0.1.0",
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^13.4.9",
+    "next": "13.4.9"
+  }
+}

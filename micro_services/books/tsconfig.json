@@ -14,10 +14,14 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "noEmit": false,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "types": ["vite/client"],
+    "paths": {
+      "src/*": ["src/*"]
+    }
   },
-  "references": [{ "path": "tsconfig.node.json" }],
-  "include": [],
-  "exclude": ["packages/**/dist/**"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

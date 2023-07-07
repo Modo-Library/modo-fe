@@ -1,5 +1,4 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-
 import PageRoutes from 'src/routes/page';
 import ComponentRoutes from 'src/routes/component';
 

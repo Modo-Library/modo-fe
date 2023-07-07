@@ -5,6 +5,12 @@
     padding: 0;
   }
 
+  .flex-center {
+    display : flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   #root {
     @apply flex-center flex-col w-full h-screen shadow-layout px-4;
   }

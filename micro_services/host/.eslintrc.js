@@ -1,5 +1,6 @@
 module.exports = {
-  extends: ['eslint-config-preset', 'eslint-config-next', 'next', 'next/core-web-vitals'],
+  extends: ['eslint-config-preset', 'plugin:react/recommended'],
+  version: "latest",
   settings: {
     'import/resolver': {
       node: {
@@ -7,10 +8,9 @@ module.exports = {
       },
       alias: {
         map: [
-          ['src', './src'],
+          ['src', './micro_services/host/src'],
           ['auth', './micro_services/auth/src'],
           ['books', './micro_services/books/src'],
-          ['host', './micro_services/host/src'],
         ],
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },

@@ -1,6 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Suspense } from 'react';
-
 import * as router from 'src/routes';
 
 import Loader from '@packages/components/Loader';

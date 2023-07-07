@@ -4,6 +4,7 @@ module.exports = {
     './packages/**/*.{js,ts,jsx,tsx}',
     './microServices/**/*.{js,ts,jsx,tsx}',
     './src/**/*.{js,ts,jsx,tsx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     screens: {

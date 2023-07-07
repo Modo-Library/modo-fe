@@ -121,17 +121,17 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/naming-convention': [
-      'error',
-      {
-        format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
-        selector: 'variable',
-        leadingUnderscore: 'allow',
-      },
-      { format: ['camelCase', 'PascalCase'], selector: 'function' },
-      { format: ['PascalCase'], selector: 'interface' },
-      { format: ['PascalCase'], selector: 'typeAlias' },
-    ],
+    // '@typescript-eslint/naming-convention': [
+    //   'error',
+    //   {
+    //     format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+    //     selector: 'variable',
+    //     leadingUnderscore: 'allow',
+    //   },
+    //   { format: ['camelCase', 'PascalCase'], selector: 'function' },
+    //   { format: ['PascalCase'], selector: 'interface' },
+    //   { format: ['PascalCase'], selector: 'typeAlias' },
+    // ],
     'no-async-promise-executor': 'warn',
     'no-warning-comments': [
       'warn',
