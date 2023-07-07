@@ -1,5 +1,4 @@
 import App3 from 'auth/App';
-
 import App2 from 'books/App';
 
 export default function HomePage() {

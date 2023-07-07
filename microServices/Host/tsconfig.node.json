@@ -10,8 +10,7 @@
     "paths": {
       "src/*": ["src/*"],
       "auth/*": ["microServices/Auth/src/*"],
-      "books/*": ["microServices/Books/src/*"],
-      "host/*": ["microServices/Host/src/*"]
+      "books/*": ["microServices/Books/src/*"]
     },
     "types": ["vite/client"],
     "baseUrl": "."
@@ -22,7 +21,6 @@
     "custom.d.ts",
     "vite.config.ts",
     "microServices/Auth/src/**/*",
-    "microServices/Books/src/**/*",
-    "microServices/Host/src/**/*"
+    "microServices/Books/src/**/*"
   ]
 }

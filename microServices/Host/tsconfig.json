@@ -17,12 +17,7 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "references": [
-    { "path": "tsconfig.node.json" },
-    { "path": "microServices/Auth/tsconfig.json" },
-    { "path": "microServices/Books/tsconfig.json" },
-    { "path": "microServices/Host/tsconfig.json" }
-  ],
+  "references": [{ "path": "tsconfig.node.json" }],
   "include": [],
   "exclude": ["packages/**/dist/**"]
 }

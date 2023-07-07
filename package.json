@@ -9,6 +9,10 @@
     "dev:host": "vite",
     "build": "npm run generate:css && tsc && vite build",
     "preview": "vite --port 5000 --strictPort",
+    "host": "run-p \"host:*\"",
+    "host:mfa": "npm run mfa",
+    "host:css": "npm run generate:css -- --watch",
+    "host:dev": "npm run dev -workspace=@workspace/host",
     "auth": "run-p \"auth:*\"",
     "auth:css": "npm run generate:css -- --watch",
     "auth:dev": "npm run dev -workspace=@workspace/auth",
@@ -36,6 +40,10 @@
     ],
     "microServices/Books/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix --config microServices/Books/.eslintrc.js",
+      "prettier --write"
+    ],
+    "microServices/Host/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix --config microServices/Host/.eslintrc.js",
       "prettier --write"
     ]
   },
