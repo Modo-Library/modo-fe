@@ -9,7 +9,7 @@ const BtnHeirarchyMap = {
   third: 'shadow-none underline underline-offset-4 text-brown100',
   fourth: 'text-black100 underline-offset-2 shadow-none',
   fifth: 'text-gray100 underline font-light text-sm shadow-none',
-  disabled: 'text-gray100 bg-gray100 opacity-25 border-2',
+  disabled: 'active:animate-none text-gray100 bg-gray100 opacity-25 border-2',
 };
 
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {

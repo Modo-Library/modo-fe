@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client';
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter } from 'react-router-dom';
 
+import '@packages/styles/_mobile.css';
+
 import App from './App';
 
-import '@packages/styles/global.css';
+const container = document.getElementById('root') as HTMLElement;
+const root = ReactDOM.createRoot(container!);
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+root.render(
   <React.StrictMode>
     <BrowserRouter>
       <RecoilRoot>

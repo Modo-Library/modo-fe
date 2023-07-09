@@ -5,12 +5,12 @@
   "scripts": {
     "dev": "run-p \"dev:*\"",
     "dev:css": "npm run generate:css -- --watch",
-    "dev:mfa": "npm run mfa",
+    "dev:host": "npm run mfa-prod",
     "dev:main": "next dev",
     "build": "npm run generate:css && tsc && next build",
     "preview": "next start -p 5173",
     "host": "run-p \"host:*\"",
-    "host:mfa": "npm run mfa",
+    "host:mfa": "npm run mfa-dev",
     "host:css": "npm run generate:css -- --watch",
     "host:dev": "npm run dev -workspace=@workspace/host",
     "auth": "run-p \"auth:*\"",
@@ -19,15 +19,18 @@
     "books": "run-p \"books:*\"",
     "books:css": "npm run generate:css -- --watch",
     "books:dev": "npm run dev -workspace=@workspace/books",
-    "mfa": "run-p \"mfa:*\"",
-    "mfa:auth": "npm run build -workspace=@workspace/auth && npm run preview -workspace=@workspace/auth",
-    "mfa:books": "npm run build -workspace=@workspace/books && npm run preview -workspace=@workspace/books",
+    "mfa-dev": "run-p \"mfa-service:*\"",
+    "mfa-prod": "run-p \"mfa-service:*\" mfa-host",
+    "mfa-host": "npm run build -workspace=@workspace/host && npm run preview -workspace=@workspace/host",
+    "mfa-service:auth": "npm run build -workspace=@workspace/auth && npm run preview -workspace=@workspace/auth",
+    "mfa-service:books": "npm run build -workspace=@workspace/books && npm run preview -workspace=@workspace/books",
     "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
     "lint": "next lint && tsc",
     "test": "jest",
     "generate:css": "npx tailwindcss -i ./packages/styles/global.css -o ./packages/styles/tailwind-LEGACY.css",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "testing": "next dev"
   },
   "lint-staged": {
     "{src,packages}/**/*.{js,jsx,ts,tsx}": [
@@ -52,10 +55,7 @@
     "packages/**/*"
   ],
   "dependencies": {
-    "@packages/config": "^0.1.0",
-    "npm-run-all": "^4.1.5",
-    "react-hook-form": "^7.43.1",
-    "sass": "^1.63.6"
+    "@packages/config": "^0.1.0"
   },
   "devDependencies": {
     "@packages/assets": "^0.1.0",
