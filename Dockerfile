@@ -7,6 +7,9 @@ ARG SERVER_IP
 #### Dependency Image
 FROM node:16-alpine as dependency
 
+# 호환성 고려
+RUN apk add --no-cache libc6-compat
+
 WORKDIR /app
 COPY package.json /app/
 COPY packages/components /app/packages/components
@@ -22,22 +25,26 @@ FROM dependency as build
 WORKDIR /app
 COPY . /app
 RUN npm run build
+RUN rm -rf ./.next/cache
 
 #### Server Image
-FROM nginx:alpine as server
-ENV SERVICE main
-ENV URL app/main
+FROM node:16-alpine as server
+WORKDIR /app
+ENV NODE_ENV=production
 ENV PORT 5173
-ENV HOST 0.0.0.0
 
-COPY nginx.conf /etc/nginx/conf.d/modo.template
-COPY --from=build /app/.next /home/ubuntu/production/$URL
+# 권한 부여 (next.js / node.js)
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-WORKDIR /home/ubuntu/production/$URL
-RUN rm -rf cache
-RUN npm run preview
+# build 파일에 쓰기/읽기 권한 역할 적용
+COPY --from=build /app/public ./public
+COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-EXPOSE $PORT
+# User를 입력하여 컨테이너에 권한 부여
+USER nextjs
 
-## Inject Environment Variables
-CMD sh -c "envsubst '\$PORT \$URL \$SERVICE' < /etc/nginx/conf.d/modo.template > /etc/nginx/conf.d/modo.conf && nginx -g 'daemon off;'"
+EXPOSE $POST
+
+CMD ["node", "server.js"]
