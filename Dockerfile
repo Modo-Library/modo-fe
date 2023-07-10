@@ -8,7 +8,7 @@ ARG SERVER_IP
 FROM node:16-alpine as dependency
 
 WORKDIR /app
-COPY micro_services/host/package.json /app/
+COPY package.json /app/
 COPY packages/components /app/packages/components
 COPY packages/tsconfig /app/packages/tsconfig
 COPY packages/config /app/packages/config
@@ -20,18 +20,22 @@ RUN npm install
 FROM dependency as build
 
 WORKDIR /app
-COPY micro_services/host /app
+COPY . /app
 RUN npm run build
 
 #### Server Image
 FROM nginx:alpine as server
-ENV SERVICE host
-ENV URL app/host
-ENV PORT 5000
+ENV SERVICE main
+ENV URL app/main
+ENV PORT 5173
 ENV HOST 0.0.0.0
 
 COPY nginx.conf /etc/nginx/conf.d/modo.template
-COPY --from=build /app/dist /home/ubuntu/production/$URL
+COPY --from=build /app/.next /home/ubuntu/production/$URL
+
+WORKDIR /home/ubuntu/production/$URL
+RUN rm -rf cache
+RUN npm run preview
 
 EXPOSE $PORT
 

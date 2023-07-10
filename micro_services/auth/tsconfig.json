@@ -17,10 +17,11 @@
     "noEmit": false,
     "jsx": "react-jsx",
     "baseUrl": ".",
+    "rootDir": ".",
     "paths": {
       "src/*": ["src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

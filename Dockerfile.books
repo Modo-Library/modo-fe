@@ -20,7 +20,7 @@ RUN npm install
 FROM dependency as build
 
 WORKDIR /app
-COPY microServices/Books /app
+COPY micro_services/books /app
 
 RUN npm run build
 

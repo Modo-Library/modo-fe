@@ -1,29 +1,29 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "composite": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "jsx": "preserve",
+    "rootDir": ".",
+    "baseUrl": ".",
     "incremental": true,
-    "outDir": "tscompile",
     "plugins": [
       {
         "name": "next"
       }
     ]
   },
+  "include": ["next-env.d.ts", "app/**/*.tsx", "app/**/*.ts", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"],
   "references": [
     {
       "path": "tsconfig.node.json"
@@ -37,7 +37,5 @@
     {
       "path": "micro_services/host/tsconfig.json"
     }
-  ],
-  "include": [".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  ]
 }

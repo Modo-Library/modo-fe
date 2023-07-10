@@ -20,7 +20,7 @@ RUN npm install
 FROM dependency as build
 
 WORKDIR /app
-COPY microServices/Auth /app
+COPY micro_services/auth /app
 
 RUN npm run build
 

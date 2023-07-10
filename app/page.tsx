@@ -7,9 +7,9 @@ export default function Home() {
       <iframe
         src={`${reqURL}/account/login`}
         title="MODO Library Service"
-        className="w-[26rem] h-screen"
+        className="mobile-layout"
       />
-      <div className="flex items-center justify-center flex-col gap-3">
+      <div className="items-center justify-center flex-col gap-3 flex">
         <h1>MODO</h1>
         <h2>모두의 도서관</h2>
       </div>
