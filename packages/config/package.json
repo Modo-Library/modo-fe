@@ -16,6 +16,9 @@
   "devDependencies": {
     "@iconify/react": "^4.1.1",
     "@originjs/vite-plugin-federation": "^1.2.3",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/node": "18.13.0",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.2.6",

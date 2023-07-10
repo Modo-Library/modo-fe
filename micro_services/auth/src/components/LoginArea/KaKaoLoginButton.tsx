@@ -2,7 +2,7 @@ import Button from '@packages/components/Button';
 
 export default function KaKaoLoginButton() {
   const { VITE_KAKAO_RESTAPI_KEY, VITE_SERVER_URL } = import.meta.env;
-  const requestKakaoLoginURL = `https://kauth.kakao.com/oauth/authorize?client_id=${VITE_KAKAO_RESTAPI_KEY}&redirect_uri=${VITE_SERVER_URL}/oauth/kakao&response_type=code`;
+  const requestKakaoLoginURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${VITE_KAKAO_RESTAPI_KEY}&redirect_uri=${VITE_SERVER_URL}/oauth/kakao`;
 
   const handleKaKaoLogin = () => {
     window.location.href = requestKakaoLoginURL;
