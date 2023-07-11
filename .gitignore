@@ -55,4 +55,4 @@ tscompile
 next-env.d.ts
 
 #tailiwindCSS LEGACY
-tailwind-LEGACY.css
+tailwind-LEGACY.*

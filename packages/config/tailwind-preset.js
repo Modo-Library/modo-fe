@@ -2,7 +2,7 @@ module.exports = {
   content: [
     './index.html',
     './packages/**/*.{js,ts,jsx,tsx}',
-    './microServices/**/*.{js,ts,jsx,tsx}',
+    './micro_services/**/*.{js,ts,jsx,tsx}',
     './src/**/*.{js,ts,jsx,tsx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],

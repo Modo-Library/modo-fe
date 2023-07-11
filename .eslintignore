@@ -3,3 +3,5 @@ build/
 dist/
 .next/
 package-lock.json
+
+tailwind-LEGACY.css

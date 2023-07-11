@@ -4,31 +4,30 @@
   "description": "Frontend Modo Project using Monorepo Architecture",
   "scripts": {
     "dev": "run-p \"dev:*\"",
-    "dev:css": "npm run generate_web:css -- --watch",
+    "dev:css": "npm run generate:css -- --watch",
     "dev:host": "npm run mfa-prod",
-    "dev:main": "next dev",
+    "dev:main": "next dev -p 5173",
     "host": "run-p \"host:*\"",
     "host:mfa": "npm run mfa-dev",
-    "host:css": "npm run generate_mobile:css -- --watch",
+    "host:css": "npm run generate:css -- --watch",
     "host:dev": "npm run dev -workspace=@workspace/host",
     "auth": "run-p \"auth:*\"",
-    "auth:css": "npm run generate_mobile:css -- --watch",
+    "auth:css": "npm run generate:css -- --watch",
     "auth:dev": "npm run dev -workspace=@workspace/auth",
     "books": "run-p \"books:*\"",
-    "books:css": "npm run generate_mobile:css -- --watch",
+    "books:css": "npm run generate:css -- --watch",
     "books:dev": "npm run dev -workspace=@workspace/books",
     "mfa-dev": "run-p \"mfa-service:*\"",
     "mfa-prod": "run-p \"mfa-service:*\" mfa-host",
     "mfa-host": "npm run build -workspace=@workspace/host && npm run preview -workspace=@workspace/host",
     "mfa-service:auth": "npm run build -workspace=@workspace/auth && npm run preview -workspace=@workspace/auth",
     "mfa-service:books": "npm run build -workspace=@workspace/books && npm run preview -workspace=@workspace/books",
-    "build": "npm run generate_web:css && tsc && next build",
+    "build": "npm run generate:css && tsc && next build",
     "preview": "next start -p 5173",
     "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
     "lint": "next lint && tsc",
     "test": "jest",
-    "generate_web:css": "npx tailwindcss -i ./packages/styles/_web.css -o ./packages/styles/tailwind-LEGACY.css",
-    "generate_mobile:css": "npx tailwindcss -i ./packages/styles/_mobile.css -o ./packages/styles/tailwind-LEGACY.css",
+    "generate:css": "npx tailwindcss -i ./packages/styles/_mobile.css -o ./packages/styles/tailwind-LEGACY.css",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   },
@@ -55,7 +54,8 @@
     "packages/**/*"
   ],
   "dependencies": {
-    "@packages/config": "^0.1.0"
+    "@packages/config": "^0.1.0",
+    "@packages/utils": "^0.1.0"
   },
   "devDependencies": {
     "@packages/assets": "^0.1.0",
@@ -64,6 +64,7 @@
     "@packages/config-next": "^0.1.0",
     "@packages/styles": "^0.1.0",
     "@packages/tsconfig": "^0.1.0",
+    "@packages/utils": "^0.1.0",
     "eslint-config-preset": "^0.1.0"
   }
 }

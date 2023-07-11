@@ -15,6 +15,7 @@
     "jsx": "preserve",
     "rootDir": ".",
     "baseUrl": ".",
+    "types": ["node", "vite/client"],
     "incremental": true,
     "plugins": [
       {

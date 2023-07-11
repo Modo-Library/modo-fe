@@ -1,8 +1,11 @@
 import Button from '@packages/components/Button';
 
 import KaKaoLoginButton from './KaKaoLoginButton';
+import useKaKaoLogin from './hooks/useKaKaoLogin';
 
 export default function LoginArea() {
+  useKaKaoLogin();
+
   return (
     <section className="flex flex-col w-full gap-4">
       <KaKaoLoginButton />
