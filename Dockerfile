@@ -17,6 +17,7 @@ COPY packages/tsconfig /app/packages/tsconfig
 COPY packages/config /app/packages/config
 COPY packages/styles /app/packages/styles
 COPY packages/assets /app/packages/assets
+COPY packages/utils /app/packages/utils
 RUN npm install
 
 ### Build Image (build on dependency)
