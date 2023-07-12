@@ -64,7 +64,6 @@
     "@packages/config-next": "^0.1.0",
     "@packages/styles": "^0.1.0",
     "@packages/tsconfig": "^0.1.0",
-    "@packages/utils": "^0.1.0",
-    "eslint-config-preset": "^0.1.0"
+    "@packages/utils": "^0.1.0"
   }
 }

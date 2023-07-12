@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['eslint-config-preset', 'eslint-config-next', 'next', 'next/core-web-vitals'],
+  extends: ['eslint-config-preset', 'eslint-config-next', 'next/core-web-vitals'],
   settings: {
     'import/resolver': {
       node: {
