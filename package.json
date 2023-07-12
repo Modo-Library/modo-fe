@@ -26,7 +26,7 @@
     "preview": "next start -p 5173",
     "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
     "lint": "next lint && tsc",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "generate:css": "npx tailwindcss -i ./packages/styles/_mobile.css -o ./packages/styles/tailwind-LEGACY.css",
     "prepare": "husky install",
     "lint-staged": "lint-staged"

@@ -48,6 +48,7 @@ dist-ssr
 *.sw?
 
 .env
+*.test.yml
 
 # typescript
 tscompile
