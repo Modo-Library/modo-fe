@@ -28,15 +28,6 @@
   "references": [
     {
       "path": "tsconfig.node.json"
-    },
-    {
-      "path": "micro_services/auth/tsconfig.json"
-    },
-    {
-      "path": "micro_services/books/tsconfig.json"
-    },
-    {
-      "path": "micro_services/host/tsconfig.json"
     }
   ]
 }

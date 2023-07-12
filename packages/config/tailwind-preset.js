@@ -2,8 +2,9 @@ module.exports = {
   content: [
     './index.html',
     './packages/**/*.{js,ts,jsx,tsx}',
-    './microServices/**/*.{js,ts,jsx,tsx}',
+    './micro_services/**/*.{js,ts,jsx,tsx}',
     './src/**/*.{js,ts,jsx,tsx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     screens: {
@@ -52,6 +53,15 @@ module.exports = {
       },
       width: {
         layout: '25rem',
+      },
+      keyframes: {
+        push: {
+          '0%': { transform: 'scale(1.0)' },
+          '100%': { transform: 'scale(0.975)' },
+        },
+      },
+      animation: {
+        push: 'push .2s ease-out forwards',
       },
     },
   },

@@ -1,3 +1,27 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# vercel
+.vercel
+
 # Logs
 logs
 *.log
@@ -23,10 +47,12 @@ dist-ssr
 *.sln
 *.sw?
 
-
-
 .env
-tsconfig.tsbuildinfo
+
+# typescript
+tscompile
+*.tsbuildinfo
+next-env.d.ts
 
 #tailiwindCSS LEGACY
-tailwind-LEGACY.css
+tailwind-LEGACY.*

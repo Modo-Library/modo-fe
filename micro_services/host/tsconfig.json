@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "composite": true,
+    "noEmit": false,
+    "jsx": "react-jsx",
+    "baseUrl": "../",
+    "rootDir": "../",
+    "types": ["vite/client"],
+    "paths": {
+      "src/*": ["host/src/*"],
+      "auth/*": ["auth/src/*"],
+      "books/*": ["books/src/*"]
+    }
+  },
+  "include": ["src", "../auth/src/**/*", "../books/src/**/*"],
+  "exclude": ["node_modules"]
+}

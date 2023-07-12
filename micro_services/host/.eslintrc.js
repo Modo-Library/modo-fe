@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['eslint-config-preset', 'eslint-config-next', 'next/core-web-vitals'],
+  extends: ['eslint-config-preset'],
   settings: {
     'import/resolver': {
       node: {
@@ -7,16 +7,12 @@ module.exports = {
       },
       alias: {
         map: [
-          ['src', './src'],
+          ['src', './micro_services/host/src'],
           ['auth', './micro_services/auth/src'],
           ['books', './micro_services/books/src'],
-          ['host', './micro_services/host/src'],
         ],
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
-  },
-  rules: {
-    '@next/next/no-html-link-for-pages': ['error', 'app'],
   },
 };

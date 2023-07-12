@@ -9,7 +9,7 @@ const BtnHeirarchyMap = {
   third: 'shadow-none underline underline-offset-4 text-brown100',
   fourth: 'text-black100 underline-offset-2 shadow-none',
   fifth: 'text-gray100 underline font-light text-sm shadow-none',
-  disabled: 'text-gray100 bg-gray100 opacity-25 border-2',
+  disabled: 'active:animate-none text-gray100 bg-gray100 opacity-25 border-2',
 };
 
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -36,8 +36,10 @@ export const Button: ButtonType = (props) => {
     customClass,
   } = props;
 
-  const disabledClass = `${disabled ? `${BtnHeirarchyMap.disabled}` : ''}`;
-  const common = `w-full font-semibold px-10 py-3 shadow-md rounded-md cursor:pointer ${disabledClass}`;
+  const disabledClass = `${
+    disabled ? `${BtnHeirarchyMap.disabled}` : 'cursor:pointer active:animate-push'
+  }`;
+  const common = `w-full font-semibold px-10 py-3 shadow-md rounded-md ${disabledClass}`;
   const btnClass = `${common} ${customClass ? `${customClass}` : `${BtnHeirarchyMap[heirarchy]}`}`;
 
   return (
