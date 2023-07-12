@@ -1,0 +1,40 @@
+name: test before
+
+on:
+  pull_request:
+    branches:
+      - app
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: Test
+
+    steps:
+      - name: Check Auth branch
+        run: |
+          if [[ ${{ github.event.pull_request.head.ref }} == 'test' ]]; then
+            echo "Branch check passed"
+          else
+            echo "Branch check failed, skipping job"
+            exit 0
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check Node
+        run: node -v
+
+      - name: Check npm
+        run: npm -v
+
+      - name: Install Dependencies
+        run: npm install --frozen-lockfile
+
+      - name: Build
+        run: npm run build
+
+      - name: Run Test
+        run: npm test
