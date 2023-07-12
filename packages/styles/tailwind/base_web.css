@@ -1,0 +1,35 @@
+@tailwind base;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .flex-center {
+    display : flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .mobile-layout {
+    @apply flex-center flex-col w-[25rem] h-screen shadow-layout px-4;
+  }
+
+  body {
+    /* text */
+    @apply font-pretendard text-base leading-relaxed;
+    /* margin, padding, overflow */
+    @apply mx-auto overflow-x-hidden;
+    /* layout */
+    @apply w-screen mx-auto;
+  }
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+}

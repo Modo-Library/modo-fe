@@ -1,0 +1,22 @@
+{
+  "name": "@workspace/auth",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vite --port 5001 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --port 5001 --strictPort",
+    "serve": "vite serve --port 5001 --strictPort"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@packages/assets": "^0.1.0",
+    "@packages/components": "^0.1.0",
+    "@packages/config": "^0.1.0",
+    "@packages/styles": "^0.1.0",
+    "@packages/tsconfig": "^0.1.0",
+    "@packages/utils": "^0.1.0"
+  }
+}
