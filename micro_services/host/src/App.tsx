@@ -14,7 +14,7 @@ function App() {
         <Route path="account">
           <Route element={<router.Login />} path="login" />
         </Route>
-        <Route element={<router.Home />} path="home" />
+        <Route element={<router.Home />} path="/" />
         <Route element={<router.Error />} path="*" />
       </Routes>
     </Suspense>

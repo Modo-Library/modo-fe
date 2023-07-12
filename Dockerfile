@@ -25,8 +25,13 @@ FROM dependency as build
 
 WORKDIR /app
 COPY . /app
+
+RUN rm -rf /app/micro_services
+RUN rm -rf /app/tsconfig.json
+COPY tsconfig.prod.json /app/tsconfig.json
+
 RUN npm run build
-RUN rm -rf ./.next/cache
+RUN rm -rf /app/.next/cache
 
 #### Server Image
 FROM node:16-alpine as server

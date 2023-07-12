@@ -9,7 +9,7 @@ export default defineConfig({
     svgr(),
     react(),
     federation({
-      name: 'remote_app',
+      name: 'service:books',
       filename: 'remoteEntry.js',
       exposes: {
         './App': './src/App',

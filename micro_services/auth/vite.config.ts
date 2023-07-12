@@ -13,12 +13,12 @@ export default defineConfig({
     svgr(),
     react(),
     federation({
-      name: 'remote_app',
+      name: 'service:auth',
       filename: 'remoteEntry.js',
       exposes: {
         './components/LoginArea': './src/components/LoginArea',
       },
-      shared: ['react', 'react-dom'],
+      shared: ['react', 'react-dom', 'react-router-dom'],
     }),
   ],
   resolve: {
@@ -31,8 +31,5 @@ export default defineConfig({
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
-    rollupOptions: {
-      external: ['qs'],
-    },
   },
 });

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import qs from 'qs';
 
 import request from '@packages/utils/axios';
 import { setCookie, removeCookie } from '@packages/utils/cookies';
@@ -14,7 +13,7 @@ interface IToken {
 export default function useKaKaoLogin() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { code } = qs.parse(location.search.split('?')[1]);
+  const code = new URLSearchParams(location.search).get('code');
 
   useEffect(() => {
     if (!code) return;
