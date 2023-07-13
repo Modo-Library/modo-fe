@@ -22,21 +22,22 @@ FROM dependency as build
 
 WORKDIR /app
 COPY micro_services/auth /app
+COPY .env /app
 
 RUN npm run generate:css
 RUN npm run build
 
-#### Server Image
-FROM nginx:alpine as server
-ENV SERVICE auth
-ENV URL app/auth
-ENV PORT 5001
-ENV HOST 0.0.0.0
+# #### Server Image
+# FROM nginx:alpine as server
+# ENV SERVICE auth
+# ENV URL app/auth
+# ENV PORT 5001
+# ENV HOST 0.0.0.0
 
-COPY nginx.conf /etc/nginx/conf.d/modo.template
-COPY --from=build /app/dist /home/ubuntu/production/$URL
+# COPY nginx.conf /etc/nginx/conf.d/modo.template
+# COPY --from=build /app/dist /home/ubuntu/production/$URL
 
-EXPOSE $PORT
+# EXPOSE $PORT
 
-## Inject Environment Variables
-CMD sh -c "envsubst '\$PORT \$URL \$SERVICE' < /etc/nginx/conf.d/modo.template > /etc/nginx/conf.d/modo.conf && nginx -g 'daemon off;'"
+# ## Inject Environment Variables
+# CMD sh -c "envsubst '\$PORT \$URL \$SERVICE' < /etc/nginx/conf.d/modo.template > /etc/nginx/conf.d/modo.conf && nginx -g 'daemon off;'"
