@@ -18,8 +18,8 @@
     "books": "run-p \"books:*\"",
     "books:css": "npm run generate:css -- --watch",
     "books:dev": "npm run dev -workspace=@workspace/books",
-    "mfa-dev": "run-p \"mfa-service:*\"",
-    "mfa-prod": "run-p \"mfa-service:*\" mfa-host",
+    "mfa-dev": "NODE_ENV=development run-p \"mfa-service:*\"",
+    "mfa-prod": "NODE_ENV=production run-p \"mfa-service:*\" mfa-host",
     "mfa-host": "npm run build -workspace=@workspace/host && npm run preview -workspace=@workspace/host",
     "mfa-service:auth": "npm run build -workspace=@workspace/auth && npm run preview -workspace=@workspace/auth",
     "mfa-service:books": "npm run build -workspace=@workspace/books && npm run preview -workspace=@workspace/books",
@@ -33,7 +33,7 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "{src,packages}/**/*.{js,jsx,ts,tsx}": [
+    "{app,packages}/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ],
