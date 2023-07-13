@@ -33,20 +33,20 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "{src,packages}/**/*.{js,jsx,ts,tsx}": [
+    "{app,packages}/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "micro_services/Auth/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config micro_services/Auth/.eslintrc.js",
+    "micro_services/auth/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix --config micro_services/auth/.eslintrc.js",
       "prettier --write"
     ],
-    "micro_services/Books/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config micro_services/Books/.eslintrc.js",
+    "micro_services/books/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix --config micro_services/books/.eslintrc.js",
       "prettier --write"
     ],
-    "micro_services/Host/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config micro_services/Host/.eslintrc.js",
+    "micro_services/host/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix --config micro_services/host/.eslintrc.js",
       "prettier --write"
     ]
   },
