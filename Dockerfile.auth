@@ -22,6 +22,7 @@ FROM dependency as build
 
 WORKDIR /app
 COPY micro_services/auth /app
+COPY .env /app
 
 RUN npm run generate:css
 RUN npm run build
