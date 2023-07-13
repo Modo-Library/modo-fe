@@ -1,5 +1,5 @@
 const reqURL =
-  process.env.NODE_ENV !== 'production' ? 'http://localhost:5000' : 'https://host.mobilelib.site';
+  process.env.NODE_ENV !== 'production' ? 'http://localhost:5000' : 'http://host.modolib.site';
 
 export default function Home() {
   return (

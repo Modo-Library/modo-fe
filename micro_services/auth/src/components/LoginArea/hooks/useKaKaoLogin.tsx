@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import request from '@packages/utils/axios';
-import { setCookie, removeCookie } from '@packages/utils/cookies';
+import request from '@packages/utils/api/axios';
+import { setCookie, removeCookie } from '@packages/utils/api/cookies';
 import getDateHour from '@packages/utils/getDateHour';
 
 interface IToken {
@@ -34,7 +34,7 @@ export default function useKaKaoLogin() {
           value: result.refreshToken,
           options: { path: '/', expires: new Date(Date.now() + getDateHour(24 * 30)) },
         });
-        navigate('/');
+        navigate('http://localhost:5000');
       }
     };
 

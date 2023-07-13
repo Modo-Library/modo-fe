@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "run-p \"dev:*\"",
     "dev:css": "npm run generate:css -- --watch",
-    "dev:host": "npm run mfa-prod",
+    "dev:mfa": "npm run mfa-dev",
+    "dev:host": "npm run dev -workspace=@workspace/host",
     "dev:main": "next dev -p 5173",
     "host": "run-p \"host:*\"",
     "host:mfa": "npm run mfa-dev",

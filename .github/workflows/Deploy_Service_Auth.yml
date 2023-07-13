@@ -1,14 +1,18 @@
-name: test before
+name: Deploy Auth Service
 
 on:
   push:
     tags:
-      - Test-v*.*.*
+      - Auth-v*.*.*
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: Test
+    environment: Service-Auth
+
+    env:
+      CONTAINER_NAME: auth
+      PORT: 5001
 
     steps:
       - name: Checkout
@@ -41,7 +45,22 @@ jobs:
         uses: docker/build-push-action@v4.1.1
         with:
           context: .
-          file: ./Dockerfile.auth
+          file: ./Dockerfile.${{ env.CONTAINER_NAME }}
           platforms: linux/amd64
           push: true
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/test:${{ steps.get_version.outputs.VERSION }}
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/${{ env.CONTAINER_NAME }}:${{ steps.get_version.outputs.VERSION }}
+
+      - name: Application Run
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_KEY }}
+
+          script: |
+            sudo docker kill ${{ env.CONTAINER_NAME }}
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ steps.get_version.outputs.VERSION }}
+
+            sudo docker run -it --rm -p ${{ env.PORT }}:${{ env.PORT }} \
+            --name ${{ env.CONTAINER_NAME }} \
+            -d ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.CONTAINER_NAME }}:${{ steps.get_version.outputs.VERSION }}

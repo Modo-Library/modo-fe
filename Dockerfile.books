@@ -23,6 +23,7 @@ FROM dependency as build
 WORKDIR /app
 COPY micro_services/books /app
 
+RUN npm run generate:css
 RUN npm run build
 
 #### Server Image

@@ -6,10 +6,11 @@
     "dev": "vite --port 5000 --strictPort",
     "build": "vite build",
     "preview": "vite preview --port 5000 --strictPort",
-    "serve": "vite serve --port 5000 --strictPort"
+    "serve": "vite serve --port 5000 --strictPort",
+    "generate:css": "npx tailwindcss -i ./packages/styles/_mobile.css -o ./packages/styles/tailwind-LEGACY.css"
   },
   "workspaces": [
-    "microServices/*",
+    "micro_services/*",
     "packages/*"
   ],
   "devDependencies": {
