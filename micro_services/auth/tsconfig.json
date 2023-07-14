@@ -1,0 +1,15 @@
+{
+  "extends": "@packages/tsconfig/react.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "composite": true,
+    "declaration": true,
+    "noEmit": true,
+    "paths": {
+      "auth/*": ["src/*"]
+    }
+  },
+  "include": ["."]
+}

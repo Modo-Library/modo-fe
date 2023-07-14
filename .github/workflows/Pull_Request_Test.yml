@@ -1,0 +1,29 @@
+name: Test Code by Jest
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: Test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3.7.0
+        with:
+          node-version: v18.16.0
+          cache: npm
+
+      - name: Check Node
+        run: node -v
+
+      - name: Check npm
+        run: npm -v
+
+      - name: Install Dependencies
+        run: npm install --quiet --frozen-lockfile
+
+      - name: Run Test
+        run: npm test

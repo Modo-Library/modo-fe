@@ -1,0 +1,12 @@
+{
+  "extends": "@packages/tsconfig/react.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "composite": true,
+    "declaration": true,
+    "noEmit": true
+  },
+  "include": ["."],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,79 @@
+{
+  "name": "modo-fe",
+  "version": "0.1.0",
+  "description": "Frontend Modo Project using Monorepo Architecture",
+  "scripts": {
+    "dev": "run-p \"dev:*\"",
+    "dev:css": "npm run generate:css -- --watch",
+    "dev:mfa": "npm run mfa-dev",
+    "dev:host": "npm run dev -workspace=@workspace/host",
+    "dev:main": "next dev -p 5173",
+    "host": "run-p \"host:*\"",
+    "host:mfa": "npm run mfa-dev",
+    "host:css": "npm run generate:css -- --watch",
+    "host:dev": "npm run dev -workspace=@workspace/host",
+    "auth": "run-p \"auth:*\"",
+    "auth:css": "npm run generate:css -- --watch",
+    "auth:dev": "npm run dev -workspace=@workspace/auth",
+    "books": "run-p \"books:*\"",
+    "books:css": "npm run generate:css -- --watch",
+    "books:dev": "npm run dev -workspace=@workspace/books",
+    "mfa-dev": "NODE_ENV=development run-p \"mfa-service:*\"",
+    "mfa-prod": "NODE_ENV=production run-p \"mfa-service:*\" mfa-host",
+    "mfa-host": "npm run build -workspace=@workspace/host && npm run preview -workspace=@workspace/host",
+    "mfa-service:auth": "npm run build -workspace=@workspace/auth && npm run preview -workspace=@workspace/auth",
+    "mfa-service:books": "npm run build -workspace=@workspace/books && npm run preview -workspace=@workspace/books",
+    "build": "npm run generate:css && tsc && next build",
+    "preview": "next start -p 5173",
+    "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
+    "lint": "run-p \"lint:*\"",
+    "lint:packages": "eslint && tsc -p packages/tsconfig.json --noEmit",
+    "lint:main": "next lint && tsc -p tsconfig.json --noEmit",
+    "lint:host": "eslint && tsc -p micro_services/host/tsconfig.json --noEmit",
+    "lint:auth": "eslint && tsc -p micro_services/auth/tsconfig.json --noEmit",
+    "lint:books": "eslint && tsc -p micro_services/books/tsconfig.json --noEmit",
+    "test": "jest --passWithNoTests",
+    "generate:css": "npx tailwindcss -i ./packages/styles/_mobile.css -o ./packages/styles/tailwind-LEGACY.css",
+    "prepare": "husky install",
+    "lint-staged": "npm run lint && lint-staged"
+  },
+  "lint-staged": {
+    "app/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+     "packages/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "micro_services/auth/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "micro_services/books/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "micro_services/host/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "workspaces": [
+    "micro_services/*",
+    "packages/**/*"
+  ],
+  "dependencies": {
+    "@packages/config": "^0.1.0",
+    "@packages/utils": "^0.1.0"
+  },
+  "devDependencies": {
+    "@packages/assets": "^0.1.0",
+    "@packages/components": "^0.1.0",
+    "@packages/config": "^0.1.0",
+    "@packages/config-next": "^0.1.0",
+    "@packages/styles": "^0.1.0",
+    "@packages/tsconfig": "^0.1.0",
+    "@packages/utils": "^0.1.0"
+  }
+}
