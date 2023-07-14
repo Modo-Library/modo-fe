@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import '@packages/styles/_mobile.css';
 
-import GlobalErrorBoundary from 'src/utils/error/globalBoundary';
+import GlobalErrorBoundary from 'host/utils/error/globalBoundary';
 
 import App from './App';
 
