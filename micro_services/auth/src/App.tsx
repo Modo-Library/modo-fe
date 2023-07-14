@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 
-import PageRoutes from 'src/routes/page';
-import ComponentRoutes from 'src/routes/component';
+import PageRoutes from 'auth/routes/page';
+import ComponentRoutes from 'auth/routes/component';
 
 function App() {
   const location = useLocation();
