@@ -5,7 +5,7 @@ import kakaoIcon from './assets/kakaoIcon';
 
 export default function KaKaoLoginButton() {
   const handleKaKaoLogin = () => {
-    const kakaoWindow = window.open(REQUEST_KAKAO_LOGIN_URL, '_blank', 'width=500,height=600');
+    window.open(REQUEST_KAKAO_LOGIN_URL, '_blank', 'width=500,height=600');
   };
 
   return (

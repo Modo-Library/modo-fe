@@ -24,7 +24,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      src: path.resolve(__dirname, './src'),
+      host: path.resolve(__dirname, './src'),
     },
   },
   build: {

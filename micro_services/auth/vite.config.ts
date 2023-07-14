@@ -23,7 +23,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      src: path.resolve(__dirname, './src'),
+      auth: path.resolve(__dirname, './src'),
     },
   },
   build: {

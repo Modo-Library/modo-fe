@@ -1,4 +1,4 @@
-name: Test Code by Jest
+name: Lint Code
 
 on:
   pull_request:
@@ -26,4 +26,4 @@ jobs:
         run: npm install --quiet --frozen-lockfile
 
       - name: Run Test
-        run: npm test
+        run: npm run lint
