@@ -9,7 +9,9 @@ import App from './App';
 
 import '@packages/styles/_mobile.css';
 
-server.start({ onUnhandledRequest: 'bypass' });
+if (process.env.NODE_ENV === 'test') {
+  server.start({ onUnhandledRequest: 'bypass' });
+}
 
 const queryClient = new QueryClient();
 const container = document.getElementById('root') as HTMLElement;
