@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import { Icon, IconifyIcon } from '@iconify/react';
 
-import '@packages/styles/tailwind-LEGACY.css';
+// import '@packages/styles/tailwind-LEGACY.css';
 
 const BtnHeirarchyMap = {
   first: 'bg-brown100 text-white',

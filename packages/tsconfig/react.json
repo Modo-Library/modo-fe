@@ -4,7 +4,7 @@
   "extends": "@packages/tsconfig/base.json",
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "target": "ES5",
+    "target": "ES6",
     "module": "ESNext",
     "types": ["jest", "node", "vite/client"],
     "jsx": "react-jsx"

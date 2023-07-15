@@ -1,7 +1,7 @@
 // Only used by Jest
 module.exports = {
   presets: [
-    '@babel/preset-config',
+    '@babel/preset-react',
     ['@babel/preset-env', { targets: { node: 'current' } }],
     '@babel/preset-typescript',
   ],
