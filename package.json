@@ -18,35 +18,45 @@
     "books": "run-p \"books:*\"",
     "books:css": "npm run generate:css -- --watch",
     "books:dev": "npm run dev -workspace=@workspace/books",
-    "mfa-dev": "run-p \"mfa-service:*\"",
-    "mfa-prod": "run-p \"mfa-service:*\" mfa-host",
+    "mfa-dev": "NODE_ENV=development run-p \"mfa-service:*\"",
+    "mfa-prod": "NODE_ENV=production run-p \"mfa-service:*\" mfa-host",
     "mfa-host": "npm run build -workspace=@workspace/host && npm run preview -workspace=@workspace/host",
     "mfa-service:auth": "npm run build -workspace=@workspace/auth && npm run preview -workspace=@workspace/auth",
     "mfa-service:books": "npm run build -workspace=@workspace/books && npm run preview -workspace=@workspace/books",
     "build": "npm run generate:css && tsc && next build",
     "preview": "next start -p 5173",
     "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
-    "lint": "next lint && tsc",
+    "lint": "run-p \"lint:*\"",
+    "lint:packages": "eslint && tsc -p packages/tsconfig.json --noEmit",
+    "lint:main": "next lint && tsc -p tsconfig.json --noEmit",
+    "lint:host": "eslint && tsc -p micro_services/host/tsconfig.json --noEmit",
+    "lint:auth": "eslint && tsc -p micro_services/auth/tsconfig.json --noEmit",
+    "lint:books": "eslint && tsc -p micro_services/books/tsconfig.json --noEmit",
     "test": "jest --passWithNoTests",
+    "test:auth": "NODE_ENV=test npm run auth",
     "generate:css": "npx tailwindcss -i ./packages/styles/_mobile.css -o ./packages/styles/tailwind-LEGACY.css",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "npm run lint && lint-staged"
   },
   "lint-staged": {
-    "{src,packages}/**/*.{js,jsx,ts,tsx}": [
+    "app/**/*.{js?(x),ts?(x)}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "micro_services/Auth/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config micro_services/Auth/.eslintrc.js",
+    "packages/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
       "prettier --write"
     ],
-    "micro_services/Books/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config micro_services/Books/.eslintrc.js",
+    "micro_services/auth/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
       "prettier --write"
     ],
-    "micro_services/Host/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config micro_services/Host/.eslintrc.js",
+    "micro_services/books/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "micro_services/host/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
       "prettier --write"
     ]
   },
@@ -66,5 +76,8 @@
     "@packages/styles": "^0.1.0",
     "@packages/tsconfig": "^0.1.0",
     "@packages/utils": "^0.1.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

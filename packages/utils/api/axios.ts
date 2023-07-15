@@ -8,7 +8,7 @@ const accessToken = getCookie('accessToken');
 // const refreshToken = getCookie('refreshToken');
 
 const Axios = axios.create({
-  baseURL: `${import.meta.env.VITE_SERVER_URL}`,
+  baseURL: `${process.env.NODE_ENV === 'test' ? '' : `${import.meta.env.VITE_SERVER_URL}`}`,
   headers: { Authorization: accessToken ? `Bearer ${accessToken}` : '' },
   timeout: 2000,
 });

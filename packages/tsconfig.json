@@ -1,15 +1,12 @@
 {
   "extends": "@packages/tsconfig/react.json",
   "compilerOptions": {
-    "jsx": "preserve",
     "baseUrl": ".",
     "rootDir": ".",
     "composite": true,
     "declaration": true,
-    "noEmit": true,
-    "paths": {
-      "books/*": ["src/*"]
-    }
+    "noEmit": true
   },
-  "include": ["."]
+  "include": ["."],
+  "exclude": ["node_modules"]
 }

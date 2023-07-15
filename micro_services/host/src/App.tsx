@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 
 import Loader from '@packages/components/Loader';
 
-import * as router from 'src/routes';
+import * as router from 'host/routes';
 
 function App() {
   const location = useLocation();
