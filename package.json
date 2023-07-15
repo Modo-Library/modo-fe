@@ -33,6 +33,7 @@
     "lint:auth": "eslint && tsc -p micro_services/auth/tsconfig.json --noEmit",
     "lint:books": "eslint && tsc -p micro_services/books/tsconfig.json --noEmit",
     "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch",
     "test:auth": "NODE_ENV=test npm run auth",
     "generate:css": "npx tailwindcss -i ./packages/styles/_mobile.css -o ./packages/styles/tailwind-LEGACY.css",
     "prepare": "husky install",
@@ -76,8 +77,5 @@
     "@packages/styles": "^0.1.0",
     "@packages/tsconfig": "^0.1.0",
     "@packages/utils": "^0.1.0"
-  },
-  "msw": {
-    "workerDirectory": "public"
   }
 }

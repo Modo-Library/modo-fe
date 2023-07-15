@@ -12,7 +12,7 @@ const BtnHeirarchyMap = {
   disabled: 'active:animate-none text-gray100 bg-gray100 opacity-25 border-2',
 };
 
-interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconCustom?: React.ReactElement;
   iconSrc?: string | IconifyIcon;
   iconColor?: string;
