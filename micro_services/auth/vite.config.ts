@@ -23,7 +23,7 @@ export default defineConfig({
       exposes: {
         './components/LoginArea': './src/components/LoginArea',
       },
-      shared: ['react', 'react-dom', 'react-router-dom'],
+      shared: ['react', 'react-dom', 'react-router-dom', 'recoil'],
     }),
   ],
   resolve: {

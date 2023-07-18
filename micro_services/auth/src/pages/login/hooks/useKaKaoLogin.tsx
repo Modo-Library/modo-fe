@@ -25,6 +25,6 @@ export default async function useKaKaoLogin(code: string | null) {
       value: result.refreshToken,
       options: { path: '/', expires: new Date(Date.now() + getDateHour(24 * 30)) },
     });
-    window.location.replace(`${import.meta.env.VITE_REDIRECT_URL}/components/loginArea`);
+    window.location.replace(`${import.meta.env.VITE_AUTH_URL}/login`);
   }
 }

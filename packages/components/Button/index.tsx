@@ -44,6 +44,7 @@ export const Button = (props: ButtonProps): React.ReactElement => {
     return <></>;
   }
 
+  const loadingClass = isLoading ? 'opacity-50' : '';
   const disabledClass = `${
     disabled ? `${BtnHeirarchyMap.disabled}` : 'cursor:pointer active:animate-push'
   }`;
@@ -52,7 +53,7 @@ export const Button = (props: ButtonProps): React.ReactElement => {
 
   return (
     <button onClick={onClick} className={btnClass} type={type} disabled={disabled}>
-      <div className="flex items-center justify-center gap-4">
+      <div className={`flex items-center justify-center gap-4 ${loadingClass}`}>
         {iconCustom && iconCustom}
         {iconSrc && <Icon icon={iconSrc} color={iconColor} width={24} height={24} />}
         <p>{value}</p>
