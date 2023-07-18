@@ -1,10 +1,17 @@
+import { useLocation } from 'react-router-dom';
+
 import Button from '@packages/components/Button';
 
 import KaKaoLoginButton from './KaKaoLoginButton';
 import useKaKaoLogin from './hooks/useKaKaoLogin';
 
 export default function LoginArea() {
-  useKaKaoLogin();
+  const location = useLocation();
+  const code = new URLSearchParams(location.search).get('code');
+
+  // ------------------------
+  useKaKaoLogin(code);
+  // ------------------------
 
   return (
     <section className="flex flex-col w-full gap-4">
