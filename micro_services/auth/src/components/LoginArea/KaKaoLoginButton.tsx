@@ -14,6 +14,7 @@ export default function KaKaoLoginButton() {
       customClass="bg-[#F7E600]"
       iconCustom={kakaoIcon}
       value={'카카오 계정으로 로그인'}
+      spinnerColor={'#212121'}
     />
   );
 }

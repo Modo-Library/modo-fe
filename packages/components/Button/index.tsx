@@ -3,6 +3,8 @@ import { Icon, IconifyIcon } from '@iconify/react';
 
 import '@packages/styles/tailwind-LEGACY.css';
 
+import ButtonSpinner from './ButtonSpinner';
+
 const BtnHeirarchyMap = {
   first: 'bg-brown100 text-white',
   second: 'bg-white border-2 border-brown100 shadow-none text-brown100',
@@ -12,18 +14,17 @@ const BtnHeirarchyMap = {
   disabled: 'active:animate-none text-gray100 bg-gray100 opacity-25 border-2',
 };
 
-interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconCustom?: React.ReactElement;
   iconSrc?: string | IconifyIcon;
   iconColor?: string;
   heirarchy?: keyof typeof BtnHeirarchyMap;
   customClass?: string;
-  onClick: () => void;
+  isLoading?: boolean;
+  spinnerColor?: string;
 }
 
-type ButtonType = (props: IButton) => React.ReactElement;
-
-export const Button: ButtonType = (props) => {
+export const Button = (props: ButtonProps): React.ReactElement => {
   const {
     onClick,
     disabled,
@@ -32,9 +33,16 @@ export const Button: ButtonType = (props) => {
     iconCustom,
     iconSrc,
     iconColor,
+    isLoading = false,
+    spinnerColor,
     heirarchy = 'first',
     customClass,
   } = props;
+
+  if (iconCustom && iconSrc) {
+    console.error('아이콘이 중복 사용되었습니다');
+    return <></>;
+  }
 
   const disabledClass = `${
     disabled ? `${BtnHeirarchyMap.disabled}` : 'cursor:pointer active:animate-push'
@@ -48,6 +56,7 @@ export const Button: ButtonType = (props) => {
         {iconCustom && iconCustom}
         {iconSrc && <Icon icon={iconSrc} color={iconColor} width={24} height={24} />}
         <p>{value}</p>
+        {isLoading && <ButtonSpinner color={spinnerColor} />}
       </div>
     </button>
   );
