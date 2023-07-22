@@ -13,6 +13,8 @@
     "react-router-dom": "^6.13.0"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.11.0",
+    "@emotion/react": "^11.11.1",
     "@iconify/react": "^4.1.1",
     "@originjs/vite-plugin-federation": "^1.2.3",
     "@testing-library/jest-dom": "^5.16.5",

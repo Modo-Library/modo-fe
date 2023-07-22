@@ -11,14 +11,19 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
   plugins: [
     svgr(),
-    react(),
+    react({
+      jsxImportSource: '@emotion/react',
+      babel: {
+        plugins: ['@emotion/babel-plugin'],
+      },
+    }),
     federation({
       name: 'service:auth',
       filename: 'remoteEntry.js',
       exposes: {
         './components/LoginArea': './src/components/LoginArea',
       },
-      shared: ['react', 'react-dom', 'react-router-dom'],
+      shared: ['react', 'react-dom', 'react-router-dom', 'recoil'],
     }),
   ],
   resolve: {
