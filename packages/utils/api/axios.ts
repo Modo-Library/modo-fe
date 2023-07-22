@@ -9,7 +9,7 @@ const accessToken = getCookie('accessToken');
 
 const Axios = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_URL}`,
-  headers: { Authorization: accessToken ? `Bearer ${accessToken}` : '' },
+  headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
   timeout: 2000,
 });
 

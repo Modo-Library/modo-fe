@@ -141,11 +141,6 @@ module.exports = {
             position: 'after',
           },
           {
-            pattern: 'src/**',
-            group: 'internal',
-            position: 'after',
-          },
-          {
             pattern: '**/*/assets/**',
             group: 'internal',
             position: 'after',
@@ -199,7 +194,7 @@ module.exports = {
         location: 'anywhere',
       },
     ],
-    'no-console': 'error',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-debugger': 'error',
     'no-unused-vars': 'off',
     'no-param-reassign': ['error', { props: false }],
