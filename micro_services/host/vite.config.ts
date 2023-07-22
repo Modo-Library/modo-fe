@@ -19,7 +19,7 @@ export default defineConfig({
         auth: `http://${PREFIX_ENVIRONMENT_URL('auth', 5001)}/assets/remoteEntry.js`,
         books: `http://${PREFIX_ENVIRONMENT_URL('books', 5002)}/assets/remoteEntry.js`,
       },
-      shared: ['react', 'react-dom', 'react-router-dom'],
+      shared: ['react', 'react-dom', 'react-router-dom', 'recoil'],
     }),
   ],
   resolve: {
