@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Suspense } from 'react';
 
-import Loader from '@packages/components/Loader';
+import Loader from '@packages/components/Indicator/Loader';
 
 import { LoginPage } from 'auth/routes';
 import ComponentRoutes from 'auth/routes/Component';

@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 
-import Loader from '@packages/components/Loader';
+import Loader from '@packages/components/Indicator/Loader';
 import { ReactComponent as Logo } from '@packages/assets/Logo/modo-with-font.svg';
 
 const LoginArea = lazy(() => import('auth/components/LoginArea'));

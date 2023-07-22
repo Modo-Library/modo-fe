@@ -1,12 +1,20 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-export default function ButtonSpinner({ color }: { color?: string }) {
+interface ButtonSpinnerProps {
+  color?: string;
+  width?: number;
+  height?: number;
+}
+
+export default function ButtonSpinner(props: ButtonSpinnerProps) {
+  const { color, width, height } = props;
+
   const isColor = color || '#eeeeee';
 
   const spinner = css`
-    width: 24px;
-    height: 24px;
+    width: ${width ?? 24}px;
+    height: ${height ?? 24}px;
     border-radius: 50%;
     background: radial-gradient(farthest-side, ${isColor} 94%, #0000) top/5px 5px no-repeat,
       conic-gradient(#0000 30%, ${isColor});

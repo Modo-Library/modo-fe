@@ -1,12 +1,19 @@
 import { useLocation } from 'react-router-dom';
 import React, { useState } from 'react';
 
+import ButtonSpinner from '@packages/components/Indicator/Spinner';
+
 import { LoginType } from 'auth/components/LoginArea/constant';
 
 import useKaKaoLogin from './hooks/useKaKaoLogin';
 
 const StateComponentsMap: { [key in string]: React.ReactElement } = {
-  pending: <div>로딩 중...</div>,
+  pending: (
+    <div className="flex flex-col gap-2 items-center justify-center">
+      <ButtonSpinner width={48} height={48} />
+      <p>로딩 중...</p>
+    </div>
+  ),
   error: <div>로그인 실패!</div>,
   success: <div>로그인 성공!</div>,
 };

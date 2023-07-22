@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
 import Button from '@packages/components/Button';
-import { getCookie } from '@packages/utils/api/cookies';
 
 import openCenteredWindow from 'auth/utils/openCenterWindow';
 
@@ -23,11 +22,10 @@ export default function KaKaoLoginButton() {
   };
 
   useEffect(() => {
-    if (!getCookie('accessToken')) return;
     setTimeout(() => {
       windowRef.current?.close();
       setLoading(false);
-    }, 500);
+    }, 1000);
   });
 
   return (

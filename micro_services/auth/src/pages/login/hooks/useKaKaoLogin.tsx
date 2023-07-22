@@ -19,24 +19,23 @@ export default async function useKaKaoLogin(
   if (!code || getCookie('accessToken')) return;
   if (type !== 'kakao') return;
 
-  const result: IToken = await request.get(`oauth/kakao?code=${code}`);
+  try {
+    const result: IToken = await request.get(`oauth/kakao?code=${code}`);
 
-  if (!result) {
+    handleState('success');
+    removeCookie('accessToken');
+    removeCookie('refreshToken');
+    setCookie({
+      name: 'accessToken',
+      value: result.accessToken,
+      options: { path: '/', expires: new Date(Date.now() + getDateHour(1)) },
+    });
+    setCookie({
+      name: 'refreshToken',
+      value: result.refreshToken,
+      options: { path: '/', expires: new Date(Date.now() + getDateHour(24 * 30)) },
+    });
+  } catch (err) {
     handleState('error');
-    return;
   }
-
-  handleState('success');
-  removeCookie('accessToken');
-  removeCookie('refreshToken');
-  setCookie({
-    name: 'accessToken',
-    value: result.accessToken,
-    options: { path: '/', expires: new Date(Date.now() + getDateHour(1)) },
-  });
-  setCookie({
-    name: 'refreshToken',
-    value: result.refreshToken,
-    options: { path: '/', expires: new Date(Date.now() + getDateHour(24 * 30)) },
-  });
 }

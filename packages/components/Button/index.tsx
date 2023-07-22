@@ -3,7 +3,7 @@ import { Icon, IconifyIcon } from '@iconify/react';
 
 import '@packages/styles/tailwind-LEGACY.css';
 
-import ButtonSpinner from './ButtonSpinner';
+import ButtonSpinner from '@packages/components/Indicator/Spinner';
 
 const BtnHeirarchyMap = {
   first: 'bg-brown100 text-white',
