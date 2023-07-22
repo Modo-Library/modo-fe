@@ -25,6 +25,7 @@ export default defineConfig({
   resolve: {
     alias: {
       host: path.resolve(__dirname, './src'),
+      'state/auth': path.resolve(__dirname, '../auth/src/utils/recoil'),
     },
   },
   build: {
