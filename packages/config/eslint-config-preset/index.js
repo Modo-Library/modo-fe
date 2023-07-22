@@ -141,11 +141,6 @@ module.exports = {
             position: 'after',
           },
           {
-            pattern: 'src/**',
-            group: 'internal',
-            position: 'after',
-          },
-          {
             pattern: '**/*/assets/**',
             group: 'internal',
             position: 'after',

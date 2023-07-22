@@ -1,17 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import Button from '@packages/components/Button';
+import { getCookie } from '@packages/utils/api/cookies';
+
+import openCenteredWindow from 'auth/utils/openCenterWindow';
 
 import { REQUEST_KAKAO_LOGIN_URL } from './constant';
 import kakaoIcon from './assets/kakaoIcon';
 
 export default function KaKaoLoginButton() {
   const [loading, setLoading] = useState<boolean>(false);
+  const windowRef = useRef<Window | null>(null);
 
   const handleKaKaoLogin = () => {
     setLoading(true);
-    window.open(REQUEST_KAKAO_LOGIN_URL, '_self', 'width=500,height=600');
+    windowRef.current = openCenteredWindow(
+      REQUEST_KAKAO_LOGIN_URL,
+      'MODO : 카카오 로그인',
+      500,
+      600,
+    );
   };
+
+  useEffect(() => {
+    if (!getCookie('accessToken')) return;
+    setTimeout(() => {
+      windowRef.current?.close();
+      setLoading(false);
+    }, 500);
+  });
 
   return (
     <Button
