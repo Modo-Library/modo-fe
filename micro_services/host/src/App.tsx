@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import Loader from '@packages/components/Loader';
 
 import * as router from 'host/routes';
+import AuthRoute from 'host/routes/AuthRoute';
 
 function App() {
   const location = useLocation();
@@ -14,8 +15,7 @@ function App() {
         <Route path="account">
           <Route element={<router.Login />} path="login" />
         </Route>
-        <Route element={<router.Home />} path="/" />
-        <Route element={<router.Error />} path="*" />
+        <Route path="/*" element={<AuthRoute />} />
       </Routes>
     </Suspense>
   );
