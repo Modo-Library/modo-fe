@@ -25,7 +25,7 @@ export default function KaKaoLoginButton() {
     setTimeout(() => {
       windowRef.current?.close();
       setLoading(false);
-    }, 1000);
+    }, 2000);
   });
 
   return (

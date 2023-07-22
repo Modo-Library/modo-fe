@@ -22,6 +22,7 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       exposes: {
         './components/LoginArea': './src/components/LoginArea',
+        './state/auth': './src/utils/recoil/auth',
       },
       shared: ['react', 'react-dom', 'react-router-dom', 'recoil'],
     }),
