@@ -8,23 +8,22 @@ interface AxiosCustomRequestConfig extends AxiosRequestConfig {
 
 // 쿠키 확인 및 Axios 기본 세팅
 const accessToken = getCookie('accessToken');
-// TODO : refresh 토큰 사용 필요
-// const refreshToken = getCookie('refreshToken');
+const refreshToken = getCookie('refreshToken');
 const MAX_RETRY_COUNT = 1;
 
 const Axios = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_URL}`,
   headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+  withCredentials: true,
   timeout: 2000,
 });
 
 // Interceptor로 응답/요청 공통 핸들링
 Axios.interceptors.request.use(
   (request) => {
-    if (!accessToken && window.location.pathname !== '/login') {
-      window.location.href = '/account/login';
+    if (!refreshToken && window.location.pathname !== '/login') {
+      window.location.href = `${import.meta.env.VITE_HOST_URL}/account/login`;
       console.warn('[Message] No Token');
-      throw new Error('Request Interceptor Error');
     }
 
     return request;

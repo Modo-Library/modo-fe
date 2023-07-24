@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import Button from '@packages/components/Button';
 
 import openCenteredWindow from 'auth/utils/openCenterWindow';
@@ -18,17 +16,9 @@ export default function KaKaoLoginButton(props: KaKaoLoginButtonProps) {
 
   const handleKaKaoLogin = () => {
     setLoading();
+    localStorage.setItem('loginType', 'kakao');
     openCenteredWindow(REQUEST_KAKAO_LOGIN_URL, '_self', 500, 600);
   };
-
-  useEffect(() => {
-    if (loadingState !== 'success') return;
-
-    setTimeout(() => {
-      window.location.replace('/');
-    }, 1000);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadingState]);
 
   return (
     <Button
