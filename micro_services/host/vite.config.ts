@@ -6,7 +6,9 @@ import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 
 const PREFIX_ENVIRONMENT_URL = (prefix: string, port: number) =>
-  process.env.NODE_ENV === 'production' ? `${prefix}.modolib.site` : `localhost:${port}`;
+  process.env.NODE_ENV === 'production'
+    ? `https://${prefix}.modolib.site`
+    : `http://localhost:${port}`;
 
 export default defineConfig({
   plugins: [
@@ -16,8 +18,8 @@ export default defineConfig({
       name: 'host',
       filename: 'remoteEntry.js',
       remotes: {
-        auth: `https://${PREFIX_ENVIRONMENT_URL('auth', 5001)}/assets/remoteEntry.js`,
-        books: `https://${PREFIX_ENVIRONMENT_URL('books', 5002)}/assets/remoteEntry.js`,
+        auth: `${PREFIX_ENVIRONMENT_URL('auth', 5001)}/assets/remoteEntry.js`,
+        books: `${PREFIX_ENVIRONMENT_URL('books', 5002)}/assets/remoteEntry.js`,
       },
       shared: ['react', 'react-dom', 'react-router-dom', 'recoil'],
     }),
@@ -25,7 +27,6 @@ export default defineConfig({
   resolve: {
     alias: {
       host: path.resolve(__dirname, './src'),
-      'state/auth': path.resolve(__dirname, '../auth/src/utils/recoil'),
     },
   },
   build: {

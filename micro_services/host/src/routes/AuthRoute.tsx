@@ -1,6 +1,6 @@
 import { Outlet, Navigate, useLocation, Route, Routes } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { authSelector } from 'state/auth/auth';
+import { authSelector } from 'auth/utils/recoil/auth';
 
 import * as router from 'host/routes';
 
@@ -14,7 +14,7 @@ const GetAuthentication = () => {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [getAuth]);
 
-  return getAuth === 'visitor' ? <Outlet /> : <Navigate to="/account/login" />;
+  return getAuth === 'user' ? <Outlet /> : <Navigate to="/account/login" />;
 };
 
 export default function AuthRoute() {

@@ -22,7 +22,7 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       exposes: {
         './pages/login': './src/pages/login',
-        './state/auth': './src/utils/recoil/auth',
+        './utils/recoil/auth': './src/utils/recoil/auth',
       },
       shared: ['react', 'react-dom', 'react-router-dom', 'recoil'],
     }),
