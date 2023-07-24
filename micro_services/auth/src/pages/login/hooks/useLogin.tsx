@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 
 import request from '@packages/utils/api/axios';
-import { getCookie, setCookie, removeCookie } from '@packages/utils/api/cookies';
+import { setCookie, removeCookie } from '@packages/utils/api/cookies';
 import getDateHour from '@packages/utils/getDateHour';
 
 import { LoginType } from 'auth/components/LoginArea/constant';
@@ -23,8 +23,7 @@ export default function useLogin(
   const type = localStorage.getItem('loginType') as LoginType;
 
   const getKaKaoLogin = async () => {
-    if (code === null || getCookie('accessToken')) return;
-    if (type !== 'kakao') return;
+    if (code === null || type !== 'kakao') return;
 
     try {
       const result: IToken = await request.get(`oauth/kakao?code=${code}`);
@@ -50,6 +49,10 @@ export default function useLogin(
     } catch (err) {
       handleState('error');
     }
+
+    setTimeout(() => {
+      localStorage.removeItem('loginType');
+    }, 100);
   };
 
   return { getKaKaoLogin };

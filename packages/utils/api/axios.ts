@@ -14,6 +14,7 @@ const MAX_RETRY_COUNT = 1;
 const Axios = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_URL}`,
   headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+  withCredentials: true,
   timeout: 2000,
 });
 
@@ -21,7 +22,7 @@ const Axios = axios.create({
 Axios.interceptors.request.use(
   (request) => {
     if (!refreshToken && window.location.pathname !== '/login') {
-      window.location.href = `${import.meta.env.VITE_HOST_URL}/login`;
+      window.location.href = `${import.meta.env.VITE_HOST_URL}/account/login`;
       console.warn('[Message] No Token');
     }
 
