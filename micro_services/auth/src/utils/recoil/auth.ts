@@ -7,13 +7,13 @@ import { IUser } from 'auth/utils/types/interface';
 
 type AuthType = 'visitor' | 'user';
 
-const authState = atom<AuthType>({
-  key: 'authState',
+const authAtom = atom<AuthType>({
+  key: 'authAtom',
   default: 'visitor',
 });
 
-const authInfoState = atom<IUser>({
-  key: 'authInfoState',
+const authInfoAtom = atom<IUser>({
+  key: 'authInfoAtom',
   default: {
     usersId: '',
     nickname: '',
@@ -31,29 +31,30 @@ export const authSelector = selector({
   get: ({ get }) => {
     const accessToken = getCookie('accessToken');
     const tokenState = accessToken ? 'user' : 'visitor';
-    const currentState = get(authState);
+    const currentState = get(authAtom);
 
     return tokenState !== currentState ? tokenState : currentState;
   },
-  set: ({ set }, newState) => {
-    set(authState, newState as AuthType);
+  set: ({ set }, newAtom) => {
+    set(authAtom, newAtom as AuthType);
   },
 });
 
 export const authInfoSelector = selector({
   key: 'authInfoSelector',
   get: async ({ get }) => {
-    const state = get(authInfoState);
+    const auth = get(authAtom);
+    const state = get(authInfoAtom);
     const usersId = localStorage.getItem('usersId');
-    const res = await request.get(`users/findUsers/${usersId}`);
 
-    if (res) {
-      return res;
+    if (auth === 'visitor' || !usersId) {
+      return state;
     }
 
-    return state;
+    const res = await request.get(`users/findUsers/${usersId}`);
+    return res;
   },
-  set: ({ set }, newInfoState) => {
-    set(authInfoState, newInfoState as IUser);
+  set: ({ set }, newInfoAtom) => {
+    set(authInfoAtom, newInfoAtom as IUser);
   },
 });

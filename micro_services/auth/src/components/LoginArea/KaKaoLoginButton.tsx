@@ -1,32 +1,34 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import Button from '@packages/components/Button';
 
 import openCenteredWindow from 'auth/utils/openCenterWindow';
+import { LoadingStateType } from 'auth/utils/types';
 
 import { REQUEST_KAKAO_LOGIN_URL } from './constant';
 import kakaoIcon from './assets/kakaoIcon';
 
-export default function KaKaoLoginButton() {
-  const [loading, setLoading] = useState<boolean>(false);
-  const windowRef = useRef<Window | null>(null);
+interface KaKaoLoginButtonProps {
+  loadingState: LoadingStateType;
+  setLoading: () => void;
+}
+
+export default function KaKaoLoginButton(props: KaKaoLoginButtonProps) {
+  const { loadingState, setLoading } = props;
 
   const handleKaKaoLogin = () => {
-    setLoading(true);
-    windowRef.current = openCenteredWindow(
-      REQUEST_KAKAO_LOGIN_URL,
-      'MODO : 카카오 로그인',
-      500,
-      600,
-    );
+    setLoading();
+    openCenteredWindow(REQUEST_KAKAO_LOGIN_URL, '_self', 500, 600);
   };
 
   useEffect(() => {
+    if (loadingState !== 'success') return;
+
     setTimeout(() => {
-      windowRef.current?.close();
-      setLoading(false);
-    }, 2000);
-  });
+      window.location.replace('/');
+    }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadingState]);
 
   return (
     <Button
@@ -34,7 +36,7 @@ export default function KaKaoLoginButton() {
       customClass="bg-[#F7E600]"
       iconCustom={kakaoIcon}
       value={'카카오 계정으로 로그인'}
-      isLoading={loading}
+      isLoading={loadingState === 'pending'}
       spinnerColor={'#212121'}
     />
   );
