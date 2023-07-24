@@ -28,12 +28,16 @@ const authInfoAtom = atom<IUser>({
 
 export const authSelector = selector({
   key: 'authSelector',
-  get: ({ get }) => {
+  get: () => {
     const accessToken = getCookie('accessToken');
+    const refreshToken = getCookie('refreshToken');
     const tokenState = accessToken ? 'user' : 'visitor';
-    const currentState = get(authAtom);
 
-    return tokenState !== currentState ? tokenState : currentState;
+    if (refreshToken && tokenState === 'visitor') {
+      // TODO : refresh 토큰 발급
+    }
+
+    return tokenState;
   },
   set: ({ set }, newAtom) => {
     set(authAtom, newAtom as AuthType);

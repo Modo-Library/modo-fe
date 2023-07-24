@@ -17,13 +17,12 @@ interface IToken {
 
 export default function useLogin(
   code: string | null,
-  type: LoginType,
   handleState: (props: LoadingStateType) => void,
 ) {
   const setAuthState = useSetRecoilState(authSelector);
+  const type = localStorage.getItem('loginType') as LoginType;
 
   const getKaKaoLogin = async () => {
-    // FIXME : !getCookie('accessToken')
     if (code === null || getCookie('accessToken')) return;
     if (type !== 'kakao') return;
 
@@ -47,6 +46,7 @@ export default function useLogin(
         options: { path: '/', expires: new Date(Date.now() + getDateHour(24 * 30)) },
       });
       localStorage.setItem('usersId', result.usersId);
+      window.location.replace(`${import.meta.env.VITE_HOST_URL}/`);
     } catch (err) {
       handleState('error');
     }
