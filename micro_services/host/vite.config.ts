@@ -16,8 +16,8 @@ export default defineConfig({
       name: 'host',
       filename: 'remoteEntry.js',
       remotes: {
-        auth: `http://${PREFIX_ENVIRONMENT_URL('auth', 5001)}/assets/remoteEntry.js`,
-        books: `http://${PREFIX_ENVIRONMENT_URL('books', 5002)}/assets/remoteEntry.js`,
+        auth: `https://${PREFIX_ENVIRONMENT_URL('auth', 5001)}/assets/remoteEntry.js`,
+        books: `https://${PREFIX_ENVIRONMENT_URL('books', 5002)}/assets/remoteEntry.js`,
       },
       shared: ['react', 'react-dom', 'react-router-dom', 'recoil'],
     }),
@@ -25,6 +25,7 @@ export default defineConfig({
   resolve: {
     alias: {
       host: path.resolve(__dirname, './src'),
+      'state/auth': path.resolve(__dirname, '../auth/src/utils/recoil'),
     },
   },
   build: {
