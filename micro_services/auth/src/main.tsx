@@ -15,11 +15,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen />
-      <BrowserRouter>
-        <RecoilRoot>
+      <RecoilRoot>
+        <BrowserRouter>
           <App />
-        </RecoilRoot>
-      </BrowserRouter>
+        </BrowserRouter>
+      </RecoilRoot>
     </QueryClientProvider>
   </React.StrictMode>,
 );

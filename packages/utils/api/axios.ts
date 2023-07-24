@@ -1,11 +1,16 @@
-import axios, { AxiosResponse, AxiosError, Method } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'axios';
 
 import { getCookie } from './cookies';
+
+interface AxiosCustomRequestConfig extends AxiosRequestConfig {
+  retryCount: number;
+}
 
 // 쿠키 확인 및 Axios 기본 세팅
 const accessToken = getCookie('accessToken');
 // TODO : refresh 토큰 사용 필요
 // const refreshToken = getCookie('refreshToken');
+const MAX_RETRY_COUNT = 1;
 
 const Axios = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_URL}`,
@@ -13,15 +18,43 @@ const Axios = axios.create({
   timeout: 2000,
 });
 
-// Response 받기 전 Interceptor로 응답 핸들링
+// Interceptor로 응답/요청 공통 핸들링
+Axios.interceptors.request.use(
+  (request) => {
+    if (!accessToken && window.location.pathname !== '/login') {
+      window.location.href = '/account/login';
+      console.warn('[Message] No Token');
+      throw new Error('Request Interceptor Error');
+    }
+
+    return request;
+  },
+  (error) => {
+    console.error('Request Interceptor Error');
+    return Promise.reject(error);
+  },
+);
+
 Axios.interceptors.response.use(
   (response) => response,
   (error) => {
     // JWTtoken needs refresh
     if (error.response.status === 401) {
-      // TODO : JWT 토큰 재발급 필요
+      // TODO : JWT 토큰 재발급 후 재요청
+      // request(error.config)
+      // error.config.headers.authorization = `Bearer ${accessToken}`
       window.location.reload();
     }
+
+    const config = error.config as AxiosCustomRequestConfig;
+    config.retryCount = config.retryCount ?? 0;
+    console.warn('[Message] RETRY COUNT :', config.retryCount);
+
+    if (config.retryCount < MAX_RETRY_COUNT) {
+      config.retryCount += 1;
+      return Axios.request(config);
+    }
+
     return Promise.reject(error);
   },
 );

@@ -43,7 +43,7 @@
       "prettier --write",
       "bash -c 'npm run lint:main'"
     ],
-     "packages/**/*.{js?(x),ts?(x)}": [
+    "packages/**/*.{js?(x),ts?(x)}": [
       "eslint --fix",
       "prettier --write",
       "bash -c 'npm run lint:packages'"
