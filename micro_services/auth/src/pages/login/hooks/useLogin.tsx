@@ -19,7 +19,9 @@ export default function useLogin(code: string | null) {
         throw new Error();
       }
 
-      const result: IToken = await axios.get(`oauth/kakao?code=${code}`);
+      const result: IToken = await axios.get(
+        `https://www.modolib.site/request/oauth/kakao?code=${code}`,
+      );
 
       setAuthState('user');
       removeCookie('accessToken');
