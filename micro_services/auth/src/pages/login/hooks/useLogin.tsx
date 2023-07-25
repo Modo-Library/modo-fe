@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
+import axios from 'axios';
 
-import request from '@packages/utils/api/axios';
 import { setCookie, removeCookie, getCookie } from '@packages/utils/api/cookies';
 import getDateHour from '@packages/utils/getDateHour';
 import { IToken } from '@packages/utils/api/reIssueToken';
@@ -13,11 +13,13 @@ export default function useLogin(code: string | null) {
   const setAuthState = useSetRecoilState(authSelector);
 
   const getKaKaoLogin = async () => {
-    const type = getCookie('loginType') as LoginType;
-    if (code === null || type !== 'kakao') return;
-
     try {
-      const result: IToken = await request.get(`oauth/kakao?code=${code}`);
+      const type = getCookie('loginType') as LoginType;
+      if (code === null || type !== 'kakao') {
+        throw new Error();
+      }
+
+      const result: IToken = await axios.get(`oauth/kakao?code=${code}`);
 
       setAuthState('user');
       removeCookie('accessToken');
