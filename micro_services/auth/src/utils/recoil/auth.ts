@@ -2,6 +2,7 @@ import { atom, selector } from 'recoil';
 
 import { getCookie } from '@packages/utils/api/cookies';
 import request from '@packages/utils/api/axios';
+import reIssueToken from '@packages/utils/api/reIssueToken';
 
 import { IUser } from 'auth/utils/types/interface';
 
@@ -28,15 +29,18 @@ const authInfoAtom = atom<IUser>({
 
 export const authSelector = selector({
   key: 'authSelector',
-  get: () => {
+  get: async () => {
     const accessToken = getCookie('accessToken');
     const refreshToken = getCookie('refreshToken');
-    const tokenState = accessToken ? 'user' : 'visitor';
 
-    if (refreshToken && tokenState === 'visitor') {
-      // TODO : refresh 토큰 발급
+    if (refreshToken && !accessToken) {
+      await reIssueToken(refreshToken);
+      const reAccessToken = getCookie('accessToken');
+      const reTokenState = reAccessToken ? 'user' : 'visitor';
+      return reTokenState;
     }
 
+    const tokenState = accessToken ? 'user' : 'visitor';
     return tokenState;
   },
   set: ({ set }, newAtom) => {

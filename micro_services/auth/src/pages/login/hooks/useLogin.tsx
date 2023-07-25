@@ -3,17 +3,12 @@ import { useSetRecoilState } from 'recoil';
 import request from '@packages/utils/api/axios';
 import { setCookie, removeCookie } from '@packages/utils/api/cookies';
 import getDateHour from '@packages/utils/getDateHour';
+import { IToken } from '@packages/utils/api/reIssueToken';
 
 import { LoginType } from 'auth/components/LoginArea/constant';
 
 import { LoadingStateType } from 'auth/utils/types';
 import { authSelector } from 'auth/utils/recoil/auth';
-
-interface IToken {
-  accessToken: string;
-  refreshToken: string;
-  usersId: string;
-}
 
 export default function useLogin(
   code: string | null,
@@ -37,12 +32,22 @@ export default function useLogin(
       setCookie({
         name: 'accessToken',
         value: result.accessToken,
-        options: { path: '/', expires: new Date(Date.now() + getDateHour(1)) },
+        options: {
+          domain: '.modolib.site',
+          secure: true,
+          path: '/',
+          expires: new Date(Date.now() + getDateHour(1)),
+        },
       });
       setCookie({
         name: 'refreshToken',
         value: result.refreshToken,
-        options: { path: '/', expires: new Date(Date.now() + getDateHour(24 * 30)) },
+        options: {
+          domain: '.modolib.site',
+          secure: true,
+          path: '/',
+          expires: new Date(Date.now() + getDateHour(24 * 30)),
+        },
       });
       localStorage.setItem('usersId', result.usersId);
       window.location.replace(`${import.meta.env.VITE_HOST_URL}/`);
