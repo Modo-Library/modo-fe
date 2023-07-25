@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import { setCookie, removeCookie, getCookie } from '@packages/utils/api/cookies';
 import getDateHour from '@packages/utils/getDateHour';
@@ -19,25 +19,30 @@ export default function useLogin(code: string | null) {
         throw new Error();
       }
 
-      const result: IToken = await axios.get(`oauth/kakao?code=${code}`);
+      await axios
+        .get(`https://www.modolib.site/request/oauth/kakao?code=${code}`)
+        .then((res: AxiosResponse<IToken>) => {
+          setAuthState('user');
+          removeCookie('accessToken');
+          removeCookie('refreshToken');
+          localStorage.removeItem('usersId');
 
-      setAuthState('user');
-      removeCookie('accessToken');
-      removeCookie('refreshToken');
-      localStorage.removeItem('usersId');
-
-      setCookie({
-        name: 'accessToken',
-        value: result.accessToken,
-        expired: getDateHour(0.5),
-      });
-      setCookie({
-        name: 'refreshToken',
-        value: result.refreshToken,
-        expired: getDateHour(6),
-      });
-      localStorage.setItem('usersId', result.usersId);
-      window.location.replace(`${import.meta.env.VITE_HOST_URL}/`);
+          setCookie({
+            name: 'accessToken',
+            value: res.data.accessToken,
+            expired: getDateHour(0.5),
+          });
+          setCookie({
+            name: 'refreshToken',
+            value: res.data.refreshToken,
+            expired: getDateHour(6),
+          });
+          localStorage.setItem('usersId', res.data.usersId);
+          window.location.replace(`${import.meta.env.VITE_HOST_URL}/`);
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
     } catch (err) {
       window.location.replace(`${import.meta.env.VITE_HOST_URL}/?state=login_error`);
     }
