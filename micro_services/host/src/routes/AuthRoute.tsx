@@ -1,12 +1,11 @@
 import { Outlet, Navigate, useLocation, Route, Routes } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { authSelector } from 'auth/utils/recoil/auth';
 
 import * as router from 'host/routes';
 
 const GetAuthentication = () => {
-  const [getAuth, setAuth] = useRecoilState(authSelector);
-  setAuth(getAuth);
+  const getAuth = useRecoilValue(authSelector);
 
   // useEffect(() => {
   //   if (getAuth) return;
