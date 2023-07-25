@@ -3,17 +3,12 @@ import { useSetRecoilState } from 'recoil';
 import request from '@packages/utils/api/axios';
 import { setCookie, removeCookie } from '@packages/utils/api/cookies';
 import getDateHour from '@packages/utils/getDateHour';
+import { IToken } from '@packages/utils/api/reIssueToken';
 
 import { LoginType } from 'auth/components/LoginArea/constant';
 
 import { LoadingStateType } from 'auth/utils/types';
 import { authSelector } from 'auth/utils/recoil/auth';
-
-interface IToken {
-  accessToken: string;
-  refreshToken: string;
-  usersId: string;
-}
 
 export default function useLogin(
   code: string | null,

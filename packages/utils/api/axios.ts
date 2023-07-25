@@ -1,30 +1,32 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'axios';
 
 import { getCookie } from './cookies';
+import reIssueToken from './reIssueToken';
 
 interface AxiosCustomRequestConfig extends AxiosRequestConfig {
   retryCount: number;
 }
 
-// 쿠키 확인 및 Axios 기본 세팅
-const accessToken = getCookie('accessToken');
-const refreshToken = getCookie('refreshToken');
+// Axios 기본 세팅
 const MAX_RETRY_COUNT = 1;
 
 const Axios = axios.create({
-  baseURL: `${import.meta.env.VITE_SERVER_URL}`,
-  headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+  baseURL: `${import.meta.env.VITE_SERVER_URL}/api`,
   withCredentials: true,
   timeout: 2000,
 });
-
 // Interceptor로 응답/요청 공통 핸들링
 Axios.interceptors.request.use(
   (request) => {
+    const accessToken = getCookie('accessToken');
+    const refreshToken = getCookie('refreshToken');
+
     if (!refreshToken && window.location.pathname !== '/login') {
       window.location.href = `${import.meta.env.VITE_HOST_URL}/account/login`;
       console.warn('[Message] No Token');
     }
+    accessToken && (request.headers.Token = `Bearer ${accessToken}`);
+    request.headers['Content-Type'] = 'application/json';
 
     return request;
   },
@@ -36,13 +38,13 @@ Axios.interceptors.request.use(
 
 Axios.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
     // JWTtoken needs refresh
     if (error.response.status === 401) {
-      // TODO : JWT 토큰 재발급 후 재요청
-      // request(error.config)
-      // error.config.headers.authorization = `Bearer ${accessToken}`
-      window.location.reload();
+      const refreshToken = getCookie('refreshToken');
+      refreshToken && (await reIssueToken(refreshToken));
+      const accessToken = getCookie('accessToken');
+      error.config.headers.Token = `Bearer ${accessToken}`;
     }
 
     const config = error.config as AxiosCustomRequestConfig;
