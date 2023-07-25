@@ -29,6 +29,7 @@ export default function AuthRoute() {
       <Route element={<GetAuthentication />}>
         <Route element={<router.Home />} path="/" />
         <Route element={<router.Profile />} path="/profile" />
+        <Route element={<router.Chat />} path="/chat" />
       </Route>
       <Route element={<router.Error />} path="*" />
     </Routes>

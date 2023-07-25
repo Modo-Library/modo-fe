@@ -1,6 +1,7 @@
+/** @jsxImportSource @emotion/react */
 import { Icon } from '@iconify/react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { css } from '@emotion/react';
 
 export interface MenuProps {
   icon: string;
@@ -8,25 +9,35 @@ export interface MenuProps {
   src: string;
 }
 
-type DisabledColorType = '#333' | '#c8c8c8';
+const menuColorMap = {
+  selected: '#333',
+  nonSelected: '#c8c8c8',
+};
 
 export default function Menu(props: MenuProps) {
   const { icon, text, src } = props;
   const navigate = useNavigate();
   const location = useLocation();
-  const [colorClass, setColorClass] = useState<DisabledColorType>('#333');
 
-  useEffect(() => {
-    setColorClass(location.pathname === `/${src}` ? '#333' : '#c8c8c8');
-  }, [navigate]);
+  const color: keyof typeof menuColorMap =
+    location.pathname === `/${src}` ? 'selected' : 'nonSelected';
+  const textColor = menuColorMap[color];
 
   return (
     <div
       className="hover:cursor-pointer flex flex-col items-center justify-center"
       onClick={() => navigate(`/${src}`)}
     >
-      <Icon icon={icon} width="24" height="24" color={colorClass} />
-      <p className={`text-xs text-center text-[${colorClass}]`}>{text}</p>
+      <Icon icon={icon} width="24" height="24" color={textColor} />
+      <p
+        css={css`
+          font-size: 14px;
+          text-align: center;
+          color: ${textColor};
+        `}
+      >
+        {text}
+      </p>
     </div>
   );
 }
