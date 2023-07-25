@@ -1,4 +1,7 @@
+import { useState } from 'react';
+
 import Button from '@packages/components/Button';
+import { setCookie } from '@packages/utils/api/cookies';
 
 import openCenteredWindow from 'auth/utils/openCenterWindow';
 import { LoadingStateType } from 'auth/utils/types';
@@ -6,17 +9,16 @@ import { LoadingStateType } from 'auth/utils/types';
 import { REQUEST_KAKAO_LOGIN_URL } from './constant';
 import kakaoIcon from './assets/kakaoIcon';
 
-interface KaKaoLoginButtonProps {
-  loadingState: LoadingStateType;
-  setLoading: () => void;
-}
-
-export default function KaKaoLoginButton(props: KaKaoLoginButtonProps) {
-  const { loadingState, setLoading } = props;
+export default function KaKaoLoginButton() {
+  const [loadingState, setLoadingState] = useState<LoadingStateType>('none');
 
   const handleKaKaoLogin = () => {
-    setLoading();
-    localStorage.setItem('loginType', 'kakao');
+    setLoadingState('pending');
+    setCookie({
+      name: 'loginType',
+      value: 'kakao',
+      expired: 3000,
+    });
     openCenteredWindow(REQUEST_KAKAO_LOGIN_URL, '_self', 500, 600);
   };
 

@@ -22,21 +22,11 @@ export default async function reIssueToken(refreshToken: string) {
   setCookie({
     name: 'accessToken',
     value: result.accessToken,
-    options: {
-      domain: '.modolib.site',
-      secure: true,
-      path: '/',
-      expires: new Date(Date.now() + getDateHour(1)),
-    },
+    expired: getDateHour(0.5),
   });
   setCookie({
     name: 'refreshToken',
     value: result.refreshToken,
-    options: {
-      domain: '.modolib.site',
-      secure: true,
-      path: '/',
-      expires: new Date(Date.now() + getDateHour(24 * 30)),
-    },
+    expired: getDateHour(6),
   });
 }
