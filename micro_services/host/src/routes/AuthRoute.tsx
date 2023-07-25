@@ -7,6 +7,10 @@ import * as router from 'host/routes';
 const GetAuthentication = () => {
   const getAuth = useRecoilValue(authSelector);
 
+  if (process.env.NODE_ENV !== 'production') {
+    return <Outlet />;
+  }
+
   // useEffect(() => {
   //   if (getAuth) return;
   //   // TODO : Toast Message 만들기

@@ -10,7 +10,7 @@ module.exports = {
     screens: {
       nw: '100vw',
       nh: '100vh',
-      full: '576px',
+      full: '768px',
     },
     boxShadow: {
       layout: '0 -1px 6px 3.5px rgb(0 0 0 / 0.15);',
