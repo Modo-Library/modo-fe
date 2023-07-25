@@ -25,7 +25,7 @@ Axios.interceptors.request.use(
       window.location.href = `${import.meta.env.VITE_HOST_URL}/account/login`;
       console.warn('[Message] No Token');
     }
-    accessToken && (request.headers.Token = `Bearer ${accessToken}`);
+    accessToken && (request.headers.Token = accessToken);
     request.headers['Content-Type'] = 'application/json';
 
     return request;
@@ -44,7 +44,7 @@ Axios.interceptors.response.use(
       const refreshToken = getCookie('refreshToken');
       refreshToken && (await reIssueToken(refreshToken));
       const accessToken = getCookie('accessToken');
-      error.config.headers.Token = `Bearer ${accessToken}`;
+      error.config.headers.Token = accessToken;
     }
 
     const config = error.config as AxiosCustomRequestConfig;

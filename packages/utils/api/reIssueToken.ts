@@ -13,7 +13,7 @@ export interface IToken {
 export default async function reIssueToken(refreshToken: string) {
   await axios
     .post(`${import.meta.env.VITE_SERVER_URL}/api/v1/auth/reIssue`, null, {
-      headers: { Token: `Bearer ${refreshToken}` },
+      headers: { Token: refreshToken, 'Content-Type': 'application/json' },
     })
     .then((res: AxiosResponse<IToken>) => {
       removeCookie('accessToken');
