@@ -1,20 +1,12 @@
 import Button from '@packages/components/Button';
 
-import { LoadingStateType } from 'auth/utils/types';
-
 import KaKaoLoginButton from './KaKaoLoginButton';
 
-interface LoginAreaProps {
-  loadingState: LoadingStateType;
-  setLoading: () => void;
-}
-
-export default function LoginArea(props: LoginAreaProps) {
-  const { loadingState, setLoading } = props;
+export default function LoginArea() {
   return (
     <section className="flex flex-col text-center w-full h-full items-center justify-around">
       <div className="w-full flex flex-col gap-4">
-        <KaKaoLoginButton loadingState={loadingState} setLoading={setLoading} />
+        <KaKaoLoginButton />
         <Button
           onClick={() => {}}
           disabled={true}

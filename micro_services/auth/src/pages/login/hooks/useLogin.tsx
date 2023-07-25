@@ -1,30 +1,25 @@
 import { useSetRecoilState } from 'recoil';
 
 import request from '@packages/utils/api/axios';
-import { setCookie, removeCookie } from '@packages/utils/api/cookies';
+import { setCookie, removeCookie, getCookie } from '@packages/utils/api/cookies';
 import getDateHour from '@packages/utils/getDateHour';
 import { IToken } from '@packages/utils/api/reIssueToken';
 
 import { LoginType } from 'auth/components/LoginArea/constant';
 
-import { LoadingStateType } from 'auth/utils/types';
 import { authSelector } from 'auth/utils/recoil/auth';
 
-export default function useLogin(
-  code: string | null,
-  handleState: (props: LoadingStateType) => void,
-) {
+export default function useLogin(code: string | null) {
   const setAuthState = useSetRecoilState(authSelector);
-  const type = localStorage.getItem('loginType') as LoginType;
 
   const getKaKaoLogin = async () => {
+    const type = getCookie('loginType') as LoginType;
     if (code === null || type !== 'kakao') return;
 
     try {
       const result: IToken = await request.get(`oauth/kakao?code=${code}`);
 
       setAuthState('user');
-      handleState('success');
       removeCookie('accessToken');
       removeCookie('refreshToken');
       localStorage.removeItem('usersId');
@@ -32,32 +27,18 @@ export default function useLogin(
       setCookie({
         name: 'accessToken',
         value: result.accessToken,
-        options: {
-          domain: '.modolib.site',
-          secure: true,
-          path: '/',
-          expires: new Date(Date.now() + getDateHour(1)),
-        },
+        expired: getDateHour(0.5),
       });
       setCookie({
         name: 'refreshToken',
         value: result.refreshToken,
-        options: {
-          domain: '.modolib.site',
-          secure: true,
-          path: '/',
-          expires: new Date(Date.now() + getDateHour(24 * 30)),
-        },
+        expired: getDateHour(6),
       });
       localStorage.setItem('usersId', result.usersId);
       window.location.replace(`${import.meta.env.VITE_HOST_URL}/`);
     } catch (err) {
-      handleState('error');
+      window.location.replace(`${import.meta.env.VITE_HOST_URL}/?state=login_error`);
     }
-
-    setTimeout(() => {
-      localStorage.removeItem('loginType');
-    }, 100);
   };
 
   return { getKaKaoLogin };
