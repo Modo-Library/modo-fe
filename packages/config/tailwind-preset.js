@@ -59,9 +59,19 @@ module.exports = {
           '0%': { transform: 'scale(1.0)' },
           '100%': { transform: 'scale(0.975)' },
         },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '0.5' },
+        },
+        showRight: {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(-10%)' },
+        },
       },
       animation: {
         push: 'push .2s ease-out forwards',
+        fadeIn: 'fadeIn .35s ease-in-out forwards',
+        showRight: 'showRight .35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
       },
     },
   },

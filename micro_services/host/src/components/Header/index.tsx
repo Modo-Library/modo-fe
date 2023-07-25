@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Icon } from '@iconify/react';
 
 import { HeaderSection } from './atoms/section';
 import { HeaderTitle } from './atoms/title';
@@ -27,7 +28,20 @@ export default function Header({ children }: { children: React.ReactNode }) {
             ? React.cloneElement(child, { key: index, ...child.props })
             : child,
         )}
-        {openMenu && <>메뉴</>}
+        {openMenu && (
+          <aside className="duration-300">
+            <div className="absolute bg-white top-0 left-0 h-screen w-1/2 z-[10000] animate-showRight">
+              메뉴
+              <button
+                className="absolute top-3 right-3 hover:cursor-pointer"
+                onClick={() => handleMenuState(false)}
+              >
+                <Icon width="28" height="28" icon="ion:exit-outline" />
+              </button>
+            </div>
+            <div className="absolute animate-fadeIn bg-gray-700 opacity-50 top-0 left-0 w-full h-screen z-[9999]" />
+          </aside>
+        )}
       </MenuContext.Provider>
     </header>
   );
