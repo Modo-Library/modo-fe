@@ -37,12 +37,22 @@ export default function useLogin(
       setCookie({
         name: 'accessToken',
         value: result.accessToken,
-        options: { path: '/', expires: new Date(Date.now() + getDateHour(1)) },
+        options: {
+          domain: '.modolib.site',
+          secure: true,
+          path: '/',
+          expires: new Date(Date.now() + getDateHour(1)),
+        },
       });
       setCookie({
         name: 'refreshToken',
         value: result.refreshToken,
-        options: { path: '/', expires: new Date(Date.now() + getDateHour(24 * 30)) },
+        options: {
+          domain: '.modolib.site',
+          secure: true,
+          path: '/',
+          expires: new Date(Date.now() + getDateHour(24 * 30)),
+        },
       });
       localStorage.setItem('usersId', result.usersId);
       window.location.replace(`${import.meta.env.VITE_HOST_URL}/`);
