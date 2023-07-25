@@ -17,7 +17,7 @@ export default function KaKaoLoginButton() {
     setCookie({
       name: 'loginType',
       value: 'kakao',
-      expired: 3000,
+      expired: 60000,
     });
     openCenteredWindow(REQUEST_KAKAO_LOGIN_URL, '_self', 500, 600);
   };
