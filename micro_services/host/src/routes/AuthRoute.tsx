@@ -7,6 +7,10 @@ import * as router from 'host/routes';
 const GetAuthentication = () => {
   const getAuth = useRecoilValue(authSelector);
 
+  if (process.env.NODE_ENV !== 'production') {
+    return <Outlet />;
+  }
+
   // useEffect(() => {
   //   if (getAuth) return;
   //   // TODO : Toast Message 만들기
@@ -24,6 +28,8 @@ export default function AuthRoute() {
     <Routes location={location}>
       <Route element={<GetAuthentication />}>
         <Route element={<router.Home />} path="/" />
+        <Route element={<router.Profile />} path="/profile" />
+        <Route element={<router.Chat />} path="/chat" />
       </Route>
       <Route element={<router.Error />} path="*" />
     </Routes>
