@@ -1,3 +1,6 @@
+// 모바일 기조의 스타일링을 우선시 합니다.
+// 웹 전용 config은 고려하지 않습니다.
+
 module.exports = {
   content: [
     './index.html',
@@ -7,6 +10,15 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontSize: {
+      xs: ['10px', '15px'],
+      sm: ['13px', '20px'],
+      base: ['15px', '22px'],
+      lg: ['17px', '24px'],
+      xl: ['20px', '28px'],
+      '2xl': ['23px', '32px'],
+      '3xl': ['26px', '35px'],
+    },
     screens: {
       nw: '100vw',
       nh: '100vh',
