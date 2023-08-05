@@ -12,7 +12,7 @@
   }
 
   #root {
-    @apply flex-center flex-col w-full h-screen shadow-layout px-4 relative;
+    @apply flex-center flex-col w-full h-screen shadow-layout relative px-4 pt-[46px] pb-[50px];
   }
 
   body {

@@ -9,7 +9,7 @@
     "paths": {
       "host/*": ["host/src/*"],
       "auth/*": ["auth/src/*"],
-      "books/*": ["books/src/*"],
+      "books/*": ["books/src/*"]
     }
   },
   "include": ["../"],

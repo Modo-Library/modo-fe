@@ -20,7 +20,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <header className="flex absolute top-0 w-full px-4 justify-between items-center h-[46px] max-h-[46px] border-b-2 border-gray50">
+    <header className="flex z-[1000] bg-white absolute top-0 w-full px-4 justify-between items-center h-[46px] max-h-[46px] border-b-2 border-gray50">
       <MenuContext.Provider value={{ handleMenuState }}>
         {React.Children.map(children, (child, index) =>
           React.isValidElement(child)
