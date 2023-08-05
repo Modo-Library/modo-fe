@@ -3,13 +3,15 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
 import React, { SVGProps } from 'react';
 
+import { colors } from '@packages/styles/config';
+
 import { ReactComponent as Chat } from '../icons/message.fill.svg';
 import { ReactComponent as Profile } from '../icons/person.fill.svg';
 import { ReactComponent as Home } from '../icons/home.fill.svg';
 
 const menuColorMap = {
-  selected: '#B28F6F',
-  nonSelected: '#8a8a8a',
+  selected: colors.brown30,
+  nonSelected: colors.gray100,
 };
 
 const IconMap = {

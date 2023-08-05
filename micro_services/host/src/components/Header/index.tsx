@@ -1,6 +1,5 @@
 import React, { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Icon } from '@iconify/react';
 
 import { HeaderSection } from './atoms/section';
 import { HeaderTitle } from './atoms/title';
@@ -21,7 +20,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <header className="flex absolute top-0 w-full px-4 justify-between items-center h-[46px] max-h-[46px] border-b-2 border-gray-100">
+    <header className="flex absolute top-0 w-full px-4 justify-between items-center h-[46px] max-h-[46px] border-b-2 border-gray50">
       <MenuContext.Provider value={{ handleMenuState }}>
         {React.Children.map(children, (child, index) =>
           React.isValidElement(child)
@@ -36,7 +35,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                 className="absolute top-3 right-3 hover:cursor-pointer"
                 onClick={() => handleMenuState(false)}
               >
-                <Icon width="28" height="28" icon="ion:exit-outline" />
+                <HeaderIcon src="back" />
               </button>
             </div>
             <div className="absolute animate-fadeIn bg-gray-700 opacity-50 top-0 left-0 w-full h-screen z-[9999]" />
@@ -66,11 +65,11 @@ Header.Right = function HeaderRightSection({ children }: { children: React.React
 Header.Back = function HeaderBack() {
   const navigate = useNavigate();
 
-  return <HeaderIcon onClick={() => navigate(-1)} src="ion:chevron-back-outline" />;
+  return <HeaderIcon onClick={() => navigate(-1)} src="back" />;
 };
 
 Header.Menu = function HeaderMenu() {
   const { handleMenuState } = useOpenMenu();
 
-  return <HeaderIcon onClick={() => handleMenuState(true)} src="ic:round-menu" />;
+  return <HeaderIcon onClick={() => handleMenuState(true)} src="menu" />;
 };

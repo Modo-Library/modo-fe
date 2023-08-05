@@ -8,7 +8,7 @@ const 메뉴정보: MenuProps[] = [
 
 export default function Navigation() {
   return (
-    <section className="absolute flex justify-around items-center bottom-0 border-t-2 border-gray-100 w-full full:w-[25rem]">
+    <section className="absolute flex justify-around items-center bottom-0 border-t-2 border-gray50 w-full full:w-[25rem]">
       {메뉴정보.map((item, idx) => (
         <Menu key={idx} {...item} />
       ))}

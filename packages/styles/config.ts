@@ -6,7 +6,7 @@ export const colors = {
   gray30: '#F5F5F5',
   brown100: '#6B5D54',
   brown50: '#93796A',
-  brown30: '#C7B199',
+  brown30: '#B28F6F',
   brown10: '#D4B495',
   orange100: '#FF805D',
 };

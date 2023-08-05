@@ -7,5 +7,9 @@ interface HeaderTitleProps {
 export function HeaderTitle(props: HeaderTitleProps) {
   const { children } = props;
 
-  return <h1 className="text-sm absolute-center">{children}</h1>;
+  return (
+    <h1 className="text-[15px] text-black100 absolute-center font-bold tracking-tight">
+      {children}
+    </h1>
+  );
 }
