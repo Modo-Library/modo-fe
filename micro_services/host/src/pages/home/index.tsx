@@ -1,13 +1,8 @@
-import Header from 'host/components/Header';
-
 export default function HomePage() {
   return (
     <>
-      <Header>
-        <Header.Title>MODO</Header.Title>
-        <Header.Menu />
-      </Header>
-      메인 페이지
+      홈페이지입니다.
+      <h3>네네</h3>
     </>
   );
 }

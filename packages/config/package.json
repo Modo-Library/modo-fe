@@ -14,7 +14,6 @@
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.11.0",
-    "@emotion/css": "^11.11.2",
     "@emotion/react": "^11.11.1",
     "@iconify/react": "^4.1.1",
     "@originjs/vite-plugin-federation": "^1.2.3",

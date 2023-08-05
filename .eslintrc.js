@@ -18,12 +18,4 @@ module.exports = {
   rules: {
     '@next/next/no-html-link-for-pages': ['error', 'app'],
   },
-  overrides: [
-    {
-      files: ['micro_services/**/*', 'packages/**/*'],
-      rules: {
-        '@next/next/no-img-element': 'off',
-      },
-    },
-  ],
 };
