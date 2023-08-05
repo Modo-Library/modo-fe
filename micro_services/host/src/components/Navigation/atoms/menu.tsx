@@ -1,39 +1,57 @@
 /** @jsxImportSource @emotion/react */
-import { Icon } from '@iconify/react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
+import React, { SVGProps } from 'react';
+
+import { colors } from '@packages/styles/config';
+
+import { ReactComponent as Chat } from '../icons/message.fill.svg';
+import { ReactComponent as Profile } from '../icons/person.fill.svg';
+import { ReactComponent as Home } from '../icons/home.fill.svg';
+
+const menuColorMap = {
+  selected: colors.brown30,
+  nonSelected: colors.gray100,
+};
+
+const IconMap = {
+  chat: <Chat />,
+  home: <Home />,
+  profile: <Profile />,
+};
 
 export interface MenuProps {
-  icon: string;
+  iconKey: keyof typeof IconMap;
   text: string;
   src: string;
 }
 
-const menuColorMap = {
-  selected: '#333',
-  nonSelected: '#c8c8c8',
-};
-
 export default function Menu(props: MenuProps) {
-  const { icon, text, src } = props;
+  const { iconKey, text, src } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
-  const color: keyof typeof menuColorMap =
+  const colorKey: keyof typeof menuColorMap =
     location.pathname === `/${src}` ? 'selected' : 'nonSelected';
-  const textColor = menuColorMap[color];
+  const color = menuColorMap[colorKey];
+
+  const Icon = ({ fill }: { fill: string }) => {
+    const SelectedIcon = IconMap[iconKey];
+    const svgProps: SVGProps<SVGElement> = { ...SelectedIcon.props, fill };
+    return React.cloneElement(SelectedIcon, svgProps);
+  };
 
   return (
     <div
       className="hover:cursor-pointer flex flex-col items-center justify-center"
       onClick={() => navigate(`/${src}`)}
     >
-      <Icon icon={icon} width="24" height="24" color={textColor} />
+      <Icon fill={color} />
       <p
         css={css`
           font-size: 14px;
           text-align: center;
-          color: ${textColor};
+          color: ${color};
         `}
       >
         {text}

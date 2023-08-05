@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface HeaderButtonProps {
+export interface HeaderButtonProps {
   color?: string;
   onClick?: () => void;
   disabled?: boolean;

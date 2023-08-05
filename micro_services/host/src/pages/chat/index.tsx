@@ -1,4 +1,3 @@
-import Navigation from 'host/components/Navigation';
 import Header from 'host/components/Header';
 
 export default function ChatPage() {
@@ -9,7 +8,6 @@ export default function ChatPage() {
         <Header.Menu />
       </Header>
       채팅 페이지
-      <Navigation />
     </>
   );
 }
