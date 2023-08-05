@@ -4,7 +4,7 @@ import { ReactComponent as LocationIcon } from './icons/location.circle.fill.svg
 
 export default function BookListRow() {
   return (
-    <div className="w-full flex gap-5 bg-white py-4">
+    <div className="relative w-full flex gap-5 bg-white p-4">
       <div className="min-w-[107px] min-h-[107px] rounded-xl bg-gray100"></div>
       <div className="w-full flex flex-col justify-between">
         <div>

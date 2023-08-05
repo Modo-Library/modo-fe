@@ -10,15 +10,17 @@ import ComponentRoutes from 'books/routes/Component';
 function App() {
   const location = useLocation();
 
+  if (process.env.NODE_ENV === 'production') {
+    return <></>;
+  }
+
   return (
     <Suspense fallback={<Loader />}>
       <Routes location={location}>
         {/* Pages */}
         <Route element={<BookPage />} path="/book" />
         {/* Components */}
-        {process.env.NODE_ENV !== 'production' && (
-          <Route element={<ComponentRoutes />} path="/components/*" />
-        )}
+        <Route element={<ComponentRoutes />} path="/components/*" />
         {/* Etc */}
         <Route element={<>존재하지 않는 페이지 입니다</>} path="*" />
       </Routes>
