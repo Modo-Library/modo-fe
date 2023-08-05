@@ -1,13 +1,13 @@
 import Header from 'host/components/Header';
 
-export default function HomePage() {
+export default function ChatPage() {
   return (
     <>
       <Header>
         <Header.Title>MODO</Header.Title>
         <Header.Menu />
       </Header>
-      메인 페이지
+      채팅 페이지
     </>
   );
 }
