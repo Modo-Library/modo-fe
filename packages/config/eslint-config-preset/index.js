@@ -103,6 +103,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-no-target-blank': 'error',
     'react/display-name': 'off',
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     'import/no-cycle': 'off',
@@ -137,11 +138,6 @@ module.exports = {
           },
           {
             pattern: '@packages/**',
-            group: 'internal',
-            position: 'after',
-          },
-          {
-            pattern: 'src/**',
             group: 'internal',
             position: 'after',
           },
@@ -199,7 +195,7 @@ module.exports = {
         location: 'anywhere',
       },
     ],
-    'no-console': 'error',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-debugger': 'error',
     'no-unused-vars': 'off',
     'no-param-reassign': ['error', { props: false }],

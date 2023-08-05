@@ -7,7 +7,6 @@ module.exports = {
       },
       alias: {
         map: [['books', './micro_services/books/src']],
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
   },
