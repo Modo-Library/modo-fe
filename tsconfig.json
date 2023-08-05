@@ -10,7 +10,6 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "paths": {
-      "src/*": ["src/*"],
       "auth/*": ["micro_services/auth/src/*"],
       "books/*": ["micro_services/books/src/*"],
       "host/*": ["micro_services/host/src/*"]
