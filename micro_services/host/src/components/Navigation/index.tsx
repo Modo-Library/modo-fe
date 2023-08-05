@@ -1,9 +1,9 @@
 import Menu, { MenuProps } from './atoms/menu';
 
 const 메뉴정보: MenuProps[] = [
-  { icon: 'gridicons:chat', text: '채팅', src: 'chat' },
-  { icon: 'ic:round-home', text: '홈', src: '' },
-  { icon: 'mdi:user', text: '프로필', src: 'profile' },
+  { iconKey: 'chat', text: '채팅', src: 'chat' },
+  { iconKey: 'home', text: '홈', src: '' },
+  { iconKey: 'profile', text: '프로필', src: 'profile' },
 ];
 
 export default function Navigation() {

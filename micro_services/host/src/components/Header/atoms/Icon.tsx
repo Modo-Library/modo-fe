@@ -1,18 +1,19 @@
 import { Icon } from '@iconify/react';
 
-interface HeaderIconProps {
+import { HeaderButtonProps } from './button';
+
+interface HeaderIconProps extends Omit<HeaderButtonProps, 'children'> {
   src: string;
-  color?: string;
-  onClick?: () => void;
 }
 
 export function HeaderIcon(props: HeaderIconProps) {
-  const { src, color = '#333', onClick } = props;
+  const { src, color = '#333', onClick, disabled = false } = props;
 
   return (
     <button
+      disabled={disabled}
       type="button"
-      className="hover:cursor-pointer outline-none border-none"
+      className="hover:cursor-pointer outline-none border-none disabled:opacity-50 disabled:hover:cursor-not-allowed"
       onClick={onClick}
     >
       <Icon icon={src} width="24" height="24" color={color} />
