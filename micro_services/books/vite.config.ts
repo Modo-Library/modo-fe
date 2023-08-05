@@ -14,9 +14,9 @@ export default defineConfig({
       name: 'service:books',
       filename: 'remoteEntry.js',
       exposes: {
-        './App': './src/App',
+        './components/BookListRow': './src/components/BookListRow',
       },
-      shared: ['react', 'react-dom', 'react-router-dom'],
+      shared: ['react', 'react-dom', 'react-router-dom', 'recoil'],
     }),
   ],
   resolve: {
