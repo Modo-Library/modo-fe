@@ -1,10 +1,10 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import '@testing-library/jest-dom';
-import Button, { IButton } from '.';
+import Button, { ButtonProps } from '.';
 
 describe('버튼 기능 테스트', () => {
-  let defaultProps: IButton;
+  let defaultProps: ButtonProps;
 
   beforeEach(() => {
     defaultProps = {
