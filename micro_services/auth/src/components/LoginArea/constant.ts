@@ -1,4 +1,4 @@
-const { VITE_KAKAO_RESTAPI_KEY, VITE_AUTH_URL } = import.meta.env;
+const { VITE_KAKAO_RESTAPI_KEY, VITE_AUTH_URL } = process.env;
 
 const config = {
   response_type: 'code',

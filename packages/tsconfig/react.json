@@ -4,9 +4,9 @@
   "extends": "@packages/tsconfig/base.json",
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "target": "ES5",
+    "target": "ES6",
     "module": "ESNext",
-    "types": ["node", "vite/client"],
+    "types": ["jest", "node", "vite/client", "@testing-library/jest-dom"],
     "jsx": "react-jsx"
   }
 }
