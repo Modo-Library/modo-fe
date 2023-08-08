@@ -13,11 +13,11 @@ module.exports = {
     '^.+\\.js?(x)$': 'babel-jest',
   },
   moduleNameMapper: {
+    '\\.(css|less|svg)$': 'identity-obj-proxy',
     '^@packages/(.*)$': '<rootDir>../../packages/$1',
     '^host/(.*)$': '<rootDir>/../../micro_services/host/$1',
     '^auth/(.*)$': '<rootDir>/../../micro_services/auth/$1',
     '^books/(.*)$': '<rootDir>/../../micro_services/books/$1',
-    '\\.(css|less|svg)$': 'identity-obj-proxy',
   },
   testEnvironment: 'jsdom',
   testMatch: ['<rootDir>/**/*.test.ts?(x)'],
