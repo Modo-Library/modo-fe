@@ -1,4 +1,5 @@
 // Only used by Jest
+
 module.exports = {
   presets: [
     ['@babel/preset-react', { runtime: 'automatic' }],

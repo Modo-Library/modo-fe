@@ -14,13 +14,18 @@ module.exports = {
   },
   moduleNameMapper: {
     '\\.(css|less|svg)$': 'identity-obj-proxy',
-    '^@packages/(.*)$': '<rootDir>../../packages/$1',
-    '^host/(.*)$': '<rootDir>/../../micro_services/host/$1',
-    '^auth/(.*)$': '<rootDir>/../../micro_services/auth/$1',
-    '^books/(.*)$': '<rootDir>/../../micro_services/books/$1',
+    '^@packages/(.*)$': '<rootDir>/../../packages/$1',
+    '^host/(.*)$': '<rootDir>/../../micro_services/host/src/$1',
+    '^auth/(.*)$': '<rootDir>/../../micro_services/auth/src/$1',
+    '^books/(.*)$': '<rootDir>/../../micro_services/books/src/$1',
   },
   testEnvironment: 'jsdom',
   testMatch: ['<rootDir>/**/*.test.ts?(x)'],
-  transformIgnorePatterns: ['<rootDir>/../../.next/', '<rootDir>/../../node_modules/'],
-  setupFilesAfterEnv: ['./jest.setup.js'],
+  transformIgnorePatterns: [
+    '<rootDir>/../../.next/',
+    '<rootDir>/../../node_modules/',
+    '<rootDir>/node_modules',
+  ],
+  // TODO : test시 import 충돌 해결해야 함
+  // setupFilesAfterEnv: ['./jest.setup.js'],
 };

@@ -1,9 +1,7 @@
 import { useState } from 'react';
 
 import Button from '@packages/components/Button';
-import { setCookie } from '@packages/utils/api/cookies';
 
-import openCenteredWindow from 'auth/utils/openCenterWindow';
 import { LoadingStateType } from 'auth/utils/types';
 
 import { REQUEST_KAKAO_LOGIN_URL } from './constant';
@@ -14,12 +12,7 @@ export default function KaKaoLoginButton() {
 
   const handleKaKaoLogin = () => {
     setLoadingState('pending');
-    setCookie({
-      name: 'loginType',
-      value: 'kakao',
-      expired: 60000,
-    });
-    openCenteredWindow(REQUEST_KAKAO_LOGIN_URL, '_self', 500, 600);
+    window.location.href = REQUEST_KAKAO_LOGIN_URL;
   };
 
   return (

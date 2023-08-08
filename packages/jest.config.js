@@ -15,9 +15,6 @@ module.exports = {
   moduleNameMapper: {
     '\\.(css|less|svg)$': 'identity-obj-proxy',
     '^@packages/(.*)$': '<rootDir>/$1',
-    '^host/(.*)$': '<rootDir>/../micro_services/host/$1',
-    '^auth/(.*)$': '<rootDir>/../micro_services/auth/$1',
-    '^books/(.*)$': '<rootDir>/../micro_services/books/$1',
   },
   testEnvironment: 'jsdom',
   testMatch: ['<rootDir>/**/*.test.ts?(x)'],

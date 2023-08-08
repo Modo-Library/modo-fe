@@ -1,16 +1,19 @@
 {
   "extends": "@packages/tsconfig/react.json",
   "compilerOptions": {
+    "target": "ESNext",
     "jsx": "preserve",
     "baseUrl": ".",
     "rootDir": ".",
     "composite": true,
     "declaration": true,
+    "esModuleInterop": true,
     "noEmit": true,
     "jsxImportSource": "@emotion/react",
     "paths": {
       "auth/*": ["src/*"]
     }
   },
-  "include": ["."]
+  "include": ["."],
+  "exclude": ["node_modules"]
 }

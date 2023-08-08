@@ -38,13 +38,13 @@ export default function useLogin(code: string | null) {
             expired: getDateHour(6),
           });
           localStorage.setItem('usersId', res.data.usersId);
-          window.location.replace(`${import.meta.env.VITE_HOST_URL}/`);
+          window.location.replace(`${process.env.VITE_HOST_URL}/`);
         })
         .catch((err) => {
           throw new Error(err);
         });
     } catch (err) {
-      window.location.replace(`${import.meta.env.VITE_HOST_URL}/?state=login_error`);
+      window.location.replace(`${process.env.VITE_HOST_URL}/?state=login_error`);
     }
   };
 
