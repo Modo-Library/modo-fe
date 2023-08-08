@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import Loader from '@packages/components/Indicator/Loader';
 
 import { LoginPage } from 'auth/routes';
-import ComponentRoutes from 'auth/routes/component';
+import ComponentRoutes from 'auth/routes/Component';
 
 function App() {
   const location = useLocation();
