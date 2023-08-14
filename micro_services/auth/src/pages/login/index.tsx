@@ -6,7 +6,7 @@ import useLogin from './hooks/useLogin';
 export default function LoginPage() {
   const location = useLocation();
   const codeKakao = new URLSearchParams(location.search).get('code');
-  const codeApple = location.pathname.split('#code=')[1];
+  const codeApple = window.location.hash.split('#code=')[1];
 
   // -------------------------
   const { getLogin } = useLogin();
