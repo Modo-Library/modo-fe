@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import Button from '@packages/components/Button';
-import { setCookie } from '@packages/utils/api/cookies';
 
 import { LoadingStateType } from 'auth/utils/types';
 
@@ -13,11 +12,6 @@ export default function KaKaoLoginButton() {
 
   const handleKaKaoLogin = () => {
     setLoadingState('pending');
-    setCookie({
-      name: 'loginType',
-      value: 'kakao',
-      expired: 60000,
-    });
     window.location.href = REQUEST_KAKAO_LOGIN_URL;
   };
 

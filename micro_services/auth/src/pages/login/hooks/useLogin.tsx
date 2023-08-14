@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import axios, { AxiosResponse } from 'axios';
 
-import { setCookie, removeCookie, getCookie } from '@packages/utils/api/cookies';
+import { setCookie, removeCookie } from '@packages/utils/api/cookies';
 import getDateHour from '@packages/utils/getDateHour';
 import { IToken } from '@packages/utils/api/reIssueToken';
 
@@ -9,18 +9,17 @@ import { LoginType } from 'auth/components/LoginArea/constant';
 
 import { authSelector } from 'auth/utils/recoil/auth';
 
-export default function useLogin(code: string | null) {
+export default function useLogin() {
   const setAuthState = useSetRecoilState(authSelector);
 
-  const getKaKaoLogin = async () => {
+  const getLogin = async (code: string | null, type: LoginType) => {
     try {
-      const type = getCookie('loginType') as LoginType;
-      if (code === null || type !== 'kakao') {
+      if (code === null) {
         throw new Error();
       }
 
       await axios
-        .get(`https://www.modolib.site/request/oauth/kakao?code=${code}`)
+        .get(`https://www.modolib.site/request/oauth/${type}?code=${code}`)
         .then((res: AxiosResponse<IToken>) => {
           setAuthState('user');
           removeCookie('accessToken');
@@ -48,5 +47,5 @@ export default function useLogin(code: string | null) {
     }
   };
 
-  return { getKaKaoLogin };
+  return { getLogin };
 }

@@ -5,15 +5,19 @@ import useLogin from './hooks/useLogin';
 
 export default function LoginPage() {
   const location = useLocation();
-  const code = new URLSearchParams(location.search).get('code');
+  const codeKakao = new URLSearchParams(location.search).get('code');
+  const codeApple = location.pathname.split('#code=')[1];
 
   // -------------------------
-  const { getKaKaoLogin } = useLogin(code);
+  const { getLogin } = useLogin();
   // -------------------------
 
   useEffect(() => {
-    if (code === null) return;
-    getKaKaoLogin();
+    if (codeKakao) {
+      getLogin(codeKakao, 'kakao');
+    } else if (codeApple) {
+      getLogin(codeApple, 'apple');
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
