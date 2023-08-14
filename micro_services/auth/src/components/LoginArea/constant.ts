@@ -7,7 +7,7 @@ const SOCIAL_CONFIG = {
     redirect_uri: `${VITE_AUTH_URL}/login`,
   },
   apple: {
-    client_id: 'com.heodoo.NewModo2',
+    client_id: 'com.heodoo.NewModoWeb',
     redirect_uri: `https://auth.modolib.site/login`,
     response_type: 'code',
     response_mode: 'fragment',
