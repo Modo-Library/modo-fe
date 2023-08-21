@@ -19,7 +19,7 @@ export default function useLogin() {
       }
 
       await axios
-        .get(`https://www.modolib.site/request/oauth/${type}?code=${code}`)
+        .post(`https://www.modolib.site/request/oauth/${type}?code=${code}`)
         .then((res: AxiosResponse<IToken>) => {
           setAuthState('user');
           removeCookie('accessToken');
