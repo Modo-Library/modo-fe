@@ -71,10 +71,7 @@
   ],
   "dependencies": {
     "@packages/config": "^0.1.0",
-    "@packages/utils": "^0.1.0",
-    "@sentry/cli": "^2.20.5",
-    "@sentry/vite-plugin": "^2.7.0",
-    "uninstall": "^0.0.0"
+    "@packages/utils": "^0.1.0"
   },
   "devDependencies": {
     "@packages/assets": "^0.1.0",
