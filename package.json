@@ -23,7 +23,7 @@
     "mfa-host": "npm run build -workspace=@workspace/host && npm run preview -workspace=@workspace/host",
     "mfa-service:auth": "npm run build -workspace=@workspace/auth && npm run preview -workspace=@workspace/auth",
     "mfa-service:books": "npm run build -workspace=@workspace/books && npm run preview -workspace=@workspace/books",
-    "build": "npm run generate:css && tsc && next build",
+    "build": "npm run generate:css && tsc && next build && npm run sentry:sourcemaps",
     "preview": "next start -p 5173",
     "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
     "lint": "run-p \"lint:*\"",
@@ -35,7 +35,8 @@
     "test": "jest --passWithNoTests",
     "generate:css": "npx tailwindcss -i ./packages/styles/_mobile.css -o ./packages/styles/tailwind-LEGACY.css",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org modo-n0 --project host ./micro_services/host/dist && sentry-cli sourcemaps upload --org modo-n0 --project host ./micro_services/host/dist"
   },
   "lint-staged": {
     "app/**/*.{js?(x),ts?(x)}": [
@@ -70,7 +71,10 @@
   ],
   "dependencies": {
     "@packages/config": "^0.1.0",
-    "@packages/utils": "^0.1.0"
+    "@packages/utils": "^0.1.0",
+    "@sentry/cli": "^2.20.5",
+    "@sentry/vite-plugin": "^2.7.0",
+    "uninstall": "^0.0.0"
   },
   "devDependencies": {
     "@packages/assets": "^0.1.0",
