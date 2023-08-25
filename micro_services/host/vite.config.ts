@@ -5,6 +5,9 @@ import { defineConfig } from 'vite';
 import federation from '@originjs/vite-plugin-federation';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const PREFIX_ENVIRONMENT_URL = (prefix: string, port: number) =>
   process.env.NODE_ENV === 'production'
@@ -29,6 +32,9 @@ export default defineConfig({
       project: 'host',
     }),
   ],
+  define: {
+    'process.env': JSON.stringify(process.env),
+  },
   resolve: {
     alias: {
       host: path.resolve(__dirname, './src'),
