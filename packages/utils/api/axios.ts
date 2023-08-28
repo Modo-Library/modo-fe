@@ -1,27 +1,61 @@
-import axios, { AxiosResponse, AxiosError, Method } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'axios';
 
 import { getCookie } from './cookies';
+import reIssueToken from './reIssueToken';
 
-// 쿠키 확인 및 Axios 기본 세팅
-const accessToken = getCookie('accessToken');
-// TODO : refresh 토큰 사용 필요
-// const refreshToken = getCookie('refreshToken');
+interface AxiosCustomRequestConfig extends AxiosRequestConfig {
+  retryCount: number;
+}
+
+// Axios 기본 세팅
+const MAX_RETRY_COUNT = 1;
 
 const Axios = axios.create({
-  baseURL: `${import.meta.env.VITE_SERVER_URL}`,
-  headers: { Authorization: accessToken ? `Bearer ${accessToken}` : '' },
+  baseURL: `${process.env.NODE_ENV === 'test' ? '' : `${import.meta.env.VITE_SERVER_URL}/api`}`,
+  withCredentials: true,
   timeout: 2000,
 });
+// Interceptor로 응답/요청 공통 핸들링
+Axios.interceptors.request.use(
+  (request) => {
+    const accessToken = getCookie('accessToken');
+    const refreshToken = getCookie('refreshToken');
 
-// Response 받기 전 Interceptor로 응답 핸들링
+    if (!refreshToken && window.location.pathname !== '/login') {
+      window.location.href = `${import.meta.env.VITE_HOST_URL}/account/login`;
+      console.warn('[Message] No Token');
+    }
+    accessToken && (request.headers.Token = accessToken);
+    request.headers['Content-Type'] = 'application/json';
+
+    return request;
+  },
+  (error) => {
+    console.error('Request Interceptor Error');
+    return Promise.reject(error);
+  },
+);
+
 Axios.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
     // JWTtoken needs refresh
     if (error.response.status === 401) {
-      // TODO : JWT 토큰 재발급 필요
-      window.location.reload();
+      const refreshToken = getCookie('refreshToken');
+      refreshToken && (await reIssueToken(refreshToken));
+      const accessToken = getCookie('accessToken');
+      error.config.headers.Token = accessToken;
     }
+
+    const config = error.config as AxiosCustomRequestConfig;
+    config.retryCount = config.retryCount ?? 0;
+    console.warn('[Message] RETRY COUNT :', config.retryCount);
+
+    if (config.retryCount < MAX_RETRY_COUNT) {
+      config.retryCount += 1;
+      return Axios.request(config);
+    }
+
     return Promise.reject(error);
   },
 );

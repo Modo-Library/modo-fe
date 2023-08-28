@@ -1,16 +1,29 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { Suspense } from 'react';
 
-import PageRoutes from 'src/routes/page';
-import ComponentRoutes from 'src/routes/component';
+import Loader from '@packages/components/Indicator/Loader';
+
+import { LoginPage } from 'auth/routes';
+import ComponentRoutes from 'auth/routes/Component';
 
 function App() {
   const location = useLocation();
 
   return (
-    <Routes location={location}>
-      <Route element={<ComponentRoutes />} path="/components/*" />
-      <Route element={<PageRoutes />} path="/pages/*" />
-    </Routes>
+    <Suspense fallback={<Loader />}>
+      <Routes location={location}>
+        {process.env.NODE_ENV !== 'production' && (
+          <>
+            {/* Components */}
+            <Route element={<ComponentRoutes />} path="/components/*" />
+          </>
+        )}
+        {/* Pages */}
+        <Route element={<LoginPage />} path="/login" />
+        {/* Etc */}
+        <Route element={<>존재하지 않는 페이지 입니다</>} path="*" />
+      </Routes>
+    </Suspense>
   );
 }
 

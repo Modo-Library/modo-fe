@@ -1,12 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "React",
-  "extends": "./base.json",
+  "extends": "@packages/tsconfig/base.json",
   "compilerOptions": {
-    "lib": ["ES2015"],
-    "target": "ES5",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "target": "ES6",
     "module": "ESNext",
-    "types": ["vite/client"],
+    "types": ["jest", "node", "vite/client", "@testing-library/jest-dom"],
     "jsx": "react-jsx"
   }
 }

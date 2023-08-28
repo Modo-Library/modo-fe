@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Nextjs",
+  "extends": "@packages/tsconfig/base.json",
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "target": "ES5",
+    "module": "ESNext",
+     "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "types": ["node"],
+    "jsx": "react-jsx"
+  }
+}

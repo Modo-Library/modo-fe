@@ -18,36 +18,52 @@
     "books": "run-p \"books:*\"",
     "books:css": "npm run generate:css -- --watch",
     "books:dev": "npm run dev -workspace=@workspace/books",
-    "mfa-dev": "run-p \"mfa-service:*\"",
-    "mfa-prod": "run-p \"mfa-service:*\" mfa-host",
+    "mfa-dev": "NODE_ENV=development run-p \"mfa-service:*\"",
+    "mfa-prod": "NODE_ENV=production run-p \"mfa-service:*\" mfa-host",
     "mfa-host": "npm run build -workspace=@workspace/host && npm run preview -workspace=@workspace/host",
     "mfa-service:auth": "npm run build -workspace=@workspace/auth && npm run preview -workspace=@workspace/auth",
     "mfa-service:books": "npm run build -workspace=@workspace/books && npm run preview -workspace=@workspace/books",
     "build": "npm run generate:css && tsc && next build",
     "preview": "next start -p 5173",
     "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
-    "lint": "next lint && tsc",
-    "test": "jest --passWithNoTests",
+    "lint": "run-p \"lint:*\"",
+    "lint:packages": "eslint && tsc -p packages/tsconfig.json --noEmit",
+    "lint:main": "next lint && tsc -p tsconfig.json --noEmit",
+    "lint:host": "eslint && tsc -p micro_services/host/tsconfig.json --noEmit",
+    "lint:auth": "eslint && tsc -p micro_services/auth/tsconfig.json --noEmit",
+    "lint:books": "eslint && tsc -p micro_services/books/tsconfig.json --noEmit",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --passWithNoTests",
+    "test:watch": "jest --no-cache --watch",
+    "mock:auth": "NODE_ENV=mock npm run auth",
     "generate:css": "npx tailwindcss -i ./packages/styles/_mobile.css -o ./packages/styles/tailwind-LEGACY.css",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "{src,packages}/**/*.{js,jsx,ts,tsx}": [
+    "app/**/*.{js?(x),ts?(x)}": [
       "eslint --fix",
-      "prettier --write"
+      "prettier --write",
+      "bash -c 'npm run lint:main'"
     ],
-    "micro_services/Auth/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config micro_services/Auth/.eslintrc.js",
-      "prettier --write"
+    "packages/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
+      "prettier --write",
+      "bash -c 'npm run lint:packages'"
     ],
-    "micro_services/Books/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config micro_services/Books/.eslintrc.js",
-      "prettier --write"
+    "micro_services/auth/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
+      "prettier --write",
+      "bash -c 'npm run lint:auth'"
     ],
-    "micro_services/Host/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config micro_services/Host/.eslintrc.js",
-      "prettier --write"
+    "micro_services/books/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
+      "prettier --write",
+      "bash -c 'npm run lint:books'"
+    ],
+    "micro_services/host/**/*.{js?(x),ts?(x)}": [
+      "eslint --fix",
+      "prettier --write",
+      "bash -c 'npm run lint:host'"
     ]
   },
   "workspaces": [

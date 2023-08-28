@@ -1,22 +1,13 @@
-import Button from '@packages/components/Button';
-
 import KaKaoLoginButton from './KaKaoLoginButton';
-import useKaKaoLogin from './hooks/useKaKaoLogin';
+import AppleLoginButton from './AppleLoginButton';
 
 export default function LoginArea() {
-  useKaKaoLogin();
-
   return (
-    <section className="flex flex-col w-full gap-4">
-      <KaKaoLoginButton />
-      <Button
-        onClick={() => {}}
-        disabled={true}
-        customClass={'bg-black100 text-white'}
-        iconSrc={'mdi:apple'}
-        iconColor={'#fefefe'}
-        value={'애플 계정으로 로그인'}
-      />
+    <section className="flex flex-col text-center w-full h-full items-center justify-around">
+      <div className="w-full flex flex-col gap-4">
+        <KaKaoLoginButton />
+        <AppleLoginButton />
+      </div>
     </section>
   );
 }

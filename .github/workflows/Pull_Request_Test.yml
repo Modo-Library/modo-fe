@@ -11,7 +11,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3.7.0
+        with:
+          node-version: v18.16.0
+
+      - name: Check Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Check Node
         run: node -v
@@ -20,7 +30,7 @@ jobs:
         run: npm -v
 
       - name: Install Dependencies
-        run: npm install --frozen-lockfile
+        run: npm install --quiet --frozen-lockfile
 
       - name: Run Test
         run: npm test
