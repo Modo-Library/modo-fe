@@ -1,0 +1,15 @@
+{
+  "extends": "@packages/tsconfig/react.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "composite": true,
+    "declaration": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["jest", "node", "vite/client", "@testing-library/jest-dom"]
+  },
+  "include": [".", "../babel.config.js"],
+  "exclude": ["node_modules"]
+}

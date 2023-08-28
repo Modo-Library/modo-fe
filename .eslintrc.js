@@ -7,7 +7,6 @@ module.exports = {
       },
       alias: {
         map: [
-          ['src', './src'],
           ['auth', './micro_services/auth/src'],
           ['books', './micro_services/books/src'],
           ['host', './micro_services/host/src'],

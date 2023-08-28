@@ -19,5 +19,8 @@
     "@packages/styles": "^0.1.0",
     "@packages/tsconfig": "^0.1.0",
     "@packages/utils": "^0.1.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

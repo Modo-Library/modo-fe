@@ -1,42 +1,20 @@
 {
+  "extends": "@packages/tsconfig/nextjs.json",
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
     "rootDir": ".",
     "baseUrl": ".",
-    "types": ["node", "vite/client"],
+    "composite": true,
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  },
-  "include": ["next-env.d.ts", "app/**/*.tsx", "app/**/*.ts", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"],
-  "references": [
-    {
-      "path": "tsconfig.node.json"
-    },
-    {
-      "path": "micro_services/auth/tsconfig.json"
-    },
-    {
-      "path": "micro_services/books/tsconfig.json"
-    },
-    {
-      "path": "micro_services/host/tsconfig.json"
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "paths": {
+      "auth/*": ["micro_services/auth/src/*"],
+      "books/*": ["micro_services/books/src/*"],
+      "host/*": ["micro_services/host/src/*"]
     }
-  ]
+  },
+  "include": [".", "next-env.d.ts", "app/*", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "micro_services", "packages"]
 }

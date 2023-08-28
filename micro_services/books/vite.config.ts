@@ -1,3 +1,5 @@
+import path from 'path';
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
@@ -12,11 +14,16 @@ export default defineConfig({
       name: 'service:books',
       filename: 'remoteEntry.js',
       exposes: {
-        './App': './src/App',
+        './pages/book': './src/pages/book',
       },
-      shared: ['react', 'react-dom', 'react-router-dom'],
+      shared: ['react', 'react-dom', 'react-router-dom', 'recoil'],
     }),
   ],
+  resolve: {
+    alias: {
+      books: path.resolve(__dirname, './src'),
+    },
+  },
   build: {
     modulePreload: false,
     target: 'esnext',

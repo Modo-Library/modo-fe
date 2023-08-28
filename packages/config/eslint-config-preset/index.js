@@ -1,3 +1,26 @@
+const parserRules = {
+  '@typescript-eslint/no-empty-interface': 'off',
+  '@typescript-eslint/prefer-as-const': 'warn',
+  '@typescript-eslint/no-var-requires': 'warn',
+  '@typescript-eslint/no-non-null-asserted-optional-chain': 'warn',
+  '@typescript-eslint/ban-types': 'warn',
+  '@typescript-eslint/no-inferrable-types': 'warn',
+  '@typescript-eslint/no-empty-function': 'off',
+  '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
+  '@typescript-eslint/explicit-module-boundary-types': 'off',
+  '@typescript-eslint/naming-convention': [
+    'error',
+    {
+      format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+      selector: 'variable',
+      leadingUnderscore: 'allow',
+    },
+    { format: ['camelCase', 'PascalCase'], selector: 'function' },
+    { format: ['PascalCase'], selector: 'interface' },
+    { format: ['PascalCase'], selector: 'typeAlias' },
+  ],
+};
+
 module.exports = {
   env: {
     node: true,
@@ -18,15 +41,61 @@ module.exports = {
     'plugin:import/typescript',
     'eslint-config-prettier',
   ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  },
   plugins: ['react', '@typescript-eslint', 'prettier'],
+  overrides: [
+    {
+      files: ['micro_services/auth/**/*.ts?(x)'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: ['micro_services/auth/tsconfig.json'],
+      },
+      rules: parserRules,
+    },
+    {
+      files: ['micro_services/host/**/*.ts?(x)'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: ['micro_services/host/tsconfig.json'],
+      },
+      rules: parserRules,
+    },
+    {
+      files: ['micro_services/books/**/*.ts?(x)'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: ['micro_services/books/tsconfig.json'],
+      },
+      rules: parserRules,
+    },
+    {
+      files: ['packages/**/*.ts?(x)'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: ['packages/tsconfig.json'],
+      },
+      rules: parserRules,
+    },
+  ],
   rules: {
     'getter-return': 'warn',
     'react/prop-types': ['off'],
@@ -72,11 +141,6 @@ module.exports = {
             position: 'after',
           },
           {
-            pattern: 'src/**',
-            group: 'internal',
-            position: 'after',
-          },
-          {
             pattern: '**/*/assets/**',
             group: 'internal',
             position: 'after',
@@ -88,6 +152,11 @@ module.exports = {
           },
           {
             pattern: '**/*/pages/**',
+            group: 'internal',
+            position: 'after',
+          },
+          {
+            pattern: 'host/**',
             group: 'internal',
             position: 'after',
           },
@@ -117,26 +186,6 @@ module.exports = {
         'newlines-between': 'always',
       },
     ],
-    '@typescript-eslint/no-empty-interface': 'off',
-    '@typescript-eslint/prefer-as-const': 'warn',
-    '@typescript-eslint/no-var-requires': 'warn',
-    '@typescript-eslint/no-non-null-asserted-optional-chain': 'warn',
-    '@typescript-eslint/ban-types': 'warn',
-    '@typescript-eslint/no-inferrable-types': 'warn',
-    '@typescript-eslint/no-empty-function': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    // '@typescript-eslint/naming-convention': [
-    //   'error',
-    //   {
-    //     format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
-    //     selector: 'variable',
-    //     leadingUnderscore: 'allow',
-    //   },
-    //   { format: ['camelCase', 'PascalCase'], selector: 'function' },
-    //   { format: ['PascalCase'], selector: 'interface' },
-    //   { format: ['PascalCase'], selector: 'typeAlias' },
-    // ],
     'no-async-promise-executor': 'warn',
     'no-warning-comments': [
       'warn',
@@ -145,7 +194,7 @@ module.exports = {
         location: 'anywhere',
       },
     ],
-    'no-console': 'error',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-debugger': 'error',
     'no-unused-vars': 'off',
     'no-param-reassign': ['error', { props: false }],

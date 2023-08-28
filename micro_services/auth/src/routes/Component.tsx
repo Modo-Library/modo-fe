@@ -1,9 +1,9 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
-import Loader from '@packages/components/Loader';
+import Loader from '@packages/components/Indicator/Loader';
 
-const LoginArea = lazy(() => import('src/components/LoginArea'));
+const LoginArea = lazy(() => import('auth/components/LoginArea'));
 
 export const ComponentRoutes = () => {
   const location = useLocation();
