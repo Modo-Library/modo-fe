@@ -12,7 +12,11 @@
   }
   
   .mobile-layout {
-    @apply flex-center flex-col w-[25rem] h-screen shadow-layout px-4;
+    @apply flex-center flex-col w-[25rem] h-screen shadow-layout;
+  }
+
+  .hidden-when-mobile-view {
+    @apply block;
   }
 
   body {
@@ -31,5 +35,15 @@
   }
   h3 {
     @apply text-[18px];
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-layout {
+    width : 100vw;
+  }
+
+  .hidden-when-mobile-view {
+    display : none;
   }
 }
