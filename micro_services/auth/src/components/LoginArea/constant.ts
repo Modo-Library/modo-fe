@@ -10,6 +10,7 @@ const SOCIAL_CONFIG = {
     client_id: 'com.heodoo.NewModoWeb',
     redirect_uri: `https://auth.modolib.site/login`,
     response_type: 'code',
+    scope: 'name email',
     response_mode: 'fragment',
   },
 };
