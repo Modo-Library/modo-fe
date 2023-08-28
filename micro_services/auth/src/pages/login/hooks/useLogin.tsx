@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse, AxiosError } from 'axios';
 import * as Sentry from '@sentry/react';
 
 import { setCookie, removeCookie } from '@packages/utils/api/cookies';
@@ -43,12 +43,30 @@ export default function useLogin() {
           });
           setCookie({
             name: 'usersId',
-            value: res.data.usersId,
+            value: decodeURIComponent(res.data.usersId),
             expired: getDateHour(0.5),
           });
           window.location.replace(`${process.env.VITE_HOST_URL}/`);
         });
     } catch (err) {
+      if (err instanceof AxiosError) {
+        const { method, url, params, headers } = err.config!;
+        const { data, status } = err.response!;
+
+        Sentry.setContext('API Request Detail', {
+          method,
+          url,
+          params,
+          data,
+          headers,
+        });
+
+        Sentry.setContext('API Response Detail', {
+          status,
+          data,
+        });
+      }
+
       Sentry.withScope((scope) => {
         scope.setTag('type', 'login');
         scope.setLevel('debug');

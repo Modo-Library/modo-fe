@@ -1,5 +1,7 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse, AxiosError } from 'axios';
+import * as Sentry from '@sentry/react';
 
+import getErrorMessage from '@packages/utils/getErrorMessage';
 import getDateHour from '@packages/utils/getDateHour';
 
 import { setCookie, removeCookie } from './cookies';
@@ -30,7 +32,13 @@ export default async function reIssueToken(refreshToken: string) {
       });
     })
     .catch((err) => {
-      console.error(err);
+      Sentry.withScope((scope) => {
+        scope.setTag('type', 'api');
+        scope.setTag('api', 'reIssue Token');
+        scope.setLevel('fatal');
+
+        Sentry.captureException(new AxiosError(getErrorMessage(err)));
+      });
       window.location.replace(`${import.meta.env.VITE_HOST_URL}/account/login?state=token_expired`);
     });
 }
