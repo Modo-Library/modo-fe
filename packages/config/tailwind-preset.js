@@ -22,7 +22,7 @@ module.exports = {
     screens: {
       nw: '100vw',
       nh: '100vh',
-      full: '768px',
+      full: '576px',
     },
     boxShadow: {
       layout: '0 -1px 6px 3.5px rgb(0 0 0 / 0.15);',
@@ -56,12 +56,10 @@ module.exports = {
       colors: {
         black100: '#212121',
         black50: '#333333',
-        gray100: '#8a8a8a',
-        gray50: '#D9D9D9',
-        gray30: '#F5F5F5',
+        gray100: '#999999',
         brown100: '#6B5D54',
         brown50: '#93796A',
-        brown30: '#B28F6F',
+        brown30: '#C7B199',
         brown10: '#D4B495',
         orange100: '#FF805D',
       },
@@ -73,19 +71,9 @@ module.exports = {
           '0%': { transform: 'scale(1.0)' },
           '100%': { transform: 'scale(0.975)' },
         },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '0.5' },
-        },
-        showRight: {
-          '0%': { transform: 'translateX(-50%)' },
-          '100%': { transform: 'translateX(0%)' },
-        },
       },
       animation: {
         push: 'push .2s ease-out forwards',
-        fadeIn: 'fadeIn .35s ease-in-out forwards',
-        showRight: 'showRight .35s ease-in-out forwards',
       },
     },
   },
