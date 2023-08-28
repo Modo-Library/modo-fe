@@ -14,7 +14,7 @@ export interface IToken {
 
 export default async function reIssueToken(refreshToken: string) {
   await axios
-    .post(`${import.meta.env.VITE_SERVER_URL}/api/v1/auth/reIssue`, null, {
+    .post(`${process.env.VITE_SERVER_URL}/api/v1/auth/reIssue`, null, {
       headers: { Token: refreshToken, 'Content-Type': 'application/json' },
     })
     .then((res: AxiosResponse<IToken>) => {
@@ -39,6 +39,6 @@ export default async function reIssueToken(refreshToken: string) {
 
         Sentry.captureException(new AxiosError(getErrorMessage(err)));
       });
-      window.location.replace(`${import.meta.env.VITE_HOST_URL}/account/login?state=token_expired`);
+      window.location.replace(`${process.env.VITE_HOST_URL}/account/login?state=token_expired`);
     });
 }

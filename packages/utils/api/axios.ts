@@ -12,7 +12,7 @@ interface AxiosCustomRequestConfig extends AxiosRequestConfig {
 const MAX_RETRY_COUNT = 1;
 
 const Axios = axios.create({
-  baseURL: `${process.env.NODE_ENV === 'test' ? '' : `${import.meta.env.VITE_SERVER_URL}/api`}`,
+  baseURL: `${process.env.NODE_ENV === 'test' ? '' : `${process.env.VITE_SERVER_URL}/api`}`,
   withCredentials: true,
   timeout: 2000,
 });
@@ -23,7 +23,7 @@ Axios.interceptors.request.use(
     const refreshToken = getCookie('refreshToken');
 
     if (!refreshToken && window.location.pathname !== '/login') {
-      window.location.href = `${import.meta.env.VITE_HOST_URL}/account/login`;
+      window.location.href = `${process.env.VITE_HOST_URL}/account/login`;
       console.warn('[Message] No Token');
     }
     accessToken && (request.headers.Token = accessToken);
