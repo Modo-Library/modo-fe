@@ -1,8 +1,17 @@
+import { lazy } from 'react';
+
+import Header from 'host/components/Header';
+
+const BookPage = lazy(() => import('books/pages/book'));
+
 export default function HomePage() {
   return (
     <>
-      홈페이지입니다.
-      <h3>네네</h3>
+      <Header>
+        <Header.Title>MODO</Header.Title>
+        <Header.Menu />
+      </Header>
+      <BookPage />
     </>
   );
 }

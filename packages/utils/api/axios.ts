@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'axios';
+import * as Sentry from '@sentry/react';
 
 import { getCookie } from './cookies';
 import reIssueToken from './reIssueToken';
@@ -31,7 +32,18 @@ Axios.interceptors.request.use(
     return request;
   },
   (error) => {
-    console.error('Request Interceptor Error');
+    const { method, url } = error.config;
+    const { status } = error.response;
+
+    Sentry.withScope((scope) => {
+      scope.setTag('type', 'api');
+      scope.setTag('api', 'axios interceptor');
+      scope.setLevel('warning');
+
+      scope.setFingerprint([method, status, url]);
+
+      Sentry.captureException(new AxiosError('API Request Interceptor Error'));
+    });
     return Promise.reject(error);
   },
 );
@@ -55,6 +67,32 @@ Axios.interceptors.response.use(
       config.retryCount += 1;
       return Axios.request(config);
     }
+
+    const { method, url, params, headers } = error.config;
+    const { data, status } = error.response;
+
+    Sentry.setContext('API Request Detail', {
+      method,
+      url,
+      params,
+      data,
+      headers,
+    });
+
+    Sentry.setContext('API Response Detail', {
+      status,
+      data,
+    });
+
+    Sentry.withScope((scope) => {
+      scope.setTag('type', 'api');
+      scope.setTag('api', 'axios interceptor');
+      scope.setLevel('warning');
+
+      scope.setFingerprint([method, status, url]);
+
+      Sentry.captureException(new AxiosError('API Response Interceptor Error'));
+    });
 
     return Promise.reject(error);
   },
