@@ -11,7 +11,7 @@ const SOCIAL_CONFIG = {
     redirect_uri: `https://auth.modolib.site/login`,
     response_type: 'code',
     scope: 'name email',
-    response_mode: 'fragment',
+    response_mode: 'form_post',
   },
 };
 
