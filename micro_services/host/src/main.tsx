@@ -14,7 +14,7 @@ Sentry.init({
   dsn: process.env.NODE_ENV === 'production' ? process.env.VITE_SENTRY_DSN : '',
   normalizeDepth: 5,
   integrations: [new Sentry.BrowserTracing()],
-  environment: process.env.NODE_ENV,
+  environment: 'host',
   tracesSampleRate: 0.4,
 });
 
