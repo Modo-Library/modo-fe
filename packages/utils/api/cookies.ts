@@ -9,7 +9,7 @@ interface CookieCustomOptions extends CookieChangeOptions {
 export const setCookie = ({ name, value, expired }: CookieCustomOptions): void =>
   cookies.set(name, value, {
     domain: `${process.env.NODE_ENV === 'production' ? '.modolib.site' : 'localhost'}`,
-    secure: true,
+    secure: process.env.NODE_ENV === 'production',
     path: '/',
     expires: new Date(Date.now() + expired),
   });
