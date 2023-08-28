@@ -58,3 +58,14 @@ next-env.d.ts
 
 #tailiwindCSS LEGACY
 tailwind-LEGACY.*
+# Sentry Auth Token
+.sentryclirc
+
+# Sentry Auth Token
+.env.sentry-build-plugin
+
+# Sentry Auth Token
+.env.sentry-build-plugin
+
+# Sentry Auth Token
+.env.sentry-build-plugin

@@ -28,5 +28,5 @@ export default function ButtonSpinner(props: ButtonSpinnerProps) {
     }
   `;
   // eslint-disable-next-line react/no-unknown-property
-  return <div css={spinner} />;
+  return <div data-testid="button-spinner" css={spinner} />;
 }

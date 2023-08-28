@@ -1,8 +1,10 @@
 import React from 'react';
+import * as Sentry from '@sentry/react';
 
 import Button from '@packages/components/Button';
+import getErrorMessage from '@packages/utils/getErrorMessage';
 
-import errorLog from './constant';
+import GlobalBoundaryError from './GlobalBoundaryError';
 
 interface Props {
   children: React.ReactNode;
@@ -21,15 +23,20 @@ export default class GlobalErrorBoundary extends React.Component<Props, State> {
 
   static getDerivedStateFromError(error: Error) {
     // Error Catch
+
+    Sentry.withScope((scope) => {
+      scope.setTag('type', 'global');
+      scope.setLevel('error');
+
+      Sentry.captureException(new GlobalBoundaryError(getErrorMessage(error)));
+    });
     return { hasError: true, error };
   }
 
   render() {
     if (this.state.hasError && this.state.error) {
       // Error Fallback UI
-      const errorInfo = this.state.error.toString();
-      const errorMessage =
-        Object.entries(errorLog).find(([key]) => errorInfo.includes(key))?.[1] || 'Unknown Error';
+      const errorMessage = getErrorMessage(this.state.error);
 
       const onClickRefresh = () => {
         window.location.reload();

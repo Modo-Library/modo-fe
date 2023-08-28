@@ -12,10 +12,14 @@ function App() {
   return (
     <Suspense fallback={<Loader />}>
       <Routes location={location}>
+        {process.env.NODE_ENV !== 'production' && (
+          <>
+            {/* Components */}
+            <Route element={<ComponentRoutes />} path="/components/*" />
+          </>
+        )}
         {/* Pages */}
         <Route element={<LoginPage />} path="/login" />
-        {/* Components */}
-        <Route element={<ComponentRoutes />} path="/components/*" />
         {/* Etc */}
         <Route element={<>존재하지 않는 페이지 입니다</>} path="*" />
       </Routes>

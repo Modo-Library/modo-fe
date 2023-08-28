@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import getDateHour from '@packages/utils/getDateHour';
 
@@ -11,22 +11,26 @@ export interface IToken {
 }
 
 export default async function reIssueToken(refreshToken: string) {
-  const result: IToken = await axios.post(
-    'v1/auth/reIssue',
-    {},
-    { headers: { Token: `Bearer ${refreshToken}` } },
-  );
-
-  removeCookie('accessToken');
-  removeCookie('refreshToken');
-  setCookie({
-    name: 'accessToken',
-    value: result.accessToken,
-    expired: getDateHour(0.5),
-  });
-  setCookie({
-    name: 'refreshToken',
-    value: result.refreshToken,
-    expired: getDateHour(6),
-  });
+  await axios
+    .post(`${import.meta.env.VITE_SERVER_URL}/api/v1/auth/reIssue`, null, {
+      headers: { Token: refreshToken, 'Content-Type': 'application/json' },
+    })
+    .then((res: AxiosResponse<IToken>) => {
+      removeCookie('accessToken');
+      removeCookie('refreshToken');
+      setCookie({
+        name: 'accessToken',
+        value: res.data.accessToken,
+        expired: getDateHour(0.5),
+      });
+      setCookie({
+        name: 'refreshToken',
+        value: res.data.refreshToken,
+        expired: getDateHour(6),
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      window.location.replace(`${import.meta.env.VITE_HOST_URL}/account/login?state=token_expired`);
+    });
 }

@@ -1,3 +1,5 @@
+// deprecated
+
 export default function openCenteredWindow(
   url: string,
   name: string,

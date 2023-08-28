@@ -1,4 +1,8 @@
+import { lazy } from 'react';
+
 import Header from 'host/components/Header';
+
+const BookPage = lazy(() => import('books/pages/book'));
 
 export default function HomePage() {
   return (
@@ -7,7 +11,7 @@ export default function HomePage() {
         <Header.Title>MODO</Header.Title>
         <Header.Menu />
       </Header>
-      메인 페이지
+      <BookPage />
     </>
   );
 }

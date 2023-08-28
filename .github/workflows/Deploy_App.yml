@@ -21,6 +21,8 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
+          echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> .env
+          echo "VITE_SENTRY_DSN=${{ secrets.VITE_SENTRY_DSN }}" >> .env
           echo "VITE_SERVER_URL=${{ secrets.VITE_SERVER_URL }}" >> .env
           echo "VITE_KAKAO_RESTAPI_KEY=${{ secrets.VITE_KAKAO_RESTAPI_KEY }}" >> .env
           echo "VITE_REDIRECT_URL=${{ secrets.VITE_REDIRECT_URL }}" >> .env

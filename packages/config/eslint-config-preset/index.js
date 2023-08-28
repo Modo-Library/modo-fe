@@ -103,7 +103,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-no-target-blank': 'error',
     'react/display-name': 'off',
-    'react/no-unknown-property': ['error', { ignore: ['css'] }],
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     'import/no-cycle': 'off',

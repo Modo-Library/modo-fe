@@ -4,10 +4,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
 import svgr from 'vite-plugin-svgr';
+import dotenv from 'dotenv';
 
-// const PREFIX_ENVIRONMENT_URL =
-//   process.env.NODE_ENV === 'production' ? `host.docker.internal` : 'localhost';
-// https://vitejs.dev/config/
+dotenv.config();
+
 export default defineConfig({
   plugins: [
     svgr(),
@@ -27,6 +27,9 @@ export default defineConfig({
       shared: ['react', 'react-dom', 'react-router-dom', 'recoil'],
     }),
   ],
+  define: {
+    'process.env': JSON.stringify(process.env),
+  },
   resolve: {
     alias: {
       auth: path.resolve(__dirname, './src'),
