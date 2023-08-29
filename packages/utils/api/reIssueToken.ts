@@ -29,12 +29,19 @@ export default async function reIssueToken(refreshToken: string) {
         value: res.data.refreshToken,
         expired: getDateHour(6),
       });
+      setCookie({
+        name: 'usersId',
+        value: res.data.usersId,
+        expired: getDateHour(0.5),
+      });
     })
     .catch((err) => {
+      APIErrorCapture(err, 'reIssue Token', 'debug');
+    })
+    .finally(() => {
+      removeCookie('usersId');
       removeCookie('accessToken');
       removeCookie('refreshToken');
-      window.location.replace(`${process.env.VITE_HOST_URL}/account/login?state=token_expired`);
-      APIErrorCapture(err, 'reIssue Token', 'debug');
     });
 }
 

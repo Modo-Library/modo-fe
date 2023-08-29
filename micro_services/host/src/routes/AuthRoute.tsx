@@ -7,16 +7,21 @@ import * as router from 'host/routes';
 
 const GetAuthentication = () => {
   const [auth, setAuth] = useRecoilState(authInfoSelector);
+  const isUser = auth.usersId !== '';
 
   useEffect(() => {
     setAuth(auth);
   }, []);
 
+  useEffect(() => {
+    if (isUser && window.location.pathname === '/account/login') {
+      window.location.href = '/';
+    }
+  }, []);
+
   if (process.env.NODE_ENV !== 'production') {
     return <Outlet />;
   }
-
-  const isUser = auth.usersId !== '';
 
   // useEffect(() => {
   //   if (getAuth) return;

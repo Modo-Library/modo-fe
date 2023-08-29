@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'axios';
+import * as Sentry from '@sentry/react';
 
 import APIErrorCapture from '@packages/utils/error/APIErrorCapture';
 
@@ -52,8 +53,12 @@ Axios.interceptors.response.use(
         const reAccessToken = getCookie('accessToken');
         error.config.headers.Token = reAccessToken;
 
-        console.info(`[INFO] reAccessToken: ${reAccessToken}`);
-        console.info(`[INFO] refreshToken: ${refreshToken}`);
+        Sentry.setContext('Tokens Detail', {
+          data,
+          status,
+          reAccessToken,
+          refreshToken,
+        });
       }
     }
 
