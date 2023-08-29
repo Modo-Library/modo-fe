@@ -2,6 +2,7 @@ import { atom, selector } from 'recoil';
 
 import { getCookie } from '@packages/utils/api/cookies';
 import request from '@packages/utils/api/axios';
+import APIErrorCapture from '@packages/utils/error/APIErrorCapture';
 
 import { IUser } from 'auth/utils/types/interface';
 
@@ -32,10 +33,11 @@ export const authInfoSelector = selector({
 
     if (authInfo.usersId === '') {
       const usersId = getCookie('usersId');
-      const res: IUser = await request.get(`v1/users/findUsers/${usersId}`);
-
-      if (res.usersId) {
+      try {
+        const res: IUser = await request.get(`v1/users/findUsers/${usersId}`);
         return res;
+      } catch (err) {
+        APIErrorCapture(err, 'authInfo', 'debug');
       }
     }
 
