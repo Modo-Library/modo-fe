@@ -43,14 +43,18 @@ Axios.interceptors.response.use(
   async (error) => {
     const { data, status } = error.response;
     // JWTtoken needs refresh
-    if (status === 401 || data.errorCode === 2001 || data.errorCode === 2003) {
-      const refreshToken = getCookie('refreshToken');
-      refreshToken && (await reIssueToken(refreshToken));
-      const reAccessToken = getCookie('accessToken');
-      error.config.headers.Token = reAccessToken;
+    const refreshErrorCodes = [2000, 2001, 2002, 2003];
 
-      console.info(`[INFO] reAccessToken : ${reAccessToken}`);
-      console.info(`[INFO] refreshToken : ${refreshToken}`);
+    if (status === 401 || refreshErrorCodes.includes(data.errorCode)) {
+      const refreshToken = getCookie('refreshToken');
+      if (refreshToken) {
+        await reIssueToken(refreshToken);
+        const reAccessToken = getCookie('accessToken');
+        error.config.headers.Token = reAccessToken;
+
+        console.info(`[INFO] reAccessToken: ${reAccessToken}`);
+        console.info(`[INFO] refreshToken: ${refreshToken}`);
+      }
     }
 
     const config = error.config as AxiosCustomRequestConfig;

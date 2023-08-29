@@ -40,4 +40,5 @@ export default async function reIssueToken(refreshToken: string) {
 
 // 2000 : ExpiredJwtException
 // 2001 : ReIssueBeforeAccessTokenExpiredException
+// 2002 : TokenIsNullException
 // 2003 : SignatureException
