@@ -33,6 +33,7 @@ Axios.interceptors.request.use(
       await reIssueToken(refreshToken);
       const reAccessToken = getCookie('accessToken');
       request.headers.Token = reAccessToken;
+      APIErrorCapture(request, 'reIssue', 'debug');
     }
 
     accessToken && (request.headers.Token = accessToken);
@@ -58,6 +59,7 @@ Axios.interceptors.response.use(
 
       console.info(`[INFO] accessToken : ${accessToken}`);
       console.info(`[INFO] refreshToken : ${refreshToken}`);
+      APIErrorCapture(error, 'refreshToken', 'debug');
     }
 
     const config = error.config as AxiosCustomRequestConfig;
