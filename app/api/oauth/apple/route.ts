@@ -1,16 +1,22 @@
-import { redirect } from 'next/navigation';
 import { NextResponse } from 'next/server';
 
-import { request } from '@packages/utils/api/axios';
-
-export async function POST(req: Request) {
-  const requestJson = await req.json();
-
-  const { code } = requestJson.data.detail.authorization;
-  const res = await request.post(`${process.env.VITE_SERVER_URL}/oauth/apple?code=${code}`);
-
-  return NextResponse.json(res);
+export async function POST(request: Request) {
+  const res = await request.json();
+  return NextResponse.json({ res });
 }
 
-// TODO : APPLE API 모듈 만들기 (NM-124)
-// https://kedric-me.tistory.com/entry/Apple%EB%A1%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84web-and-other-platforms
+export async function OPTIONS(request: Request) {
+  const allowedOrigin = request.headers.get('origin');
+  const response = new NextResponse(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Allow-Origin': allowedOrigin || '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers':
+        'Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version',
+      'Access-Control-Max-Age': '86400',
+    },
+  });
+
+  return response;
+}

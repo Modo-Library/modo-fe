@@ -8,7 +8,7 @@ const SOCIAL_CONFIG = {
   },
   apple: {
     client_id: 'com.heodoo.NewModoWeb',
-    redirect_uri: `https://auth.modolib.site/login`,
+    redirect_uri: `https://www.modolib.site/api/oauth/apple`,
     response_type: 'code',
     scope: 'name email',
     response_mode: 'form_post',
