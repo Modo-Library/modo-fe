@@ -1,6 +1,5 @@
 import path from 'path';
 
-import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { defineConfig } from 'vite';
 import federation from '@originjs/vite-plugin-federation';
 import react from '@vitejs/plugin-react';
@@ -26,10 +25,6 @@ export default defineConfig({
         books: `${PREFIX_ENVIRONMENT_URL('books', 5002)}/assets/remoteEntry.js`,
       },
       shared: ['react', 'react-dom', 'react-router-dom', 'recoil'],
-    }),
-    sentryVitePlugin({
-      org: 'modo-n0',
-      project: 'host',
     }),
   ],
   define: {

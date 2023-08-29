@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'axios';
-import * as Sentry from '@sentry/react';
+
+import APIErrorCapture from '@packages/utils/error/APIErrorCapture';
 
 import { getCookie } from './cookies';
 import reIssueToken from './reIssueToken';
@@ -12,10 +13,11 @@ interface AxiosCustomRequestConfig extends AxiosRequestConfig {
 const MAX_RETRY_COUNT = 1;
 
 const Axios = axios.create({
-  baseURL: `${process.env.NODE_ENV === 'test' ? '' : `${process.env.VITE_SERVER_URL}/api`}`,
+  baseURL: `${process.env.NODE_ENV === 'test' ? '' : `${process.env.VITE_SERVER_URL}/api/`}`,
   withCredentials: true,
   timeout: 2000,
 });
+
 // Interceptor로 응답/요청 공통 핸들링
 Axios.interceptors.request.use(
   (request) => {
@@ -26,24 +28,14 @@ Axios.interceptors.request.use(
       window.location.href = `${process.env.VITE_HOST_URL}/account/login`;
       console.warn('[Message] No Token');
     }
+
     accessToken && (request.headers.Token = accessToken);
     request.headers['Content-Type'] = 'application/json';
 
     return request;
   },
   (error) => {
-    const { method, url } = error.config;
-    const { status } = error.response;
-
-    Sentry.withScope((scope) => {
-      scope.setTag('type', 'api');
-      scope.setTag('api', 'axios interceptor');
-      scope.setLevel('warning');
-
-      scope.setFingerprint([method, status, url]);
-
-      Sentry.captureException(new AxiosError('API Request Interceptor Error'));
-    });
+    APIErrorCapture(error, 'axios interceptor', 'debug', 'API Request Interceptor Error');
     return Promise.reject(error);
   },
 );
@@ -68,36 +60,10 @@ Axios.interceptors.response.use(
       return Axios.request(config);
     }
 
-    const { method, url, params, headers } = error.config;
-    const { data, status } = error.response;
-
-    Sentry.setContext('API Request Detail', {
-      method,
-      url,
-      params,
-      data,
-      headers,
-    });
-
-    Sentry.setContext('API Response Detail', {
-      status,
-      data,
-    });
-
-    Sentry.withScope((scope) => {
-      scope.setTag('type', 'api');
-      scope.setTag('api', 'axios interceptor');
-      scope.setLevel('warning');
-
-      scope.setFingerprint([method, status, url]);
-
-      Sentry.captureException(new AxiosError('API Response Interceptor Error'));
-    });
-
+    APIErrorCapture(error, 'axios interceptor', 'debug', 'API Response Interceptor Error');
     return Promise.reject(error);
   },
 );
-
 // Axios Custom
 type RequestElementType = <Response = AxiosResponse | AxiosError, Request = any>(
   url: string,
@@ -107,17 +73,17 @@ type RequestType = { [key in Method]: RequestElementType };
 type PickRequestType = 'get' | 'post';
 
 export const request: Pick<RequestType, PickRequestType> = {
-  get: (url) =>
-    Axios.get(url)
+  get: (URL) =>
+    Axios.get(URL)
       .then((res) => res.data)
       .catch((err) => {
-        throw new Error(err);
+        APIErrorCapture(err, 'get', 'debug');
       }),
-  post: (url, body?) =>
-    Axios.post(url, body)
+  post: (URL, BODY?) =>
+    Axios.post(URL, BODY)
       .then((res) => res.data)
       .catch((err) => {
-        throw new Error(err);
+        APIErrorCapture(err, 'post', 'debug');
       }),
 };
 

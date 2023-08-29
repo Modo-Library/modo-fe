@@ -1,4 +1,3 @@
-import { useSetRecoilState } from 'recoil';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import * as Sentry from '@sentry/react';
 
@@ -10,12 +9,9 @@ import getErrorMessage from '@packages/utils/getErrorMessage';
 
 import { LoginType } from 'auth/components/LoginArea/constant';
 
-import { authSelector } from 'auth/utils/recoil/auth';
 import AuthError from 'auth/utils/error/AuthError';
 
 export default function useLogin() {
-  const setAuthState = useSetRecoilState(authSelector);
-
   const getLogin = async (code: string | null, type: LoginType) => {
     try {
       if (code === null) {
@@ -26,10 +22,9 @@ export default function useLogin() {
       await axios
         .post(`https://www.modolib.site/request/oauth/${type}?code=${code}`)
         .then((res: AxiosResponse<IToken>) => {
-          setAuthState('user');
           removeCookie('accessToken');
           removeCookie('refreshToken');
-          localStorage.removeItem('usersId');
+          removeCookie('usersId');
 
           setCookie({
             name: 'accessToken',

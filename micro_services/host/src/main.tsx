@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, RecoilEnv } from 'recoil';
 import * as Sentry from '@sentry/react';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -17,6 +17,10 @@ Sentry.init({
   environment: 'host',
   tracesSampleRate: 0.4,
 });
+
+if (process.env.NODE_ENV !== 'production') {
+  RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
+}
 
 const container = document.getElementById('root') as HTMLElement;
 const root = ReactDOM.createRoot(container!);
