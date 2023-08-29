@@ -1,7 +1,7 @@
 import { Outlet, Navigate, useLocation, Route, Routes } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { authInfoSelector } from 'auth/utils/recoil/auth';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 import * as router from 'host/routes';
 
@@ -9,9 +9,13 @@ const GetAuthentication = () => {
   const [auth, setAuth] = useRecoilState(authInfoSelector);
   const isUser = auth.usersId !== '';
 
-  useEffect(() => {
+  const getAuthState = useCallback(() => {
     setAuth(auth);
-  }, []);
+  }, [auth, setAuth]);
+
+  useEffect(() => {
+    getAuthState();
+  }, [getAuthState]);
 
   if (process.env.NODE_ENV !== 'production') {
     return <Outlet />;
