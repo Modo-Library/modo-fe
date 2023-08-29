@@ -20,13 +20,19 @@ const Axios = axios.create({
 
 // Interceptor로 응답/요청 공통 핸들링
 Axios.interceptors.request.use(
-  (request) => {
+  async (request) => {
     const accessToken = getCookie('accessToken');
     const refreshToken = getCookie('refreshToken');
 
     if (!refreshToken && window.location.pathname !== '/login') {
       window.location.href = `${process.env.VITE_HOST_URL}/account/login`;
       console.warn('[Message] No Token');
+    }
+
+    if (refreshToken && !accessToken) {
+      await reIssueToken(refreshToken);
+      const reAccessToken = getCookie('accessToken');
+      request.headers.Token = reAccessToken;
     }
 
     accessToken && (request.headers.Token = accessToken);
