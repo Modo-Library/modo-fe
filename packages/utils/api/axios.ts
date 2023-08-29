@@ -1,5 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'axios';
+import * as Sentry from '@sentry/react';
 
+import NetworkError from '@packages/utils/error/NetworkError';
+import getErrorMessage from '@packages/utils/getErrorMessage';
 import APIErrorCapture from '@packages/utils/error/APIErrorCapture';
 
 import { getCookie } from './cookies';
@@ -8,7 +11,6 @@ import reIssueToken from './reIssueToken';
 interface AxiosCustomRequestConfig extends AxiosRequestConfig {
   retryCount: number;
 }
-
 // Axios 기본 세팅
 const MAX_RETRY_COUNT = 1;
 
@@ -17,7 +19,6 @@ const Axios = axios.create({
   withCredentials: true,
   timeout: 2000,
 });
-
 // Interceptor로 응답/요청 공통 핸들링
 Axios.interceptors.request.use(
   async (request) => {
@@ -33,7 +34,19 @@ Axios.interceptors.request.use(
       await reIssueToken(refreshToken);
       const reAccessToken = getCookie('accessToken');
       request.headers.Token = reAccessToken;
-      APIErrorCapture(request, 'reIssue', 'debug');
+      Sentry.setContext('ReIssue Detail', {
+        headers: request.headers,
+        accessToken,
+        refreshToken,
+      });
+
+      Sentry.withScope((scope) => {
+        scope.setTag('type', 'api');
+        scope.setTag('api', 'reIssueToken');
+        scope.setLevel('debug');
+
+        Sentry.captureException(new NetworkError(getErrorMessage(request)));
+      });
     }
 
     accessToken && (request.headers.Token = accessToken);
