@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { redirect } from 'next/navigation';
 import axios from 'axios';
 
-export async function POST(request: NextRequest) {
-  const res = await request.json();
-
-  const { code } = res.data.detail.authorization;
-  return NextResponse.redirect(`${request.url}/callback?code=${code || null}`, 302);
+export async function GET(request: NextRequest) {
+  const params = request.nextUrl.searchParams;
+  const code = params.get('code');
+  redirect(`${process.env.VITE_AUTH_URL}/login?code=${code}`);
 }
 
 export async function OPTIONS(request: Request) {
