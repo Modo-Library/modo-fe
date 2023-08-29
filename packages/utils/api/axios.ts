@@ -1,8 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'axios';
-import * as Sentry from '@sentry/react';
 
-import NetworkError from '@packages/utils/error/NetworkError';
-import getErrorMessage from '@packages/utils/getErrorMessage';
 import APIErrorCapture from '@packages/utils/error/APIErrorCapture';
 
 import { getCookie } from './cookies';
@@ -30,25 +27,6 @@ Axios.interceptors.request.use(
       console.warn('[Message] No Token');
     }
 
-    if (refreshToken && !accessToken) {
-      await reIssueToken(refreshToken);
-      const reAccessToken = getCookie('accessToken');
-      request.headers.Token = reAccessToken;
-      Sentry.setContext('ReIssue Detail', {
-        headers: request.headers,
-        accessToken,
-        refreshToken,
-      });
-
-      Sentry.withScope((scope) => {
-        scope.setTag('type', 'api');
-        scope.setTag('api', 'reIssueToken');
-        scope.setLevel('debug');
-
-        Sentry.captureException(new NetworkError(getErrorMessage(request)));
-      });
-    }
-
     accessToken && (request.headers.Token = accessToken);
     request.headers['Content-Type'] = 'application/json';
 
@@ -63,16 +41,16 @@ Axios.interceptors.request.use(
 Axios.interceptors.response.use(
   (response) => response,
   async (error) => {
+    const { data, status } = error.response;
     // JWTtoken needs refresh
-    if (error.response.status === 401) {
+    if (status === 401 || data.errorCode === 2001 || data.errorCode === 2003) {
       const refreshToken = getCookie('refreshToken');
       refreshToken && (await reIssueToken(refreshToken));
-      const accessToken = getCookie('accessToken');
-      error.config.headers.Token = accessToken;
+      const reAccessToken = getCookie('accessToken');
+      error.config.headers.Token = reAccessToken;
 
-      console.info(`[INFO] accessToken : ${accessToken}`);
+      console.info(`[INFO] reAccessToken : ${reAccessToken}`);
       console.info(`[INFO] refreshToken : ${refreshToken}`);
-      APIErrorCapture(error, 'refreshToken', 'debug');
     }
 
     const config = error.config as AxiosCustomRequestConfig;

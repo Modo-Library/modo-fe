@@ -31,7 +31,13 @@ export default async function reIssueToken(refreshToken: string) {
       });
     })
     .catch((err) => {
-      APIErrorCapture(err, 'reIssue Token', 'debug');
+      removeCookie('accessToken');
+      removeCookie('refreshToken');
       window.location.replace(`${process.env.VITE_HOST_URL}/account/login?state=token_expired`);
+      APIErrorCapture(err, 'reIssue Token', 'debug');
     });
 }
+
+// 2000 : ExpiredJwtException
+// 2001 : ReIssueBeforeAccessTokenExpiredException
+// 2003 : SignatureException
