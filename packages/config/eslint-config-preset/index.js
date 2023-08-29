@@ -194,7 +194,7 @@ module.exports = {
         location: 'anywhere',
       },
     ],
-    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     'no-debugger': 'error',
     'no-unused-vars': 'off',
     'no-param-reassign': ['error', { props: false }],

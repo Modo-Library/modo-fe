@@ -12,4 +12,5 @@ export async function POST(req: Request) {
   return NextResponse.json(res);
 }
 
+// TODO : APPLE API 모듈 만들기 (NM-124)
 // https://kedric-me.tistory.com/entry/Apple%EB%A1%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84web-and-other-platforms

@@ -33,7 +33,10 @@ export const authInfoSelector = selector({
     if (authInfo.usersId === '') {
       const usersId = getCookie('usersId');
       const res: IUser = await request.get(`v1/users/findUsers/${usersId}`);
-      return res;
+
+      if (res.usersId) {
+        return res;
+      }
     }
 
     return authInfo;

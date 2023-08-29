@@ -49,11 +49,14 @@ Axios.interceptors.response.use(
       refreshToken && (await reIssueToken(refreshToken));
       const accessToken = getCookie('accessToken');
       error.config.headers.Token = accessToken;
+
+      console.info(`[INFO] accessToken : ${accessToken}`);
+      console.info(`[INFO] refreshToken : ${refreshToken}`);
     }
 
     const config = error.config as AxiosCustomRequestConfig;
     config.retryCount = config.retryCount ?? 0;
-    console.warn('[Message] RETRY COUNT :', config.retryCount);
+    console.warn(`[Message] RETRY COUNT : ${config.retryCount}`);
 
     if (config.retryCount < MAX_RETRY_COUNT) {
       config.retryCount += 1;

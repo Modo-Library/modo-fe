@@ -12,16 +12,16 @@ function App() {
   const location = useLocation();
 
   return (
-    <Layout>
-      <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader />}>
+      <Layout>
         <Routes location={location}>
           <Route path="account">
             <Route element={<router.Login />} path="login" />
           </Route>
           <Route path="/*" element={<AuthRoute />} />
         </Routes>
-      </Suspense>
-    </Layout>
+      </Layout>
+    </Suspense>
   );
 }
 
