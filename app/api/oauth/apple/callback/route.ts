@@ -1,13 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(request: NextRequest) {
-  const res = await request.json();
-
-  if (res?.data?.detail?.authorization) {
-    const { code } = res.data.detail.authorization;
-    return NextResponse.redirect(`${request.url}/callback?code=${code}`, 302);
-  }
-  return NextResponse.redirect(`${request.url}/callback?code=null`, 302);
+export async function GET(request: NextRequest) {
+  const params = request.nextUrl.searchParams;
+  const code = params.get('code');
+  return NextResponse.redirect(`${process.env.VITE_AUTH_URL}/login#code=${code}`, 302);
 }
 
 export async function OPTIONS(request: Request) {
