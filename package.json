@@ -24,7 +24,7 @@
     "mfa-service:auth": "npm run build -workspace=@workspace/auth && npm run preview -workspace=@workspace/auth",
     "mfa-service:books": "npm run build -workspace=@workspace/books && npm run preview -workspace=@workspace/books",
     "build": "npm run generate:css && tsc && next build",
-    "preview": "next start -p 5173",
+    "preview": "node .next/standalone/server.js -p 5173",
     "aws": "dotenv -e .env -- cross-var ssh %SSH_HOST%",
     "lint": "run-p \"lint:*\"",
     "lint:packages": "eslint && tsc -p packages/tsconfig.json --noEmit",
