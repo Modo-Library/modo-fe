@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { redirect } from 'next/navigation';
-import axios from 'axios';
 
 export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
   const code = params.get('code');
-  redirect(`${process.env.VITE_AUTH_URL}/login?code=${code}`);
+  return NextResponse.redirect(`${process.env.VITE_AUTH_URL}/login#code=${code}`, 302);
 }
 
 export async function OPTIONS(request: Request) {
