@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
-  const res = await request.json();
+  const formData = await request.formData();
+  const code = formData.get('code');
 
-  if (res?.data?.detail?.authorization) {
-    const { code } = res.data.detail.authorization;
-    return NextResponse.redirect(`${request.url}/callback?code=${code}`, 302);
-  }
-  return NextResponse.redirect(`${request.url}/callback?code=null`, 302);
+  return NextResponse.redirect(
+    `https://www.modolib.site/api/oauth/apple/callback?code=${code}`,
+    302,
+  );
 }
 
 export async function OPTIONS(request: Request) {
