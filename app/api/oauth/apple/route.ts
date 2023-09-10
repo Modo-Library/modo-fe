@@ -4,7 +4,10 @@ export async function POST(request: NextRequest) {
   const formData = await request.formData();
   const code = formData.get('code');
 
-  return NextResponse.redirect(`${request.url}/callback?code=${code}`, 302);
+  return NextResponse.redirect(
+    `https://www.modolib.site/api/oauth/apple/callback?code=${code}`,
+    302,
+  );
 }
 
 export async function OPTIONS(request: Request) {
