@@ -1,17 +1,19 @@
-import Menu, { MenuProps } from './atoms/menu';
-
-const 메뉴정보: MenuProps[] = [
-  { iconKey: 'chat', text: '채팅', src: 'chat' },
-  { iconKey: 'home', text: '홈', src: '' },
-  { iconKey: 'profile', text: '프로필', src: 'profile' },
-];
+import Menu from './atoms/menu';
+import { 메뉴정보 } from './constant';
+import useShowNavigation from './hooks/useShowNavigation';
 
 export default function Navigation() {
+  const isShow = useShowNavigation();
+
   return (
-    <section className="absolute z-[1000] bg-white flex justify-around items-center bottom-0 border-t-2 border-gray50 w-full full:w-[25rem]">
-      {메뉴정보.map((item, idx) => (
-        <Menu key={idx} {...item} />
-      ))}
-    </section>
+    <>
+      {isShow && (
+        <section className="absolute z-[1000] max-w-layout bg-white flex justify-around items-center bottom-0 border-t-2 border-gray50 w-full full:w-[25rem]">
+          {메뉴정보.map((item, idx) => (
+            <Menu key={idx} {...item} />
+          ))}
+        </section>
+      )}
+    </>
   );
 }
