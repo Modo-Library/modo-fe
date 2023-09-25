@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { useNavigate, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
 import React, { SVGProps } from 'react';
