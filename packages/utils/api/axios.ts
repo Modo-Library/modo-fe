@@ -12,7 +12,7 @@ interface AxiosCustomRequestConfig extends AxiosRequestConfig {
 const MAX_RETRY_COUNT = 1;
 
 const Axios = axios.create({
-  baseURL: `${process.env.NODE_ENV === 'test' ? '' : `${import.meta.env.VITE_SERVER_URL}/request`}`,
+  baseURL: `${process.env.NODE_ENV === 'test' ? '' : `${process.env.VITE_SERVER_URL}/request`}`,
   withCredentials: true,
   timeout: 2000,
 });
