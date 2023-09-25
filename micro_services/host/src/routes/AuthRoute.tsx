@@ -1,12 +1,14 @@
 import { Outlet, Navigate, useLocation, Route, Routes } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { authInfoSelector } from 'auth/utils/recoil/auth';
 import { useEffect, useCallback } from 'react';
 
 import * as router from 'host/routes';
+import { visibleNavigation } from 'host/utils/recoil/navigation';
 
 const GetAuthentication = () => {
   const [auth, setAuth] = useRecoilState(authInfoSelector);
+  const setShowNavigation = useSetRecoilState(visibleNavigation);
   const isUser = auth.usersId !== '';
 
   const getAuthState = useCallback(() => {
@@ -15,6 +17,10 @@ const GetAuthentication = () => {
 
   useEffect(() => {
     getAuthState();
+
+    if (!isUser && process.env.NODE_ENV === 'production') {
+      setShowNavigation(false);
+    }
   }, [getAuthState]);
 
   if (process.env.NODE_ENV !== 'production') {
