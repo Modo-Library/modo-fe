@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-const canShowNavigation = ['chat', 'profile', 'home'];
+const canShowNavigation = ['chat', 'profile'];
 
 export default function useShowNavigation() {
   const location = useLocation();
@@ -9,7 +9,8 @@ export default function useShowNavigation() {
 
   useEffect(() => {
     const { pathname } = location;
-    const startsWithValidPath = canShowNavigation.some((item) => pathname.startsWith(`/${item}`));
+    const startsWithValidPath =
+      canShowNavigation.some((item) => pathname.startsWith(`/${item}`)) || pathname === '/';
     if (startsWithValidPath) {
       setShowNavigation(true);
     }
