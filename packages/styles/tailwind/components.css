@@ -29,6 +29,11 @@
     animation: loader 1.2s infinite;
   }
 
+  .padding-layout {
+    padding-top : 46px;
+    padding-bottom : 50px;
+  }
+
   @keyframes loader {
     100% {
       background-size: 100% 100%;
