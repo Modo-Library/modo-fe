@@ -1,28 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Outlet, Navigate, useLocation, Route, Routes } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { authInfoSelector } from 'auth/utils/recoil/auth';
 import { useEffect, useCallback } from 'react';
 
 import * as router from 'host/routes';
-import { visibleNavigation } from 'host/utils/recoil/navigation';
 
-const GetAuthentication = () => {
-  const [auth, setAuth] = useRecoilState(authInfoSelector);
-  const setShowNavigation = useSetRecoilState(visibleNavigation);
-  const isUser = auth.usersId !== '';
-
-  const getAuthState = useCallback(() => {
-    setAuth(auth);
-  }, [auth, setAuth]);
-
-  useEffect(() => {
-    getAuthState();
-
-    if (!isUser && process.env.NODE_ENV === 'production') {
-      setShowNavigation(false);
-    }
-  }, [getAuthState]);
-
+const GetAuthentication = ({ isUser }: { isUser: boolean }) => {
   if (process.env.NODE_ENV !== 'production') {
     return <Outlet />;
   }
@@ -39,10 +23,20 @@ const GetAuthentication = () => {
 
 export default function AuthRoute() {
   const location = useLocation();
+  const [auth, setAuth] = useRecoilState(authInfoSelector);
+  const isUser = auth.usersId !== '';
+
+  const getAuthState = useCallback(() => {
+    setAuth(auth);
+  }, [auth, setAuth]);
+
+  useEffect(() => {
+    getAuthState();
+  }, []);
 
   return (
     <Routes location={location}>
-      <Route element={<GetAuthentication />}>
+      <Route element={<GetAuthentication isUser={isUser} />}>
         <Route element={<router.Home />} path="/" />
         <Route element={<router.Profile />} path="/profile" />
         <Route element={<router.Chat />} path="/chat" />

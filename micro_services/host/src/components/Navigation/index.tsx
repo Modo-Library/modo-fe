@@ -1,12 +1,9 @@
-import { useRecoilValue } from 'recoil';
-
-import { visibleNavigation } from 'host/utils/recoil/navigation';
-
 import Menu from './atoms/menu';
 import { 메뉴정보 } from './constant';
+import useShowNavigation from './hooks/useShowNavigation';
 
 export default function Navigation() {
-  const isShow = useRecoilValue(visibleNavigation);
+  const isShow = useShowNavigation();
 
   return (
     <>
